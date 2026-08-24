@@ -2,21 +2,41 @@
 
 /*
 
-  ==========================================
+=========================================
 
-  QAIWAN AZAN
+QAIWAN AZAN
 
-  Main Application
-
-  ==========================================
+=========================================
 
 */
 
-/* -----------------------------
+/* ================================
 
-   PRAYER DATA
+   DEFAULT PRAYER TIMES
 
------------------------------ */
+================================ */
+
+const DEFAULT_TIMES = {
+
+  Imsak: "04:16",
+
+  Fajr: "04:36",
+
+  Dhuhr: "12:27",
+
+  Asr: "15:59",
+
+  Maghrib: "18:35",
+
+  Isha: "19:53"
+
+};
+
+let prayerTimes = {
+
+  ...DEFAULT_TIMES
+
+};
 
 const prayerNames = {
 
@@ -46,89 +66,99 @@ const prayerKeys = [
 
 ];
 
-let prayerTimes = {};
-
-let countdownInterval = null;
+let countdownTimer = null;
 
 let dhikrCount = 0;
 
-let currentAudioSurah = "یاسین";
+/* ================================
 
-/* -----------------------------
+   HELPERS
 
-   DEFAULT PRAYER TIMES
+================================ */
 
------------------------------ */
+function $(selector){
 
-const defaultPrayerTimes = {
+  return document.querySelector(selector);
 
-  Imsak: "04:16",
+}
 
-  Fajr: "04:36",
+function $$(selector){
 
-  Dhuhr: "12:27",
+  return document.querySelectorAll(selector);
 
-  Asr: "15:59",
+}
 
-  Maghrib: "18:35",
-
-  Isha: "19:53"
-
-};
-
-/* -----------------------------
-
-   DOM
-
------------------------------ */
-
-const $ = selector =>
-
-  document.querySelector(selector);
-
-const $$ = selector =>
-
-  document.querySelectorAll(selector);
-
-/* -----------------------------
+/* ================================
 
    SCREEN NAVIGATION
 
------------------------------ */
+================================ */
 
 function showScreen(screenId){
 
-  $$(".screen").forEach(screen => {
+  $$(".screen").forEach(
 
-    screen.classList.remove("active");
+    screen => {
 
-  });
+      screen.classList.remove(
 
-  const screen =
+        "active"
 
-    document.getElementById(screenId);
-
-  if(screen){
-
-    screen.classList.add("active");
-
-  }
-
-  $$(".nav-btn").forEach(button => {
-
-    button.classList.remove("active");
-
-    if(
-
-      button.dataset.screen === screenId
-
-    ){
-
-      button.classList.add("active");
+      );
 
     }
 
-  });
+  );
+
+  const target =
+
+    document.getElementById(
+
+      screenId
+
+    );
+
+  if(!target){
+
+    return;
+
+  }
+
+  target.classList.add(
+
+    "active"
+
+  );
+
+  $$(".nav-btn").forEach(
+
+    button => {
+
+      button.classList.remove(
+
+        "active"
+
+      );
+
+      if(
+
+        button.dataset.screen ===
+
+        screenId
+
+      ){
+
+        button.classList.add(
+
+          "active"
+
+        );
+
+      }
+
+    }
+
+  );
 
   window.scrollTo({
 
@@ -140,57 +170,65 @@ function showScreen(screenId){
 
 }
 
-/* -----------------------------
+/* ================================
 
    NAV BUTTONS
 
------------------------------ */
+================================ */
 
-$$(".nav-btn").forEach(button => {
+$$(".nav-btn").forEach(
 
-  button.addEventListener(
+  button => {
 
-    "click",
+    button.addEventListener(
 
-    () => {
+      "click",
 
-      showScreen(
+      function(){
 
-        button.dataset.screen
+        showScreen(
 
-      );
+          this.dataset.screen
 
-    }
+        );
 
-  );
+      }
 
-});
+    );
 
-$$("[data-go]").forEach(button => {
+  }
 
-  button.addEventListener(
+);
 
-    "click",
+$$("[data-go]").forEach(
 
-    () => {
+  button => {
 
-      showScreen(
+    button.addEventListener(
 
-        button.dataset.go
+      "click",
 
-      );
+      function(){
 
-    }
+        showScreen(
 
-  );
+          this.dataset.go
 
-});
+        );
 
-/* -----------------------------
+      }
+
+    );
+
+  }
+
+);
+
+/* ================================
 
    TOAST
 
------------------------------ */
+================================ */
 
 function showToast(message){
 
@@ -198,325 +236,89 @@ function showToast(message){
 
     $("#toast");
 
-  if(!toast) return;
-
-  toast.textContent =
-
-    message;
-
-  toast.classList.add("show");
-
-  clearTimeout(
-
-    toast._timer
-
-  );
-
-  toast._timer =
-
-    setTimeout(() => {
-
-      toast.classList.remove(
-
-        "show"
-
-      );
-
-    },2200);
-
-}
-
-/* -----------------------------
-
-   PRAYER API
-
------------------------------ */
-
-async function fetchPrayerTimes(
-
-  latitude,
-
-  longitude
-
-){
-
-  try{
-
-    const now =
-
-      new Date();
-
-    const day =
-
-      String(
-
-        now.getDate()
-
-      ).padStart(2,"0");
-
-    const month =
-
-      String(
-
-        now.getMonth()+1
-
-      ).padStart(2,"0");
-
-    const year =
-
-      now.getFullYear();
-
-    const url =
-
-      "https://api.aladhan.com/v1/timings/" +
-
-      `${day}-${month}-${year}` +
-
-      `?latitude=${latitude}` +
-
-      `&longitude=${longitude}` +
-
-      "&method=3";
-
-    const response =
-
-      await fetch(url);
-
-    if(!response.ok){
-
-      throw new Error(
-
-        "Prayer API failed"
-
-      );
-
-    }
-
-    const data =
-
-      await response.json();
-
-    if(
-
-      !data.data ||
-
-      !data.data.timings
-
-    ){
-
-      throw new Error(
-
-        "No prayer data"
-
-      );
-
-    }
-
-    prayerTimes =
-
-      data.data.timings;
-
-    updatePrayerUI();
-
-    updateLocation(
-
-      latitude,
-
-      longitude
-
-    );
-
-    showToast(
-
-      "کاتی نوێژ نوێ کرایەوە"
-
-    );
-
-  }catch(error){
-
-    console.error(error);
-
-    prayerTimes = {
-
-      ...defaultPrayerTimes
-
-    };
-
-    updatePrayerUI();
-
-    showToast(
-
-      "کاتی نموونەیی بەکارهێنرا"
-
-    );
-
-  }
-
-}
-
-/* -----------------------------
-
-   LOCATION
-
------------------------------ */
-
-function getLocation(){
-
-  if(
-
-    !navigator.geolocation
-
-  ){
-
-    prayerTimes = {
-
-      ...defaultPrayerTimes
-
-    };
-
-    updatePrayerUI();
-
-    showToast(
-
-      "GPS پشتگیری ناکرێت"
-
-    );
+  if(!toast){
 
     return;
 
   }
 
-  showToast(
+  toast.textContent =
 
-    "شوێنی تۆ دەدۆزرێتەوە..."
+    message;
 
-  );
+  toast.classList.add(
 
-  navigator.geolocation.getCurrentPosition(
-
-    position => {
-
-      fetchPrayerTimes(
-
-        position.coords.latitude,
-
-        position.coords.longitude
-
-      );
-
-    },
-
-    error => {
-
-      console.warn(
-
-        "GPS:",
-
-        error.message
-
-      );
-
-      prayerTimes = {
-
-        ...defaultPrayerTimes
-
-      };
-
-      updatePrayerUI();
-
-      showToast(
-
-        "GPS ڕێگەپێدانی نەدرا"
-
-      );
-
-    },
-
-    {
-
-      enableHighAccuracy:true,
-
-      timeout:15000,
-
-      maximumAge:300000
-
-    }
+    "show"
 
   );
 
-}
+  clearTimeout(
 
-/* -----------------------------
+    toast.toastTimer
 
-   LOCATION UI
+  );
 
------------------------------ */
+  toast.toastTimer =
 
-function updateLocation(
+    setTimeout(
 
-  latitude,
+      function(){
 
-  longitude
+        toast.classList.remove(
 
-){
+          "show"
 
-  const value =
+        );
 
-    `${latitude.toFixed(3)}, ${longitude.toFixed(3)}`;
+      },
 
-  const home =
+      2200
 
-    $("#locationText");
-
-  const settings =
-
-    $("#settingsLocation");
-
-  if(home){
-
-    home.textContent =
-
-      value;
-
-  }
-
-  if(settings){
-
-    settings.textContent =
-
-      value;
-
-  }
+    );
 
 }
 
-/* -----------------------------
+/* ================================
 
    CLEAN TIME
 
------------------------------ */
+================================ */
 
-function cleanTime(time){
+function cleanTime(value){
 
-  if(!time){
+  if(!value){
 
     return "--:--";
 
   }
 
-  return String(time)
+  return String(value)
 
-    .replace(/\s*\(.+?\)/g,"")
+    .replace(
 
-    .slice(0,5);
+      /\s*\(.+?\)/g,
+
+      ""
+
+    )
+
+    .trim()
+
+    .substring(
+
+      0,
+
+      5
+
+    );
 
 }
 
-/* -----------------------------
+/* ================================
 
-   UPDATE PRAYER UI
+   UPDATE ALL PRAYER TIMES
 
------------------------------ */
+================================ */
 
 function updatePrayerUI(){
 
@@ -524,27 +326,51 @@ function updatePrayerUI(){
 
     Imsak:
 
-      cleanTime(prayerTimes.Imsak),
+      cleanTime(
+
+        prayerTimes.Imsak
+
+      ),
 
     Fajr:
 
-      cleanTime(prayerTimes.Fajr),
+      cleanTime(
+
+        prayerTimes.Fajr
+
+      ),
 
     Dhuhr:
 
-      cleanTime(prayerTimes.Dhuhr),
+      cleanTime(
+
+        prayerTimes.Dhuhr
+
+      ),
 
     Asr:
 
-      cleanTime(prayerTimes.Asr),
+      cleanTime(
+
+        prayerTimes.Asr
+
+      ),
 
     Maghrib:
 
-      cleanTime(prayerTimes.Maghrib),
+      cleanTime(
+
+        prayerTimes.Maghrib
+
+      ),
 
     Isha:
 
-      cleanTime(prayerTimes.Isha)
+      cleanTime(
+
+        prayerTimes.Isha
+
+      )
 
   };
 
@@ -580,7 +406,7 @@ function updatePrayerUI(){
 
       times.Isha;
 
-  /* PRAYERS */
+  /* PRAYERS PAGE */
 
   if($("#imsakTime"))
 
@@ -622,13 +448,13 @@ function updatePrayerUI(){
 
 }
 
-/* -----------------------------
+/* ================================
 
-   TIME CONVERSION
+   TIME TO DATE
 
------------------------------ */
+================================ */
 
-function createDateFromTime(
+function timeToDate(
 
   time,
 
@@ -666,7 +492,7 @@ function createDateFromTime(
 
     date.setDate(
 
-      date.getDate()+1
+      date.getDate() + 1
 
     );
 
@@ -688,11 +514,11 @@ function createDateFromTime(
 
 }
 
-/* -----------------------------
+/* ================================
 
    FIND NEXT PRAYER
 
------------------------------ */
+================================ */
 
 function findNextPrayer(){
 
@@ -716,7 +542,7 @@ function findNextPrayer(){
 
     const date =
 
-      createDateFromTime(time);
+      timeToDate(time);
 
     if(
 
@@ -742,19 +568,11 @@ function findNextPrayer(){
 
   }
 
-  const fajr =
-
-    cleanTime(
-
-      prayerTimes.Fajr
-
-    );
-
   const tomorrowFajr =
 
-    createDateFromTime(
+    timeToDate(
 
-      fajr,
+      prayerTimes.Fajr,
 
       true
 
@@ -764,7 +582,11 @@ function findNextPrayer(){
 
     "Fajr",
 
-    fajr,
+    cleanTime(
+
+      prayerTimes.Fajr
+
+    ),
 
     tomorrowFajr
 
@@ -772,11 +594,11 @@ function findNextPrayer(){
 
 }
 
-/* -----------------------------
+/* ================================
 
    SET NEXT PRAYER
 
------------------------------ */
+================================ */
 
 function setNextPrayer(
 
@@ -804,25 +626,11 @@ function setNextPrayer(
 
   }
 
-  highlightPrayer(key);
-
-  startCountdown(date);
-
-}
-
-/* -----------------------------
-
-   HIGHLIGHT
-
------------------------------ */
-
-function highlightPrayer(key){
-
   $$(".prayer").forEach(
 
-    item => {
+    prayer => {
 
-      item.classList.remove(
+      prayer.classList.remove(
 
         "active"
 
@@ -830,11 +638,13 @@ function highlightPrayer(key){
 
       if(
 
-        item.dataset.prayer === key
+        prayer.dataset.prayer ===
+
+        key
 
       ){
 
-        item.classList.add(
+        prayer.classList.add(
 
           "active"
 
@@ -846,23 +656,21 @@ function highlightPrayer(key){
 
   );
 
+  startCountdown(date);
+
 }
 
-/* -----------------------------
+/* ================================
 
    COUNTDOWN
 
------------------------------ */
+================================ */
 
-function startCountdown(
-
-  target
-
-){
+function startCountdown(target){
 
   clearInterval(
 
-    countdownInterval
+    countdownTimer
 
   );
 
@@ -878,11 +686,15 @@ function startCountdown(
 
       now.getTime();
 
-    if(difference <= 0){
+    if(
+
+      difference <= 0
+
+    ){
 
       clearInterval(
 
-        countdownInterval
+        countdownTimer
 
       );
 
@@ -924,25 +736,15 @@ function startCountdown(
 
       $("#countdown").textContent =
 
-        [
+        String(hours).padStart(2,"0")
 
-          hours,
+        + ":"
 
-          minutes,
+        + String(minutes).padStart(2,"0")
 
-          seconds
+        + ":"
 
-        ]
-
-        .map(
-
-          number =>
-
-            String(number).padStart(2,"0")
-
-        )
-
-        .join(":");
+        + String(seconds).padStart(2,"0");
 
     }
 
@@ -950,7 +752,7 @@ function startCountdown(
 
   update();
 
-  countdownInterval =
+  countdownTimer =
 
     setInterval(
 
@@ -962,11 +764,283 @@ function startCountdown(
 
 }
 
-/* -----------------------------
+/* ================================
+
+   GPS
+
+================================ */
+
+function getLocation(){
+
+  if(
+
+    !navigator.geolocation
+
+  ){
+
+    useDefaultTimes();
+
+    return;
+
+  }
+
+  navigator.geolocation.getCurrentPosition(
+
+    function(position){
+
+      const latitude =
+
+        position.coords.latitude;
+
+      const longitude =
+
+        position.coords.longitude;
+
+      updateLocationText(
+
+        latitude,
+
+        longitude
+
+      );
+
+      fetchPrayerTimes(
+
+        latitude,
+
+        longitude
+
+      );
+
+    },
+
+    function(){
+
+      useDefaultTimes();
+
+      showToast(
+
+        "کاتی بنەڕەتی بەکارهێنرا"
+
+      );
+
+    },
+
+    {
+
+      enableHighAccuracy:false,
+
+      timeout:10000,
+
+      maximumAge:600000
+
+    }
+
+  );
+
+}
+
+/* ================================
+
+   DEFAULT TIMES
+
+================================ */
+
+function useDefaultTimes(){
+
+  prayerTimes = {
+
+    ...DEFAULT_TIMES
+
+  };
+
+  updatePrayerUI();
+
+}
+
+/* ================================
+
+   LOCATION TEXT
+
+================================ */
+
+function updateLocationText(
+
+  latitude,
+
+  longitude
+
+){
+
+  const text =
+
+    `${latitude.toFixed(3)}, ${longitude.toFixed(3)}`;
+
+  if($("#locationText")){
+
+    $("#locationText")
+
+      .textContent =
+
+      text;
+
+  }
+
+  if($("#settingsLocation")){
+
+    $("#settingsLocation")
+
+      .textContent =
+
+      text;
+
+  }
+
+}
+
+/* ================================
+
+   PRAYER API
+
+================================ */
+
+async function fetchPrayerTimes(
+
+  latitude,
+
+  longitude
+
+){
+
+  try{
+
+    const date =
+
+      new Date();
+
+    const day =
+
+      String(
+
+        date.getDate()
+
+      ).padStart(2,"0");
+
+    const month =
+
+      String(
+
+        date.getMonth() + 1
+
+      ).padStart(2,"0");
+
+    const year =
+
+      date.getFullYear();
+
+    const url =
+
+      `https://api.aladhan.com/v1/timings/${day}-${month}-${year}` +
+
+      `?latitude=${latitude}` +
+
+      `&longitude=${longitude}` +
+
+      `&method=3`;
+
+    const response =
+
+      await fetch(url);
+
+    if(!response.ok){
+
+      throw new Error(
+
+        "Prayer API error"
+
+      );
+
+    }
+
+    const json =
+
+      await response.json();
+
+    if(
+
+      !json.data ||
+
+      !json.data.timings
+
+    ){
+
+      throw new Error(
+
+        "Prayer data unavailable"
+
+      );
+
+    }
+
+    const t =
+
+      json.data.timings;
+
+    prayerTimes = {
+
+      Imsak:
+
+        cleanTime(t.Imsak),
+
+      Fajr:
+
+        cleanTime(t.Fajr),
+
+      Dhuhr:
+
+        cleanTime(t.Dhuhr),
+
+      Asr:
+
+        cleanTime(t.Asr),
+
+      Maghrib:
+
+        cleanTime(t.Maghrib),
+
+      Isha:
+
+        cleanTime(t.Isha)
+
+    };
+
+    updatePrayerUI();
+
+    showToast(
+
+      "کاتی نوێژ نوێ کرایەوە"
+
+    );
+
+  }catch(error){
+
+    console.error(
+
+      error
+
+    );
+
+    useDefaultTimes();
+
+  }
+
+}
+
+/* ================================
 
    QURAN SEARCH
 
------------------------------ */
+================================ */
 
 const quranSearch =
 
@@ -978,11 +1052,11 @@ if(quranSearch){
 
     "input",
 
-    () => {
+    function(){
 
       const value =
 
-        quranSearch.value
+        this.value
 
           .trim()
 
@@ -996,11 +1070,11 @@ if(quranSearch){
 
             (
 
-              surah.dataset.name || ""
+              surah.dataset.name ||
 
-            )
+              ""
 
-            .toLowerCase();
+            ).toLowerCase();
 
           surah.style.display =
 
@@ -1020,81 +1094,11 @@ if(quranSearch){
 
 }
 
-/* -----------------------------
+/* ================================
 
-   QURAN AUDIO
+   QURAN SURAH BUTTONS
 
------------------------------ */
-
-const quranAudio =
-
-  $("#quranAudio");
-
-function openQuranAudio(
-
-  surah
-
-){
-
-  currentAudioSurah =
-
-    surah;
-
-  if($("#audioSurah")){
-
-    $("#audioSurah").textContent =
-
-      `سورەتی ${surah}`;
-
-  }
-
-  showScreen("audio");
-
-  showToast(
-
-    `سورەتی ${surah} هەڵبژێردرا`
-
-  );
-
-}
-
-/*
-
-  ئەم بەشە تەنها نموونەی URL ـی audio ـە.
-
-  دەتوانین لە قۆناغی دواتر audio source ـی
-
-  هەموو 114 سورەت بە API/CDN ـی تایبەت زیاد بکەین.
-
-*/
-
-const audioSources = {
-
-  "فاتحە":
-
-    "",
-
-  "بەقەرە":
-
-    "",
-
-  "عیمڕان":
-
-    "",
-
-  "نیسا":
-
-    "",
-
-  "مائدە":
-
-    "",
-
-  "یاسین":
-
-    ""
-
-};
+================================ */
 
 $$(".surah-play").forEach(
 
@@ -1104,11 +1108,31 @@ $$(".surah-play").forEach(
 
       "click",
 
-      () => {
+      function(){
 
-        openQuranAudio(
+        const surah =
 
-          button.dataset.surah
+          this.dataset.surah;
+
+        if($("#audioSurah")){
+
+          $("#audioSurah")
+
+            .textContent =
+
+            `سورەتی ${surah}`;
+
+        }
+
+        showScreen(
+
+          "audio"
+
+        );
+
+        showToast(
+
+          `سورەتی ${surah} هەڵبژێردرا`
 
         );
 
@@ -1128,11 +1152,21 @@ if($("#lastReadBtn")){
 
       "click",
 
-      () => {
+      function(){
 
-        openQuranAudio(
+        if($("#audioSurah")){
 
-          "یاسین"
+          $("#audioSurah")
+
+            .textContent =
+
+            "سورەتی یاسین";
+
+        }
+
+        showScreen(
+
+          "audio"
 
         );
 
@@ -1142,11 +1176,11 @@ if($("#lastReadBtn")){
 
 }
 
-/* -----------------------------
+/* ================================
 
-   AUDIO PLAY
+   AUDIO BUTTON
 
------------------------------ */
+================================ */
 
 if($("#audioPlay")){
 
@@ -1156,19 +1190,23 @@ if($("#audioPlay")){
 
       "click",
 
-      () => {
+      function(){
+
+        const audio =
+
+          $("#quranAudio");
 
         if(
 
-          !quranAudio ||
+          !audio ||
 
-          !quranAudio.src
+          !audio.src
 
         ){
 
           showToast(
 
-            "سەرچاوەی تلاوەت هێشتا زیاد نەکراوە"
+            "دەنگی تلاوەت هێشتا زیاد نەکراوە"
 
           );
 
@@ -1176,29 +1214,21 @@ if($("#audioPlay")){
 
         }
 
-        if(
+        if(audio.paused){
 
-          quranAudio.paused
+          audio.play();
 
-        ){
+          this.textContent =
 
-          quranAudio.play();
-
-          $("#audioPlay")
-
-            .textContent =
-
-              "Ⅱ";
+            "Ⅱ";
 
         }else{
 
-          quranAudio.pause();
+          audio.pause();
 
-          $("#audioPlay")
+          this.textContent =
 
-            .textContent =
-
-              "▶";
+            "▶";
 
         }
 
@@ -1208,11 +1238,11 @@ if($("#audioPlay")){
 
 }
 
-/* -----------------------------
+/* ================================
 
    SWITCHES
 
------------------------------ */
+================================ */
 
 $$("[data-switch]").forEach(
 
@@ -1222,25 +1252,23 @@ $$("[data-switch]").forEach(
 
       "click",
 
-      () => {
+      function(){
 
-        button.classList.toggle(
+        this.classList.toggle(
 
           "active"
 
         );
 
-        const active =
-
-          button.classList.contains(
-
-            "active"
-
-          );
+        saveSwitches();
 
         showToast(
 
-          active
+          this.classList.contains(
+
+            "active"
+
+          )
 
             ? "چالاک کرا"
 
@@ -1256,11 +1284,129 @@ $$("[data-switch]").forEach(
 
 );
 
-/* -----------------------------
+function saveSwitches(){
+
+  const states =
+
+    Array.from(
+
+      $$("[data-switch]")
+
+    ).map(
+
+      button =>
+
+        button.classList.contains(
+
+          "active"
+
+        )
+
+    );
+
+  localStorage.setItem(
+
+    "qaiwanSwitches",
+
+    JSON.stringify(states)
+
+  );
+
+}
+
+function loadSwitches(){
+
+  const saved =
+
+    localStorage.getItem(
+
+      "qaiwanSwitches"
+
+    );
+
+  if(!saved){
+
+    return;
+
+  }
+
+  try{
+
+    const states =
+
+      JSON.parse(saved);
+
+    $$("[data-switch]")
+
+      .forEach(
+
+        (button,index) => {
+
+          if(
+
+            states[index] === false
+
+          ){
+
+            button.classList.remove(
+
+              "active"
+
+            );
+
+          }else{
+
+            button.classList.add(
+
+              "active"
+
+            );
+
+          }
+
+        }
+
+      );
+
+  }catch(error){
+
+    console.error(
+
+      error
+
+    );
+
+  }
+
+}
+
+/* ================================
 
    DHIKR
 
------------------------------ */
+================================ */
+
+function updateDhikr(){
+
+  if($("#dhikrNumber")){
+
+    $("#dhikrNumber")
+
+      .textContent =
+
+      dhikrCount;
+
+  }
+
+  localStorage.setItem(
+
+    "qaiwanDhikr",
+
+    String(dhikrCount)
+
+  );
+
+}
 
 if($("#counterBtn")){
 
@@ -1270,19 +1416,11 @@ if($("#counterBtn")){
 
       "click",
 
-      () => {
+      function(){
 
         dhikrCount++;
 
-        if($("#dhikrNumber")){
-
-          $("#dhikrNumber")
-
-            .textContent =
-
-              dhikrCount;
-
-        }
+        updateDhikr();
 
         if(
 
@@ -1314,15 +1452,11 @@ if($("#resetDhikr")){
 
       "click",
 
-      () => {
+      function(){
 
         dhikrCount = 0;
 
-        $("#dhikrNumber")
-
-          .textContent =
-
-            "0";
+        updateDhikr();
 
       }
 
@@ -1330,17 +1464,41 @@ if($("#resetDhikr")){
 
 }
 
-/* -----------------------------
+function loadDhikr(){
+
+  const saved =
+
+    localStorage.getItem(
+
+      "qaiwanDhikr"
+
+    );
+
+  if(saved){
+
+    dhikrCount =
+
+      Number(saved) || 0;
+
+  }
+
+  updateDhikr();
+
+}
+
+/* ================================
 
    COMPASS
 
------------------------------ */
+================================ */
 
 function startCompass(){
 
   if(
 
-    !window.DeviceOrientationEvent
+    typeof DeviceOrientationEvent ===
+
+    "undefined"
 
   ){
 
@@ -1366,51 +1524,59 @@ function startCompass(){
 
       .requestPermission()
 
-      .then(permission => {
+      .then(
 
-        if(
+        function(permission){
 
-          permission === "granted"
+          if(
 
-        ){
+            permission ===
 
-          window.addEventListener(
+            "granted"
 
-            "deviceorientation",
+          ){
 
-            handleCompass
+            window.addEventListener(
 
-          );
+              "deviceorientation",
+
+              handleCompass
+
+            );
+
+            showToast(
+
+              "Compass چالاک کرا"
+
+            );
+
+          }else{
+
+            showToast(
+
+              "ڕێگەپێدان نەدرا"
+
+            );
+
+          }
+
+        }
+
+      )
+
+      .catch(
+
+        function(){
 
           showToast(
 
-            "Compass چالاک کرا"
-
-          );
-
-        }else{
-
-          showToast(
-
-            "ڕێگەپێدان بە Compass نەدرا"
+            "Compass چالاک نەکرا"
 
           );
 
         }
 
-      })
-
-      .catch(error => {
-
-        console.error(error);
-
-        showToast(
-
-          "Compass چالاک نەکرا"
-
-        );
-
-      });
+      );
 
   }else{
 
@@ -1438,15 +1604,33 @@ function handleCompass(event){
 
     $(".needle");
 
-  if(!needle) return;
+  if(!needle){
 
-  const alpha =
+    return;
+
+  }
+
+  let heading =
 
     event.alpha || 0;
 
+  if(
+
+    typeof event.webkitCompassHeading ===
+
+    "number"
+
+  ){
+
+    heading =
+
+      event.webkitCompassHeading;
+
+  }
+
   needle.style.transform =
 
-    `translateX(-50%) rotate(${alpha + 35}deg)`;
+    `translateX(-50%) rotate(${heading}deg)`;
 
 }
 
@@ -1464,129 +1648,47 @@ if($("#compassBtn")){
 
 }
 
-/* -----------------------------
+/* ================================
 
    MODAL
 
------------------------------ */
+================================ */
 
 const modal =
 
   $("#modal");
 
-const modalTitle =
+function openModal(
 
-  $("#modalTitle");
+  title,
 
-const modalContent =
+  html
 
-  $("#modalContent");
+){
 
-function openModal(type){
+  if(!modal){
 
-  if(!modal) return;
+    return;
+
+  }
+
+  $("#modalTitle")
+
+    .textContent =
+
+    title;
+
+  $("#modalContent")
+
+    .innerHTML =
+
+    html;
 
   modal.classList.add(
 
     "show"
 
   );
-
-  if(type === "notifications"){
-
-    modalTitle.textContent =
-
-      "ئاگادارکردنەوە";
-
-    modalContent.innerHTML = `
-
-      <button class="modal-option">
-
-        🕌 کاتی نوێژی داهاتوو
-
-      </button>
-
-      <button class="modal-option">
-
-        📖 بەردەوام بە لە قورئان
-
-      </button>
-
-      <button class="modal-option">
-
-        🤲 ئەذکاری ئێوارە
-
-      </button>
-
-    `;
-
-  }
-
-  if(type === "menu"){
-
-    modalTitle.textContent =
-
-      "Qaiwan Azan";
-
-    modalContent.innerHTML = `
-
-      <button class="modal-option" data-modal-go="prayers">
-
-        🕌 کاتی نوێژ
-
-      </button>
-
-      <button class="modal-option" data-modal-go="quran">
-
-        📖 قورئان
-
-      </button>
-
-      <button class="modal-option" data-modal-go="qibla">
-
-        🧭 قیبلە
-
-      </button>
-
-      <button class="modal-option" data-modal-go="adhkar">
-
-        🤲 ئەذکار
-
-      </button>
-
-      <button class="modal-option" data-modal-go="settings">
-
-        ⚙ ڕێکخستن
-
-      </button>
-
-    `;
-
-    $$("[data-modal-go]")
-
-      .forEach(button => {
-
-        button.addEventListener(
-
-          "click",
-
-          () => {
-
-            showScreen(
-
-              button.dataset.modalGo
-
-            );
-
-            closeModal();
-
-          }
-
-        );
-
-      });
-
-  }
 
 }
 
@@ -1624,11 +1726,13 @@ if(modal){
 
     "click",
 
-    event => {
+    function(event){
 
       if(
 
-        event.target === modal
+        event.target ===
+
+        modal
 
       ){
 
@@ -1642,11 +1746,11 @@ if(modal){
 
 }
 
-/* -----------------------------
+/* ================================
 
-   HEADER BUTTONS
+   NOTIFICATION
 
------------------------------ */
+================================ */
 
 if($("#notificationBtn")){
 
@@ -1656,11 +1760,33 @@ if($("#notificationBtn")){
 
       "click",
 
-      () => {
+      function(){
 
         openModal(
 
-          "notifications"
+          "ئاگادارکردنەوە",
+
+          `
+
+          <button class="modal-option" type="button">
+
+            🕌 کاتی نوێژی داهاتوو
+
+          </button>
+
+          <button class="modal-option" type="button">
+
+            📖 بەردەوام بە لە قورئان
+
+          </button>
+
+          <button class="modal-option" type="button">
+
+            🤲 ئەذکاری ئەمڕۆ
+
+          </button>
+
+          `
 
         );
 
@@ -1669,6 +1795,12 @@ if($("#notificationBtn")){
     );
 
 }
+
+/* ================================
+
+   MENU
+
+================================ */
 
 if($("#menuBtn")){
 
@@ -1678,11 +1810,217 @@ if($("#menuBtn")){
 
       "click",
 
-      () => {
+      function(){
 
         openModal(
 
-          "menu"
+          "Qaiwan Azan",
+
+          `
+
+          <button
+
+            class="modal-option"
+
+            type="button"
+
+            data-menu="prayers"
+
+          >
+
+            🕌 کاتی نوێژ
+
+          </button>
+
+          <button
+
+            class="modal-option"
+
+            type="button"
+
+            data-menu="quran"
+
+          >
+
+            📖 قورئان
+
+          </button>
+
+          <button
+
+            class="modal-option"
+
+            type="button"
+
+            data-menu="qibla"
+
+          >
+
+            🧭 قیبلە
+
+          </button>
+
+          <button
+
+            class="modal-option"
+
+            type="button"
+
+            data-menu="adhkar"
+
+          >
+
+            🤲 ئەذکار
+
+          </button>
+
+          <button
+
+            class="modal-option"
+
+            type="button"
+
+            data-menu="settings"
+
+          >
+
+            ⚙️ ڕێکخستن
+
+          </button>
+
+          `
+
+        );
+
+        $$("[data-menu]")
+
+          .forEach(
+
+            button => {
+
+              button.addEventListener(
+
+                "click",
+
+                function(){
+
+                  showScreen(
+
+                    this.dataset.menu
+
+                  );
+
+                  closeModal();
+
+                }
+
+              );
+
+            }
+
+          );
+
+      }
+
+    );
+
+}
+
+/* ================================
+
+   DUAS
+
+================================ */
+
+$$("[data-dua]").forEach(
+
+  button => {
+
+    button.addEventListener(
+
+      "click",
+
+      function(){
+
+        const dua =
+
+          this.dataset.dua;
+
+        openModal(
+
+          dua,
+
+          `
+
+          <div class="modal-option">
+
+            سُبْحَانَ اللَّهِ
+
+          </div>
+
+          <div class="modal-option">
+
+            الْحَمْدُ لِلَّهِ
+
+          </div>
+
+          <div class="modal-option">
+
+            اللَّهُ أَكْبَرُ
+
+          </div>
+
+          `
+
+        );
+
+      }
+
+    );
+
+  }
+
+);
+
+/* ================================
+
+   ABOUT
+
+================================ */
+
+if(
+
+  $("[data-about]")
+
+){
+
+  $("[data-about]")
+
+    .addEventListener(
+
+      "click",
+
+      function(){
+
+        openModal(
+
+          "دەربارەی Qaiwan Azan",
+
+          `
+
+          <div class="modal-option">
+
+            Qaiwan Azan ئەپێکی ئەذان و قورئانە.
+
+          </div>
+
+          <div class="modal-option">
+
+            کاتی نوێژ، قیبلە، قورئان و ئەذکار لە یەک شوێن.
+
+          </div>
+
+          `
 
         );
 
@@ -1692,201 +2030,73 @@ if($("#menuBtn")){
 
 }
 
-/* -----------------------------
+/* ================================
 
-   SAVE SETTINGS
+   SUPPORT
 
------------------------------ */
+================================ */
 
-function saveSwitches(){
+if(
 
-  const states =
+  $("[data-support]")
 
-    [...$$("[data-switch]")]
+){
 
-      .map(
-
-        button =>
-
-          button.classList.contains(
-
-            "active"
-
-          )
-
-      );
-
-  localStorage.setItem(
-
-    "qaiwanSwitches",
-
-    JSON.stringify(states)
-
-  );
-
-}
-
-function loadSwitches(){
-
-  const saved =
-
-    localStorage.getItem(
-
-      "qaiwanSwitches"
-
-    );
-
-  if(!saved) return;
-
-  try{
-
-    const states =
-
-      JSON.parse(saved);
-
-    $$("[data-switch]")
-
-      .forEach(
-
-        (button,index) => {
-
-          if(
-
-            states[index] === false
-
-          ){
-
-            button.classList.remove(
-
-              "active"
-
-            );
-
-          }
-
-        }
-
-      );
-
-  }catch(error){
-
-    console.error(error);
-
-  }
-
-}
-
-$$("[data-switch]").forEach(
-
-  button => {
-
-    button.addEventListener(
-
-      "click",
-
-      saveSwitches
-
-    );
-
-  }
-
-);
-
-/* -----------------------------
-
-   SAVE DHIKR
-
------------------------------ */
-
-function saveDhikr(){
-
-  localStorage.setItem(
-
-    "qaiwanDhikr",
-
-    String(dhikrCount)
-
-  );
-
-}
-
-function loadDhikr(){
-
-  const saved =
-
-    localStorage.getItem(
-
-      "qaiwanDhikr"
-
-    );
-
-  if(saved){
-
-    dhikrCount =
-
-      Number(saved) || 0;
-
-    if($("#dhikrNumber")){
-
-      $("#dhikrNumber")
-
-        .textContent =
-
-          dhikrCount;
-
-    }
-
-  }
-
-}
-
-if($("#counterBtn")){
-
-  $("#counterBtn")
+  $("[data-support]")
 
     .addEventListener(
 
       "click",
 
-      saveDhikr
+      function(){
+
+        openModal(
+
+          "پشتیوانی",
+
+          `
+
+          <div class="modal-option">
+
+            بۆ پشتیوانی دەتوانیت پەیوەندیمان پێوە بکەیت.
+
+          </div>
+
+          `
+
+        );
+
+      }
 
     );
 
 }
 
-if($("#resetDhikr")){
+/* ================================
 
-  $("#resetDhikr")
+   START APP
 
-    .addEventListener(
-
-      "click",
-
-      saveDhikr
-
-    );
-
-}
-
-/* -----------------------------
-
-   INITIALIZE
-
------------------------------ */
+================================ */
 
 document.addEventListener(
 
   "DOMContentLoaded",
 
-  () => {
+  function(){
 
-    prayerTimes = {
+    /*
 
-      ...defaultPrayerTimes
+      گرنگ:
 
-    };
+      پێش GPS کاتەکانی بنەڕەتی
 
-    updatePrayerUI();
+      دادەنێین بۆ ئەوەی هیچ کاتێک
+
+      --:-- نەبینرێت.
+
+    */
+
+    useDefaultTimes();
 
     loadSwitches();
 
