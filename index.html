@@ -4,1303 +4,17 @@
 
 <head>
 
-<meta charset="UTF-8">
+  <meta charset="UTF-8">
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
-<meta name="theme-color" content="#061b22">
+  <meta name="theme-color" content="#061b22">
 
-<meta name="description" content="Qaiwan Azan - Prayer Times, Quran, Qibla and Azkar">
+  <meta name="description" content="Qaiwan Azan - ئەذان، کاتی نوێژ، قورئان، قیبلە و ئەذکار">
 
-<title>Qaiwan Azan</title>
+  <title>Qaiwan Azan</title>
 
-<style>
-
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;500;600;700;800&display=swap');
-
-:root{
-
-  --bg:#04151b;
-
-  --bg2:#061e25;
-
-  --card:#09272e;
-
-  --card2:#0d3037;
-
-  --gold:#e9b84b;
-
-  --gold2:#ffd978;
-
-  --green:#15966f;
-
-  --green2:#0d6e57;
-
-  --text:#f7f5ee;
-
-  --muted:#9db1b3;
-
-  --border:rgba(233,184,75,.20);
-
-  --danger:#d85b5b;
-
-  --shadow:0 20px 60px rgba(0,0,0,.35);
-
-}
-
-*{
-
-  box-sizing:border-box;
-
-  margin:0;
-
-  padding:0;
-
-}
-
-html{
-
-  scroll-behavior:smooth;
-
-}
-
-body{
-
-  font-family:"Noto Sans Arabic",Arial,sans-serif;
-
-  background:
-
-    radial-gradient(circle at 50% -10%,rgba(22,122,105,.28),transparent 35%),
-
-    linear-gradient(180deg,#031218,#061b22 55%,#04151b);
-
-  color:var(--text);
-
-  min-height:100vh;
-
-}
-
-button,
-
-input,
-
-select{
-
-  font:inherit;
-
-}
-
-button{
-
-  cursor:pointer;
-
-}
-
-.app{
-
-  width:100%;
-
-  max-width:520px;
-
-  min-height:100vh;
-
-  margin:auto;
-
-  position:relative;
-
-  overflow:hidden;
-
-  padding-bottom:92px;
-
-}
-
-/* HEADER */
-
-.header{
-
-  height:76px;
-
-  padding:18px 18px 10px;
-
-  display:flex;
-
-  align-items:center;
-
-  justify-content:space-between;
-
-}
-
-.brand{
-
-  display:flex;
-
-  align-items:center;
-
-  gap:10px;
-
-}
-
-.logo{
-
-  width:46px;
-
-  height:46px;
-
-  border:1px solid var(--gold);
-
-  border-radius:15px;
-
-  background:
-
-    radial-gradient(circle at 50% 30%,#f7d879 0 4%,transparent 5%),
-
-    linear-gradient(145deg,#123c45,#04151b);
-
-  display:flex;
-
-  align-items:center;
-
-  justify-content:center;
-
-  font-size:23px;
-
-  box-shadow:0 8px 25px rgba(0,0,0,.3);
-
-}
-
-.brand h1{
-
-  font-size:18px;
-
-  font-weight:800;
-
-}
-
-.brand span{
-
-  display:block;
-
-  color:var(--gold);
-
-  font-size:10px;
-
-  letter-spacing:2px;
-
-  direction:ltr;
-
-}
-
-.header-actions{
-
-  display:flex;
-
-  gap:8px;
-
-}
-
-.icon-btn{
-
-  width:40px;
-
-  height:40px;
-
-  border:1px solid var(--border);
-
-  background:rgba(9,39,46,.85);
-
-  color:var(--text);
-
-  border-radius:13px;
-
-}
-
-/* SCREENS */
-
-.screen{
-
-  display:none;
-
-  padding:0 16px 25px;
-
-  animation:fade .25s ease;
-
-}
-
-.screen.active{
-
-  display:block;
-
-}
-
-@keyframes fade{
-
-  from{
-
-    opacity:0;
-
-    transform:translateY(8px);
-
-  }
-
-  to{
-
-    opacity:1;
-
-    transform:none;
-
-  }
-
-}
-
-/* HOME */
-
-.location{
-
-  text-align:center;
-
-  color:var(--muted);
-
-  font-size:12px;
-
-  margin:5px 0 12px;
-
-}
-
-.location b{
-
-  color:var(--text);
-
-}
-
-.next-prayer{
-
-  border:1px solid var(--border);
-
-  border-radius:28px;
-
-  padding:25px 20px;
-
-  text-align:center;
-
-  background:
-
-    linear-gradient(145deg,rgba(14,73,72,.92),rgba(5,30,36,.98));
-
-  box-shadow:var(--shadow);
-
-  position:relative;
-
-  overflow:hidden;
-
-}
-
-.next-prayer:before{
-
-  content:"☪";
-
-  position:absolute;
-
-  left:-15px;
-
-  top:-28px;
-
-  font-size:130px;
-
-  color:rgba(233,184,75,.06);
-
-}
-
-.next-label{
-
-  color:var(--muted);
-
-  font-size:12px;
-
-}
-
-.next-prayer h2{
-
-  margin-top:5px;
-
-  color:var(--gold2);
-
-  font-size:27px;
-
-}
-
-.countdown{
-
-  direction:ltr;
-
-  font-size:35px;
-
-  font-weight:800;
-
-  letter-spacing:2px;
-
-  margin:4px 0;
-
-}
-
-.next-time{
-
-  color:var(--muted);
-
-  font-size:12px;
-
-}
-
-/* PRAYER ROW */
-
-.prayer-row{
-
-  display:grid;
-
-  grid-template-columns:repeat(5,1fr);
-
-  gap:6px;
-
-  margin:13px 0;
-
-}
-
-.prayer{
-
-  background:rgba(9,39,46,.9);
-
-  border:1px solid rgba(255,255,255,.07);
-
-  border-radius:16px;
-
-  padding:10px 3px;
-
-  text-align:center;
-
-}
-
-.prayer.active{
-
-  background:linear-gradient(180deg,#0c6b58,#093a36);
-
-  border-color:rgba(233,184,75,.45);
-
-}
-
-.prayer .emoji{
-
-  font-size:18px;
-
-}
-
-.prayer small{
-
-  display:block;
-
-  color:var(--muted);
-
-  font-size:9px;
-
-  margin-top:4px;
-
-}
-
-.prayer strong{
-
-  display:block;
-
-  font-size:11px;
-
-  margin-top:2px;
-
-}
-
-/* VERSE */
-
-.verse{
-
-  background:linear-gradient(145deg,#092d32,#071e25);
-
-  border:1px solid var(--border);
-
-  border-radius:20px;
-
-  padding:18px;
-
-  margin-top:12px;
-
-}
-
-.verse-title{
-
-  display:flex;
-
-  justify-content:space-between;
-
-  color:var(--gold);
-
-  font-size:12px;
-
-  margin-bottom:10px;
-
-}
-
-.verse p{
-
-  line-height:2;
-
-  font-size:15px;
-
-  text-align:center;
-
-}
-
-.verse small{
-
-  display:block;
-
-  text-align:center;
-
-  color:var(--muted);
-
-  margin-top:8px;
-
-}
-
-/* QUICK ACTIONS */
-
-.section-title{
-
-  display:flex;
-
-  justify-content:space-between;
-
-  align-items:center;
-
-  margin:20px 2px 10px;
-
-}
-
-.section-title h3{
-
-  font-size:16px;
-
-}
-
-.section-title span{
-
-  color:var(--gold);
-
-  font-size:11px;
-
-}
-
-.quick-grid{
-
-  display:grid;
-
-  grid-template-columns:repeat(4,1fr);
-
-  gap:8px;
-
-}
-
-.quick{
-
-  border:1px solid rgba(255,255,255,.07);
-
-  background:var(--card);
-
-  border-radius:17px;
-
-  min-height:78px;
-
-  color:var(--text);
-
-  padding:10px 4px;
-
-}
-
-.quick i{
-
-  display:block;
-
-  font-style:normal;
-
-  font-size:23px;
-
-  margin-bottom:4px;
-
-}
-
-.quick span{
-
-  font-size:10px;
-
-}
-
-/* COMMON CARD */
-
-.card{
-
-  background:linear-gradient(145deg,#0a2a31,#061e25);
-
-  border:1px solid rgba(255,255,255,.07);
-
-  border-radius:22px;
-
-  padding:17px;
-
-  margin-bottom:12px;
-
-}
-
-.page-title{
-
-  font-size:24px;
-
-  margin:10px 0 5px;
-
-}
-
-.page-sub{
-
-  color:var(--muted);
-
-  font-size:12px;
-
-  margin-bottom:18px;
-
-}
-
-/* QURAN */
-
-.quran-search{
-
-  display:flex;
-
-  gap:8px;
-
-  margin-bottom:14px;
-
-}
-
-.quran-search input{
-
-  flex:1;
-
-  background:#071d23;
-
-  border:1px solid rgba(255,255,255,.1);
-
-  color:#fff;
-
-  outline:none;
-
-  border-radius:15px;
-
-  padding:12px;
-
-}
-
-.quran-search input::placeholder{
-
-  color:#718688;
-
-}
-
-.surah{
-
-  display:flex;
-
-  align-items:center;
-
-  gap:12px;
-
-  padding:14px 5px;
-
-  border-bottom:1px solid rgba(255,255,255,.06);
-
-}
-
-.surah:last-child{
-
-  border-bottom:0;
-
-}
-
-.surah-number{
-
-  width:39px;
-
-  height:39px;
-
-  border:1px solid var(--gold);
-
-  transform:rotate(45deg);
-
-  display:flex;
-
-  align-items:center;
-
-  justify-content:center;
-
-  flex-shrink:0;
-
-}
-
-.surah-number span{
-
-  transform:rotate(-45deg);
-
-  color:var(--gold);
-
-  font-size:11px;
-
-}
-
-.surah-info{
-
-  flex:1;
-
-}
-
-.surah-info b{
-
-  display:block;
-
-  font-size:14px;
-
-}
-
-.surah-info small{
-
-  color:var(--muted);
-
-}
-
-.play{
-
-  border:0;
-
-  width:37px;
-
-  height:37px;
-
-  border-radius:50%;
-
-  background:var(--gold);
-
-  color:#172017;
-
-}
-
-/* QIBLA */
-
-.qibla-card{
-
-  text-align:center;
-
-  padding:20px 10px 25px;
-
-}
-
-.qibla-degree{
-
-  color:var(--gold);
-
-  font-size:28px;
-
-  font-weight:800;
-
-}
-
-.compass{
-
-  width:280px;
-
-  height:280px;
-
-  max-width:80vw;
-
-  margin:15px auto;
-
-  border-radius:50%;
-
-  border:2px solid var(--gold);
-
-  position:relative;
-
-  background:
-
-    radial-gradient(circle,#092e35 0 40%,#061d24 41% 63%,#0a3034 64% 66%,#061a20 67%);
-
-  box-shadow:
-
-    0 0 0 8px rgba(233,184,75,.05),
-
-    0 20px 60px rgba(0,0,0,.4);
-
-}
-
-.compass:before{
-
-  content:"N";
-
-  position:absolute;
-
-  top:13px;
-
-  left:50%;
-
-  transform:translateX(-50%);
-
-  color:var(--gold);
-
-  font-weight:bold;
-
-}
-
-.compass:after{
-
-  content:"S";
-
-  position:absolute;
-
-  bottom:13px;
-
-  left:50%;
-
-  transform:translateX(-50%);
-
-  color:var(--muted);
-
-}
-
-.needle{
-
-  position:absolute;
-
-  width:4px;
-
-  height:220px;
-
-  background:linear-gradient(var(--gold),transparent 48%,#d9eee7 49%,transparent);
-
-  left:50%;
-
-  top:30px;
-
-  transform:translateX(-50%) rotate(35deg);
-
-  transform-origin:center;
-
-  border-radius:5px;
-
-}
-
-.kaaba{
-
-  position:absolute;
-
-  width:65px;
-
-  height:65px;
-
-  border-radius:50%;
-
-  background:#07181c;
-
-  border:1px solid var(--gold);
-
-  left:50%;
-
-  top:50%;
-
-  transform:translate(-50%,-50%);
-
-  display:flex;
-
-  align-items:center;
-
-  justify-content:center;
-
-  font-size:28px;
-
-}
-
-/* ADHKAR */
-
-.dhikr{
-
-  text-align:center;
-
-}
-
-.dhikr-number{
-
-  font-size:45px;
-
-  color:var(--gold);
-
-  font-weight:800;
-
-  margin:20px;
-
-}
-
-.dhikr-text{
-
-  line-height:2.2;
-
-  font-size:20px;
-
-}
-
-.counter{
-
-  margin:auto;
-
-  width:110px;
-
-  height:110px;
-
-  border-radius:50%;
-
-  background:linear-gradient(145deg,#0e7b63,#083f39);
-
-  border:2px solid var(--gold);
-
-  display:flex;
-
-  align-items:center;
-
-  justify-content:center;
-
-  font-size:32px;
-
-  color:white;
-
-}
-
-/* AUDIO */
-
-.audio{
-
-  text-align:center;
-
-}
-
-.reciter{
-
-  width:88px;
-
-  height:88px;
-
-  border-radius:50%;
-
-  margin:10px auto;
-
-  background:linear-gradient(145deg,#146d61,#092a30);
-
-  border:1px solid var(--gold);
-
-  display:flex;
-
-  align-items:center;
-
-  justify-content:center;
-
-  font-size:38px;
-
-}
-
-.audio h2{
-
-  font-size:18px;
-
-}
-
-.progress{
-
-  height:5px;
-
-  background:#244248;
-
-  border-radius:5px;
-
-  margin:20px 5px 8px;
-
-}
-
-.progress span{
-
-  display:block;
-
-  width:35%;
-
-  height:100%;
-
-  background:var(--gold);
-
-  border-radius:5px;
-
-}
-
-.audio-controls{
-
-  display:flex;
-
-  justify-content:center;
-
-  align-items:center;
-
-  gap:22px;
-
-  margin-top:15px;
-
-}
-
-.audio-controls button{
-
-  border:0;
-
-  background:transparent;
-
-  color:white;
-
-  font-size:24px;
-
-}
-
-.audio-controls .main{
-
-  width:58px;
-
-  height:58px;
-
-  background:var(--gold);
-
-  color:#172017;
-
-  border-radius:50%;
-
-}
-
-/* SETTINGS */
-
-.setting{
-
-  display:flex;
-
-  justify-content:space-between;
-
-  align-items:center;
-
-  padding:15px 2px;
-
-  border-bottom:1px solid rgba(255,255,255,.06);
-
-}
-
-.setting:last-child{
-
-  border-bottom:0;
-
-}
-
-.setting-info b{
-
-  display:block;
-
-  font-size:13px;
-
-}
-
-.setting-info small{
-
-  color:var(--muted);
-
-}
-
-.switch{
-
-  width:45px;
-
-  height:25px;
-
-  border-radius:20px;
-
-  background:#263e43;
-
-  padding:3px;
-
-}
-
-.switch.active{
-
-  background:var(--green);
-
-}
-
-.switch i{
-
-  display:block;
-
-  width:19px;
-
-  height:19px;
-
-  border-radius:50%;
-
-  background:white;
-
-  transition:.2s;
-
-}
-
-.switch.active i{
-
-  transform:translateX(-20px);
-
-}
-
-/* BOTTOM NAV */
-
-.bottom-nav{
-
-  position:fixed;
-
-  bottom:0;
-
-  left:50%;
-
-  transform:translateX(-50%);
-
-  width:100%;
-
-  max-width:520px;
-
-  height:78px;
-
-  background:rgba(4,21,27,.94);
-
-  backdrop-filter:blur(18px);
-
-  border-top:1px solid rgba(233,184,75,.14);
-
-  display:grid;
-
-  grid-template-columns:repeat(5,1fr);
-
-  z-index:100;
-
-  padding-bottom:env(safe-area-inset-bottom);
-
-}
-
-.nav-btn{
-
-  border:0;
-
-  background:none;
-
-  color:#759093;
-
-  font-size:10px;
-
-}
-
-.nav-btn span{
-
-  display:block;
-
-  font-size:21px;
-
-  margin-bottom:3px;
-
-}
-
-.nav-btn.active{
-
-  color:var(--gold);
-
-}
-
-/* MODAL */
-
-.modal{
-
-  display:none;
-
-  position:fixed;
-
-  inset:0;
-
-  background:rgba(0,0,0,.7);
-
-  z-index:500;
-
-  align-items:flex-end;
-
-  justify-content:center;
-
-}
-
-.modal.show{
-
-  display:flex;
-
-}
-
-.modal-box{
-
-  width:100%;
-
-  max-width:520px;
-
-  background:#09272e;
-
-  border-radius:27px 27px 0 0;
-
-  border:1px solid var(--border);
-
-  padding:22px;
-
-  animation:up .25s ease;
-
-}
-
-@keyframes up{
-
-  from{
-
-    transform:translateY(100%);
-
-  }
-
-  to{
-
-    transform:none;
-
-  }
-
-}
-
-.modal-head{
-
-  display:flex;
-
-  justify-content:space-between;
-
-  align-items:center;
-
-  margin-bottom:15px;
-
-}
-
-.close{
-
-  border:0;
-
-  background:#173a40;
-
-  color:#fff;
-
-  width:35px;
-
-  height:35px;
-
-  border-radius:50%;
-
-}
-
-.option{
-
-  width:100%;
-
-  padding:14px;
-
-  margin:5px 0;
-
-  border-radius:15px;
-
-  border:1px solid rgba(255,255,255,.08);
-
-  background:#071d23;
-
-  color:white;
-
-  text-align:right;
-
-}
-
-.option.selected{
-
-  border-color:var(--gold);
-
-  color:var(--gold);
-
-}
-
-/* TOAST */
-
-.toast{
-
-  position:fixed;
-
-  top:20px;
-
-  left:50%;
-
-  transform:translate(-50%,-100px);
-
-  background:#0d6e57;
-
-  color:white;
-
-  padding:12px 18px;
-
-  border-radius:14px;
-
-  z-index:900;
-
-  transition:.3s;
-
-  font-size:12px;
-
-}
-
-.toast.show{
-
-  transform:translate(-50%,0);
-
-}
-
-/* MOBILE */
-
-@media(max-width:360px){
-
-  .quick span{
-
-    font-size:9px;
-
-  }
-
-  .prayer strong{
-
-    font-size:10px;
-
-  }
-
-  .countdown{
-
-    font-size:30px;
-
-  }
-
-}
-
-</style>
+  <link rel="stylesheet" href="style.css">
 
 </head>
 
@@ -1308,1357 +22,993 @@ button{
 
 <div class="app">
 
-<header class="header">
+  <!-- HEADER -->
 
-  <div class="brand">
+  <header class="header">
 
-    <div class="logo">☪</div>
+    <div class="brand">
 
-    <div>
+      <div class="logo">
 
-      <h1>Qaiwan Azan</h1>
-
-      <span>QAIWAN AZAN</span>
-
-    </div>
-
-  </div>
-
-  <div class="header-actions">
-
-    <button class="icon-btn"
-
-      onclick="openModal('notifications')">
-
-      🔔
-
-    </button>
-
-    <button class="icon-btn"
-
-      onclick="openModal('menu')">
-
-      ☰
-
-    </button>
-
-  </div>
-
-</header>
-
-<!-- HOME -->
-
-<section id="home" class="screen active">
-
-  <div class="location">
-
-    📍 <b id="locationText">شوێن دیاری نەکراوە</b> · ئەمڕۆ
-
-  </div>
-
-  <div class="next-prayer">
-
-    <div class="next-label">
-
-      نوێژی داهاتوو
-
-    </div>
-
-    <h2 id="nextPrayer">
-
-      چاوەڕوان بە...
-
-    </h2>
-
-    <div class="countdown" id="countdown">
-
-      --:--:--
-
-    </div>
-
-    <div class="next-time">
-
-      کاتی نوێژ: --:--
-
-    </div>
-
-  </div>
-
-  <div class="prayer-row">
-
-    <div class="prayer">
-
-      <div class="emoji">🌙</div>
-
-      <small>بەیانی</small>
-
-      <strong id="homeFajr">--:--</strong>
-
-    </div>
-
-    <div class="prayer">
-
-      <div class="emoji">☀️</div>
-
-      <small>زوهر</small>
-
-      <strong id="homeDhuhr">--:--</strong>
-
-    </div>
-
-    <div class="prayer">
-
-      <div class="emoji">🌤️</div>
-
-      <small>عەسر</small>
-
-      <strong id="homeAsr">--:--</strong>
-
-    </div>
-
-    <div class="prayer">
-
-      <div class="emoji">🌅</div>
-
-      <small>مەغریب</small>
-
-      <strong id="homeMaghrib">--:--</strong>
-
-    </div>
-
-    <div class="prayer">
-
-      <div class="emoji">🌙</div>
-
-      <small>عیشاء</small>
-
-      <strong id="homeIsha">--:--</strong>
-
-    </div>
-
-  </div>
-
-  <div class="verse">
-
-    <div class="verse-title">
-
-      <span>✨ ئایەتی ڕۆژ</span>
-
-      <span>سورەتی کەھف</span>
-
-    </div>
-
-    <p>
-
-      وَاذْكُر رَّبَّكَ إِذَا نَسِيتَ وَقُلْ عَسَىٰ أَن يَهْدِيَنِ رَبِّي لِأَقْرَبَ مِنْ هَٰذَا رَشَدًا
-
-    </p>
-
-    <small>
-
-      سورەتی کەھف · 24
-
-    </small>
-
-  </div>
-
-  <div class="section-title">
-
-    <h3>
-
-      بەشە خێراکان
-
-    </h3>
-
-    <span>
-
-      هەمووی ببینە
-
-    </span>
-
-  </div>
-
-  <div class="quick-grid">
-
-    <button class="quick"
-
-      onclick="showScreen('quran')">
-
-      <i>📖</i>
-
-      <span>
-
-        قورئان
-
-      </span>
-
-    </button>
-
-    <button class="quick"
-
-      onclick="showScreen('qibla')">
-
-      <i>🧭</i>
-
-      <span>
-
-        قیبلە
-
-      </span>
-
-    </button>
-
-    <button class="quick"
-
-      onclick="showScreen('adhkar')">
-
-      <i>🤲</i>
-
-      <span>
-
-        ئەذکار
-
-      </span>
-
-    </button>
-
-    <button class="quick"
-
-      onclick="showScreen('prayers')">
-
-      <i>🕌</i>
-
-      <span>
-
-        کاتی نوێژ
-
-      </span>
-
-    </button>
-
-  </div>
-
-</section>
-
-<!-- PRAYERS -->
-
-<section id="prayers" class="screen">
-
-  <h2 class="page-title">
-
-    کاتی نوێژ
-
-  </h2>
-
-  <p class="page-sub">
-
-    کاتەکانی ئەمڕۆ بەپێی شوێنی تۆ
-
-  </p>
-
-  <div class="card">
-
-    <div class="setting">
-
-      <div class="setting-info">
-
-        <b>ئیمساک</b>
-
-        <small>کاتی ڕاگرتنی خواردن</small>
+        ☪
 
       </div>
-
-      <strong id="imsakTime">
-
-        --:--
-
-      </strong>
-
-    </div>
-
-    <div class="setting">
-
-      <div class="setting-info">
-
-        <b>بەیانی</b>
-
-        <small>Fajr</small>
-
-      </div>
-
-      <strong id="fajrTime">
-
-        --:--
-
-      </strong>
-
-    </div>
-
-    <div class="setting">
-
-      <div class="setting-info">
-
-        <b>زوهر</b>
-
-        <small>Dhuhr</small>
-
-      </div>
-
-      <strong id="dhuhrTime">
-
-        --:--
-
-      </strong>
-
-    </div>
-
-    <div class="setting">
-
-      <div class="setting-info">
-
-        <b>عەسر</b>
-
-        <small>Asr</small>
-
-      </div>
-
-      <strong id="asrTime">
-
-        --:--
-
-      </strong>
-
-    </div>
-
-    <div class="setting">
-
-      <div class="setting-info">
-
-        <b>مەغریب</b>
-
-        <small>Maghrib</small>
-
-      </div>
-
-      <strong id="maghribTime">
-
-        --:--
-
-      </strong>
-
-    </div>
-
-    <div class="setting">
-
-      <div class="setting-info">
-
-        <b>عیشاء</b>
-
-        <small>Isha</small>
-
-      </div>
-
-      <strong id="ishaTime">
-
-        --:--
-
-      </strong>
-
-    </div>
-
-  </div>
-
-  <div class="card">
-
-    <div class="section-title">
-
-      <h3>
-
-        🔔 ئاگادارکردنەوە
-
-      </h3>
-
-    </div>
-
-    <div class="setting">
-
-      <div class="setting-info">
-
-        <b>ئەذانی بەیانی</b>
-
-        <small>پێش نوێژ ئاگادارم بکە</small>
-
-      </div>
-
-      <div class="switch active"
-
-        onclick="toggleSwitch(this)">
-
-        <i></i>
-
-      </div>
-
-    </div>
-
-    <div class="setting">
-
-      <div class="setting-info">
-
-        <b>ئەذانی عەسر</b>
-
-        <small>دەنگی ئەذان</small>
-
-      </div>
-
-      <div class="switch active"
-
-        onclick="toggleSwitch(this)">
-
-        <i></i>
-
-      </div>
-
-    </div>
-
-    <div class="setting">
-
-      <div class="setting-info">
-
-        <b>ئەذانی مەغریب</b>
-
-        <small>ئاگادارکردنەوە</small>
-
-      </div>
-
-      <div class="switch active"
-
-        onclick="toggleSwitch(this)">
-
-        <i></i>
-
-      </div>
-
-    </div>
-
-  </div>
-
-</section>
-
-<!-- QURAN -->
-
-<section id="quran" class="screen">
-
-  <h2 class="page-title">
-
-    قورئانی پیرۆز
-
-  </h2>
-
-  <p class="page-sub">
-
-    بخوێنەوە، گوێ بگرە و لە شوێنی خۆت بەردەوام بە
-
-  </p>
-
-  <div class="card">
-
-    <div style="
-
-      display:flex;
-
-      justify-content:space-between;
-
-      align-items:center;
-
-    ">
 
       <div>
 
-        <small style="color:var(--muted)">
+        <h1>Qaiwan Azan</h1>
 
-          دوایین خوێندنەوە
-
-        </small>
-
-        <h3 style="margin-top:5px">
-
-          سورەتی یاسین
-
-        </h3>
-
-        <small style="color:var(--gold)">
-
-          ئایەتی 12
-
-        </small>
+        <span>QAIWAN AZAN</span>
 
       </div>
 
-      <button class="play"
+    </div>
 
-        onclick="playQuran('یاسین')">
+    <div class="header-actions">
 
-        ▶
+      <button class="icon-btn" id="notificationBtn" aria-label="Notifications">
+
+        🔔
+
+      </button>
+
+      <button class="icon-btn" id="menuBtn" aria-label="Menu">
+
+        ☰
 
       </button>
 
     </div>
 
-  </div>
+  </header>
 
-  <div class="quran-search">
+  <!-- HOME -->
 
-    <input
+  <main id="home" class="screen active">
 
-      id="quranSearch"
+    <div class="location">
 
-      placeholder="گەڕان لە سورەتەکان..."
-
-      oninput="searchSurah()">
-
-    <button class="icon-btn">
-
-      🔎
-
-    </button>
-
-  </div>
-
-  <div class="card" id="surahList">
-
-    <div class="surah"
-
-      data-name="الفاتحة فاتحە">
-
-      <div class="surah-number">
-
-        <span>1</span>
-
-      </div>
-
-      <div class="surah-info">
-
-        <b>الفاتحة</b>
-
-        <small>
-
-          فاتحە · 7 ئایەت
-
-        </small>
-
-      </div>
-
-      <button class="play"
-
-        onclick="playQuran('فاتحە')">
-
-        ▶
-
-      </button>
+      📍 <b id="locationText">شوێن دیاری نەکراوە</b>
 
     </div>
 
-    <div class="surah"
+    <section class="next-prayer">
 
-      data-name="البقرة بەقەرە">
+      <div class="next-label">
 
-      <div class="surah-number">
-
-        <span>2</span>
+        نوێژی داهاتوو
 
       </div>
 
-      <div class="surah-info">
+      <h2 id="nextPrayer">
 
-        <b>البقرة</b>
+        چاوەڕوان بە...
 
-        <small>
+      </h2>
 
-          بەقەرە · 286 ئایەت
+      <div class="countdown" id="countdown">
 
-        </small>
-
-      </div>
-
-      <button class="play"
-
-        onclick="playQuran('بەقەرە')">
-
-        ▶
-
-      </button>
-
-    </div>
-
-    <div class="surah"
-
-      data-name="آل عمران عیمڕان">
-
-      <div class="surah-number">
-
-        <span>3</span>
+        --:--:--
 
       </div>
 
-      <div class="surah-info">
+      <div class="next-time" id="nextTime">
 
-        <b>آل عمران</b>
-
-        <small>
-
-          عیمڕان · 200 ئایەت
-
-        </small>
+        کاتی نوێژ: --:--
 
       </div>
 
-      <button class="play"
+    </section>
 
-        onclick="playQuran('عیمڕان')">
+    <section class="prayer-row">
 
-        ▶
+      <div class="prayer" data-prayer="Fajr">
 
-      </button>
+        <div class="prayer-icon">🌙</div>
 
-    </div>
+        <small>بەیانی</small>
 
-    <div class="surah"
-
-      data-name="النساء نیسا">
-
-      <div class="surah-number">
-
-        <span>4</span>
+        <strong id="homeFajr">--:--</strong>
 
       </div>
 
-      <div class="surah-info">
+      <div class="prayer" data-prayer="Dhuhr">
 
-        <b>النساء</b>
+        <div class="prayer-icon">☀️</div>
 
-        <small>
+        <small>زوهر</small>
 
-          نیسا · 176 ئایەت
-
-        </small>
+        <strong id="homeDhuhr">--:--</strong>
 
       </div>
 
-      <button class="play"
+      <div class="prayer" data-prayer="Asr">
 
-        onclick="playQuran('نیسا')">
+        <div class="prayer-icon">🌤️</div>
 
-        ▶
+        <small>عەسر</small>
 
-      </button>
-
-    </div>
-
-    <div class="surah"
-
-      data-name="المائدة مائدە">
-
-      <div class="surah-number">
-
-        <span>5</span>
+        <strong id="homeAsr">--:--</strong>
 
       </div>
 
-      <div class="surah-info">
+      <div class="prayer" data-prayer="Maghrib">
 
-        <b>المائدة</b>
+        <div class="prayer-icon">🌅</div>
 
-        <small>
+        <small>مەغریب</small>
 
-          مائدە · 120 ئایەت
-
-        </small>
+        <strong id="homeMaghrib">--:--</strong>
 
       </div>
 
-      <button class="play"
+      <div class="prayer" data-prayer="Isha">
 
-        onclick="playQuran('مائدە')">
+        <div class="prayer-icon">🌙</div>
 
-        ▶
+        <small>عیشاء</small>
 
-      </button>
-
-    </div>
-
-    <div class="surah"
-
-      data-name="يس یاسین">
-
-      <div class="surah-number">
-
-        <span>36</span>
+        <strong id="homeIsha">--:--</strong>
 
       </div>
 
-      <div class="surah-info">
+    </section>
 
-        <b>يس</b>
+    <section class="verse">
 
-        <small>
+      <div class="verse-title">
 
-          یاسین · 83 ئایەت
+        <span>✨ ئایەتی ڕۆژ</span>
 
-        </small>
-
-      </div>
-
-      <button class="play"
-
-        onclick="playQuran('یاسین')">
-
-        ▶
-
-      </button>
-
-    </div>
-
-  </div>
-
-</section>
-
-<!-- QIBLA -->
-
-<section id="qibla" class="screen">
-
-  <h2 class="page-title">
-
-    قیبلە
-
-  </h2>
-
-  <p class="page-sub">
-
-    ئاراستەی مەککە لە شوێنی تۆ
-
-  </p>
-
-  <div class="card qibla-card">
-
-    <div style="color:var(--muted)">
-
-      ئاراستەی قیبلە
-
-    </div>
-
-    <div class="qibla-degree">
-
-      244°
-
-    </div>
-
-    <div class="compass" id="compass">
-
-      <div class="needle"></div>
-
-      <div class="kaaba">
-
-        🕋
+        <span>سورەتی کەھف</span>
 
       </div>
 
-    </div>
+      <p>
 
-    <h3>
+        وَاذْكُر رَّبَّكَ إِذَا نَسِيتَ
 
-      بەرەو ڕۆژئاوا
+      </p>
 
-    </h3>
+      <small>
 
-    <p style="
+        سورەتی کەھف · 24
 
-      color:var(--muted);
+      </small>
 
-      font-size:11px;
-
-      margin-top:5px;
-
-    ">
-
-      بۆ دۆزینەوەی وردتر، مۆبایلەکەت ڕێکبخە.
-
-    </p>
-
-    <button
-
-      onclick="enableCompass()"
-
-      style="
-
-        margin-top:18px;
-
-        background:var(--gold);
-
-        border:0;
-
-        padding:12px 20px;
-
-        border-radius:14px;
-
-      ">
-
-      🧭 چالاککردنی Compass
-
-    </button>
-
-  </div>
-
-</section>
-
-<!-- ADHKAR -->
-
-<section id="adhkar" class="screen">
-
-  <h2 class="page-title">
-
-    ئەذکار و دوعا
-
-  </h2>
-
-  <p class="page-sub">
-
-    یادی خوا دڵ ئارام دەکات
-
-  </p>
-
-  <div class="card dhikr">
-
-    <div style="color:var(--gold)">
-
-      ئەذکاری بەیانی
-
-    </div>
-
-    <p class="dhikr-text"
-
-      style="margin-top:25px">
-
-      سُبْحَانَ اللَّهِ وَبِحَمْدِهِ
-
-    </p>
-
-    <div class="dhikr-number"
-
-      id="dhikrNumber">
-
-      0
-
-    </div>
-
-    <button class="counter"
-
-      onclick="countDhikr()">
-
-      <span>
-
-        ذکر
-
-      </span>
-
-    </button>
-
-    <button
-
-      onclick="resetDhikr()"
-
-      style="
-
-        margin-top:18px;
-
-        background:none;
-
-        border:0;
-
-        color:var(--muted);
-
-      ">
-
-      ڕیسێتکردن
-
-    </button>
-
-  </div>
-
-  <div class="card">
+    </section>
 
     <div class="section-title">
 
-      <h3>
-
-        🤲 دوعاکان
-
-      </h3>
+      <h3>بەشەکان</h3>
 
     </div>
 
-    <div class="setting">
+    <section class="quick-grid">
 
-      <div class="setting-info">
+      <button class="quick" data-go="quran">
 
-        <b>دوعای پێش خەوتن</b>
+        <i>📖</i>
 
-        <small>دوعا و ئەذکاری خەوتن</small>
-
-      </div>
-
-      <span>›</span>
-
-    </div>
-
-    <div class="setting">
-
-      <div class="setting-info">
-
-        <b>دوعای سفر</b>
-
-        <small>بۆ کاتی گەشت</small>
-
-      </div>
-
-      <span>›</span>
-
-    </div>
-
-    <div class="setting">
-
-      <div class="setting-info">
-
-        <b>دوای نوێژ</b>
-
-        <small>ئەذکارەکانی دوای نوێژ</small>
-
-      </div>
-
-      <span>›</span>
-
-    </div>
-
-  </div>
-
-</section>
-
-<!-- AUDIO -->
-
-<section id="audio" class="screen">
-
-  <h2 class="page-title">
-
-    گوێگرتن لە قورئان
-
-  </h2>
-
-  <p class="page-sub">
-
-    تلاوەت بە دەنگی قاریی دڵخوازت
-
-  </p>
-
-  <div class="card audio">
-
-    <div class="reciter">
-
-      🎙️
-
-    </div>
-
-    <h2 id="audioSurah">
-
-      سورەتی یاسین
-
-    </h2>
-
-    <small style="color:var(--muted)">
-
-      قاری: مشاری العفاسی
-
-    </small>
-
-    <div class="progress">
-
-      <span id="audioProgress"></span>
-
-    </div>
-
-    <div style="
-
-      display:flex;
-
-      justify-content:space-between;
-
-      color:var(--muted);
-
-      font-size:10px;
-
-      direction:ltr;
-
-    ">
-
-      <span>
-
-        04:18
-
-      </span>
-
-      <span>
-
-        22:15
-
-      </span>
-
-    </div>
-
-    <div class="audio-controls">
-
-      <button onclick="showToast('پێشتر')">
-
-        ⏮
+        <span>قورئان</span>
 
       </button>
 
-      <button
+      <button class="quick" data-go="qibla">
 
-        onclick="toggleAudio()"
+        <i>🧭</i>
 
-        class="main"
+        <span>قیبلە</span>
 
-        id="audioButton">
+      </button>
+
+      <button class="quick" data-go="adhkar">
+
+        <i>🤲</i>
+
+        <span>ئەذکار</span>
+
+      </button>
+
+      <button class="quick" data-go="prayers">
+
+        <i>🕌</i>
+
+        <span>نوێژ</span>
+
+      </button>
+
+    </section>
+
+  </main>
+
+  <!-- PRAYERS -->
+
+  <section id="prayers" class="screen">
+
+    <h2 class="page-title">
+
+      کاتی نوێژ
+
+    </h2>
+
+    <p class="page-sub">
+
+      کاتەکانی ئەمڕۆ
+
+    </p>
+
+    <div class="card">
+
+      <div class="setting">
+
+        <div class="setting-info">
+
+          <b>ئیمساک</b>
+
+          <small>Imsak</small>
+
+        </div>
+
+        <strong id="imsakTime">--:--</strong>
+
+      </div>
+
+      <div class="setting">
+
+        <div class="setting-info">
+
+          <b>بەیانی</b>
+
+          <small>Fajr</small>
+
+        </div>
+
+        <strong id="fajrTime">--:--</strong>
+
+      </div>
+
+      <div class="setting">
+
+        <div class="setting-info">
+
+          <b>زوهر</b>
+
+          <small>Dhuhr</small>
+
+        </div>
+
+        <strong id="dhuhrTime">--:--</strong>
+
+      </div>
+
+      <div class="setting">
+
+        <div class="setting-info">
+
+          <b>عەسر</b>
+
+          <small>Asr</small>
+
+        </div>
+
+        <strong id="asrTime">--:--</strong>
+
+      </div>
+
+      <div class="setting">
+
+        <div class="setting-info">
+
+          <b>مەغریب</b>
+
+          <small>Maghrib</small>
+
+        </div>
+
+        <strong id="maghribTime">--:--</strong>
+
+      </div>
+
+      <div class="setting">
+
+        <div class="setting-info">
+
+          <b>عیشاء</b>
+
+          <small>Isha</small>
+
+        </div>
+
+        <strong id="ishaTime">--:--</strong>
+
+      </div>
+
+    </div>
+
+    <div class="card">
+
+      <div class="card-title">
+
+        ئاگادارکردنەوەی ئەذان
+
+      </div>
+
+      <div class="setting">
+
+        <div class="setting-info">
+
+          <b>ئەذانی بەیانی</b>
+
+          <small>ئاگادارکردنەوە</small>
+
+        </div>
+
+        <button class="switch active" data-switch>
+
+          <span></span>
+
+        </button>
+
+      </div>
+
+      <div class="setting">
+
+        <div class="setting-info">
+
+          <b>ئەذانی زوهر</b>
+
+          <small>ئاگادارکردنەوە</small>
+
+        </div>
+
+        <button class="switch active" data-switch>
+
+          <span></span>
+
+        </button>
+
+      </div>
+
+      <div class="setting">
+
+        <div class="setting-info">
+
+          <b>ئەذانی عەسر</b>
+
+          <small>ئاگادارکردنەوە</small>
+
+        </div>
+
+        <button class="switch active" data-switch>
+
+          <span></span>
+
+        </button>
+
+      </div>
+
+      <div class="setting">
+
+        <div class="setting-info">
+
+          <b>ئەذانی مەغریب</b>
+
+          <small>ئاگادارکردنەوە</small>
+
+        </div>
+
+        <button class="switch active" data-switch>
+
+          <span></span>
+
+        </button>
+
+      </div>
+
+      <div class="setting">
+
+        <div class="setting-info">
+
+          <b>ئەذانی عیشاء</b>
+
+          <small>ئاگادارکردنەوە</small>
+
+        </div>
+
+        <button class="switch active" data-switch>
+
+          <span></span>
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- QURAN -->
+
+  <section id="quran" class="screen">
+
+    <h2 class="page-title">
+
+      قورئانی پیرۆز
+
+    </h2>
+
+    <p class="page-sub">
+
+      بخوێنەوە و گوێ لە تلاوەت بگرە
+
+    </p>
+
+    <div class="card last-read">
+
+      <div>
+
+        <small>دوایین خوێندنەوە</small>
+
+        <h3>سورەتی یاسین</h3>
+
+        <span>ئایەتی 12</span>
+
+      </div>
+
+      <button class="play-btn" id="lastReadBtn">
 
         ▶
 
       </button>
 
-      <button onclick="showToast('دواتر')">
+    </div>
 
-        ⏭
+    <div class="search-box">
+
+      <input
+
+        id="quranSearch"
+
+        type="search"
+
+        placeholder="گەڕان لە سورەتەکان..."
+
+      >
+
+      <span>⌕</span>
+
+    </div>
+
+    <div class="card surah-list" id="surahList">
+
+      <article class="surah" data-name="الفاتحة فاتحە">
+
+        <div class="surah-number">
+
+          1
+
+        </div>
+
+        <div class="surah-info">
+
+          <b>الفاتحة</b>
+
+          <small>فاتحە · 7 ئایەت</small>
+
+        </div>
+
+        <button class="play-btn surah-play" data-surah="فاتحە">
+
+          ▶
+
+        </button>
+
+      </article>
+
+      <article class="surah" data-name="البقرة بەقەرە">
+
+        <div class="surah-number">
+
+          2
+
+        </div>
+
+        <div class="surah-info">
+
+          <b>البقرة</b>
+
+          <small>بەقەرە · 286 ئایەت</small>
+
+        </div>
+
+        <button class="play-btn surah-play" data-surah="بەقەرە">
+
+          ▶
+
+        </button>
+
+      </article>
+
+      <article class="surah" data-name="آل عمران عیمڕان">
+
+        <div class="surah-number">
+
+          3
+
+        </div>
+
+        <div class="surah-info">
+
+          <b>آل عمران</b>
+
+          <small>عیمڕان · 200 ئایەت</small>
+
+        </div>
+
+        <button class="play-btn surah-play" data-surah="عیمڕان">
+
+          ▶
+
+        </button>
+
+      </article>
+
+      <article class="surah" data-name="النساء نیسا">
+
+        <div class="surah-number">
+
+          4
+
+        </div>
+
+        <div class="surah-info">
+
+          <b>النساء</b>
+
+          <small>نیسا · 176 ئایەت</small>
+
+        </div>
+
+        <button class="play-btn surah-play" data-surah="نیسا">
+
+          ▶
+
+        </button>
+
+      </article>
+
+      <article class="surah" data-name="المائدة مائدە">
+
+        <div class="surah-number">
+
+          5
+
+        </div>
+
+        <div class="surah-info">
+
+          <b>المائدة</b>
+
+          <small>مائدە · 120 ئایەت</small>
+
+        </div>
+
+        <button class="play-btn surah-play" data-surah="مائدە">
+
+          ▶
+
+        </button>
+
+      </article>
+
+      <article class="surah" data-name="يس یاسین">
+
+        <div class="surah-number">
+
+          36
+
+        </div>
+
+        <div class="surah-info">
+
+          <b>يس</b>
+
+          <small>یاسین · 83 ئایەت</small>
+
+        </div>
+
+        <button class="play-btn surah-play" data-surah="یاسین">
+
+          ▶
+
+        </button>
+
+      </article>
+
+    </div>
+
+  </section>
+
+  <!-- AUDIO -->
+
+  <section id="audio" class="screen">
+
+    <h2 class="page-title">
+
+      تلاوەت
+
+    </h2>
+
+    <p class="page-sub">
+
+      گوێگرتن لە قورئان
+
+    </p>
+
+    <div class="card audio-card">
+
+      <div class="reciter">
+
+        🎙
+
+      </div>
+
+      <h2 id="audioSurah">
+
+        سورەتی یاسین
+
+      </h2>
+
+      <small>
+
+        تلاوەت
+
+      </small>
+
+      <audio
+
+        id="quranAudio"
+
+        controls
+
+        preload="none">
+
+      </audio>
+
+      <div class="audio-actions">
+
+        <button id="audioPlay" class="audio-main">
+
+          ▶
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- QIBLA -->
+
+  <section id="qibla" class="screen">
+
+    <h2 class="page-title">
+
+      قیبلە
+
+    </h2>
+
+    <p class="page-sub">
+
+      ئاراستەی کەعبە
+
+    </p>
+
+    <div class="card qibla-card">
+
+      <div class="qibla-degree">
+
+        <span id="qiblaDegree">244</span>°
+
+      </div>
+
+      <div class="compass" id="compass">
+
+        <span class="north">N</span>
+
+        <span class="south">S</span>
+
+        <span class="east">E</span>
+
+        <span class="west">W</span>
+
+        <div class="needle"></div>
+
+        <div class="kaaba">
+
+          🕋
+
+        </div>
+
+      </div>
+
+      <button class="gold-btn" id="compassBtn">
+
+        🧭 چالاککردنی Compass
+
+      </button>
+
+      <p class="muted">
+
+        بۆ کارکردنی Compass ڕێگە بە مۆبایلەکەت بدە.
+
+      </p>
+
+    </div>
+
+  </section>
+
+  <!-- ADHKAR -->
+
+  <section id="adhkar" class="screen">
+
+    <h2 class="page-title">
+
+      ئەذکار
+
+    </h2>
+
+    <p class="page-sub">
+
+      یادی خوا دڵ ئارام دەکات
+
+    </p>
+
+    <div class="card dhikr-card">
+
+      <span class="gold-text">
+
+        ئەذکاری بەیانی
+
+      </span>
+
+      <p class="dhikr-text">
+
+        سُبْحَانَ اللَّهِ وَبِحَمْدِهِ
+
+      </p>
+
+      <div class="dhikr-number" id="dhikrNumber">
+
+        0
+
+      </div>
+
+      <button class="counter" id="counterBtn">
+
+        ذکر
+
+      </button>
+
+      <button class="reset-btn" id="resetDhikr">
+
+        ڕیسێت
 
       </button>
 
     </div>
 
-  </div>
+    <div class="card">
 
-</section>
+      <div class="card-title">
 
-<!-- SETTINGS -->
-
-<section id="settings" class="screen">
-
-  <h2 class="page-title">
-
-    ڕێکخستنەکان
-
-  </h2>
-
-  <p class="page-sub">
-
-    ئەپەکە بە پێی ئارەزووی خۆت ڕێکبخە
-
-  </p>
-
-  <div class="card">
-
-    <div class="setting">
-
-      <div class="setting-info">
-
-        <b>شوێن</b>
-
-        <small id="settingsLocation">
-
-          دیاری نەکراوە
-
-        </small>
+        دوعاکان
 
       </div>
 
-      <span>
+      <button class="list-option">
 
-        📍
+        <span>🤲 دوعای پێش خەوتن</span>
 
-      </span>
+        <b>‹</b>
+
+      </button>
+
+      <button class="list-option">
+
+        <span>✈️ دوعای سفر</span>
+
+        <b>‹</b>
+
+      </button>
+
+      <button class="list-option">
+
+        <span>🕌 ئەذکاری دوای نوێژ</span>
+
+        <b>‹</b>
+
+      </button>
 
     </div>
 
-    <div class="setting">
+  </section>
 
-      <div class="setting-info">
+  <!-- SETTINGS -->
 
-        <b>زمان</b>
+  <section id="settings" class="screen">
 
-        <small>
+    <h2 class="page-title">
 
-          کوردی
+      ڕێکخستنەکان
 
-        </small>
+    </h2>
+
+    <p class="page-sub">
+
+      Qaiwan Azan
+
+    </p>
+
+    <div class="card">
+
+      <div class="setting">
+
+        <div class="setting-info">
+
+          <b>شوێن</b>
+
+          <small id="settingsLocation">
+
+            دیاری نەکراوە
+
+          </small>
+
+        </div>
+
+        <span>📍</span>
 
       </div>
 
-      <span>
+      <div class="setting">
 
-        🌐
+        <div class="setting-info">
 
-      </span>
+          <b>زمان</b>
+
+          <small>کوردی</small>
+
+        </div>
+
+        <span>🌐</span>
+
+      </div>
+
+      <div class="setting">
+
+        <div class="setting-info">
+
+          <b>ئاگادارکردنەوە</b>
+
+          <small>نوێژەکان</small>
+
+        </div>
+
+        <button class="switch active" data-switch>
+
+          <span></span>
+
+        </button>
+
+      </div>
+
+      <div class="setting">
+
+        <div class="setting-info">
+
+          <b>دەنگی ئەذان</b>
+
+          <small>چالاک</small>
+
+        </div>
+
+        <button class="switch active" data-switch>
+
+          <span></span>
+
+        </button>
+
+      </div>
+
+      <div class="setting">
+
+        <div class="setting-info">
+
+          <b>دۆخی تاریک</b>
+
+          <small>Dark Mode</small>
+
+        </div>
+
+        <button class="switch active" data-switch>
+
+          <span></span>
+
+        </button>
+
+      </div>
 
     </div>
 
-    <div class="setting">
+    <div class="card">
 
-      <div class="setting-info">
+      <button class="list-option">
 
-        <b>دەنگی ئەذان</b>
+        <span>ℹ️ دەربارەی Qaiwan Azan</span>
 
-        <small>
+        <b>‹</b>
 
-          چالاک
+      </button>
 
-        </small>
+      <button class="list-option">
 
-      </div>
+        <span>🛟 پشتیوانی</span>
 
-      <div class="switch active"
+        <b>‹</b>
 
-        onclick="toggleSwitch(this)">
-
-        <i></i>
-
-      </div>
+      </button>
 
     </div>
 
-    <div class="setting">
+  </section>
 
-      <div class="setting-info">
+  <!-- BOTTOM NAV -->
 
-        <b>ئاگادارکردنەوە</b>
+  <nav class="bottom-nav">
 
-        <small>
+    <button class="nav-btn active" data-screen="home">
 
-          نوێژەکان
+      <span>⌂</span>
 
-        </small>
+      سەرەکی
 
-      </div>
+    </button>
 
-      <div class="switch active"
+    <button class="nav-btn" data-screen="quran">
 
-        onclick="toggleSwitch(this)">
+      <span>📖</span>
 
-        <i></i>
+      قورئان
 
-      </div>
+    </button>
 
-    </div>
+    <button class="nav-btn" data-screen="qibla">
 
-    <div class="setting">
+      <span>🧭</span>
 
-      <div class="setting-info">
+      قیبلە
 
-        <b>دۆخی تاریک</b>
+    </button>
 
-        <small>
+    <button class="nav-btn" data-screen="adhkar">
 
-          Dark Mode
+      <span>🤲</span>
 
-        </small>
+      ئەذکار
 
-      </div>
+    </button>
 
-      <div class="switch active"
+    <button class="nav-btn" data-screen="settings">
 
-        onclick="toggleSwitch(this)">
+      <span>⚙</span>
 
-        <i></i>
+      ڕێکخستن
 
-      </div>
+    </button>
 
-    </div>
-
-    <div class="setting">
-
-      <div class="setting-info">
-
-        <b>
-
-          ڕێگای هەژمارکردنی نوێژ
-
-        </b>
-
-        <small>
-
-          MWL
-
-        </small>
-
-      </div>
-
-      <span>
-
-        ›
-
-      </span>
-
-    </div>
-
-  </div>
-
-  <div class="card">
-
-    <div class="setting">
-
-      <div class="setting-info">
-
-        <b>
-
-          دەربارەی Qaiwan Azan
-
-        </b>
-
-        <small>
-
-          QAIWAN AZAN
-
-        </small>
-
-      </div>
-
-      <span>
-
-        ›
-
-      </span>
-
-    </div>
-
-    <div class="setting">
-
-      <div class="setting-info">
-
-        <b>
-
-          پشتیوانی
-
-        </b>
-
-        <small>
-
-          یارمەتی و پەیوەندی
-
-        </small>
-
-      </div>
-
-      <span>
-
-        ›
-
-      </span>
-
-    </div>
-
-  </div>
-
-</section>
-
-<!-- BOTTOM NAV -->
-
-<nav class="bottom-nav">
-
-  <button
-
-    class="nav-btn active"
-
-    data-screen="home"
-
-    onclick="showScreen('home')">
-
-    <span>
-
-      ⌂
-
-    </span>
-
-    سەرەکی
-
-  </button>
-
-  <button
-
-    class="nav-btn"
-
-    data-screen="quran"
-
-    onclick="showScreen('quran')">
-
-    <span>
-
-      📖
-
-    </span>
-
-    قورئان
-
-  </button>
-
-  <button
-
-    class="nav-btn"
-
-    data-screen="qibla"
-
-    onclick="showScreen('qibla')">
-
-    <span>
-
-      🧭
-
-    </span>
-
-    قیبلە
-
-  </button>
-
-  <button
-
-    class="nav-btn"
-
-    data-screen="adhkar"
-
-    onclick="showScreen('adhkar')">
-
-    <span>
-
-      🤲
-
-    </span>
-
-    ئەذکار
-
-  </button>
-
-  <button
-
-    class="nav-btn"
-
-    data-screen="settings"
-
-    onclick="showScreen('settings')">
-
-    <span>
-
-      ⚙️
-
-    </span>
-
-    ڕێکخستن
-
-  </button>
-
-</nav>
+  </nav>
 
 </div>
 
@@ -2668,19 +1018,15 @@ button{
 
   <div class="modal-box">
 
-    <div class="modal-head">
+    <div class="modal-header">
 
       <h3 id="modalTitle">
 
-        ڕێکخستن
+        Qaiwan Azan
 
       </h3>
 
-      <button
-
-        class="close"
-
-        onclick="closeModal()">
+      <button id="closeModal">
 
         ×
 
@@ -2694,1585 +1040,9 @@ button{
 
 </div>
 
-<div class="toast" id="toast">
+<div class="toast" id="toast"></div>
 
-  تەواو بوو
-
-</div>
-
-<script>
-
-/* =========================================
-
-   QAIWAN AZAN
-
-   GPS + REAL PRAYER TIMES
-
-   ========================================= */
-
-const prayerNames = {
-
-  Fajr:"بەیانی",
-
-  Dhuhr:"زوهر",
-
-  Asr:"عەسر",
-
-  Maghrib:"مەغریب",
-
-  Isha:"عیشاء"
-
-};
-
-let prayerTimes = {};
-
-let nextPrayerKey = null;
-
-let countdownTimer = null;
-
-/* SCREEN NAVIGATION */
-
-function showScreen(id){
-
-  document.querySelectorAll(".screen")
-
-    .forEach(screen=>{
-
-      screen.classList.remove("active");
-
-    });
-
-  const target =
-
-    document.getElementById(id);
-
-  if(target){
-
-    target.classList.add("active");
-
-  }
-
-  document.querySelectorAll(".nav-btn")
-
-    .forEach(btn=>{
-
-      btn.classList.remove("active");
-
-      if(btn.dataset.screen === id){
-
-        btn.classList.add("active");
-
-      }
-
-    });
-
-  window.scrollTo({
-
-    top:0,
-
-    behavior:"smooth"
-
-  });
-
-}
-
-/* TOAST */
-
-function showToast(message){
-
-  const toast =
-
-    document.getElementById("toast");
-
-  if(!toast) return;
-
-  toast.textContent = message;
-
-  toast.classList.add("show");
-
-  setTimeout(()=>{
-
-    toast.classList.remove("show");
-
-  },2200);
-
-}
-
-/* GPS */
-
-function getUserLocation(){
-
-  if(!navigator.geolocation){
-
-    showToast(
-
-      "GPS لەم ئامێرەدا بەردەست نییە"
-
-    );
-
-    loadDefaultPrayerTimes();
-
-    return;
-
-  }
-
-  showToast(
-
-    "شوێنی تۆ دەدۆزرێتەوە..."
-
-  );
-
-  navigator.geolocation.getCurrentPosition(
-
-    position=>{
-
-      const latitude =
-
-        position.coords.latitude;
-
-      const longitude =
-
-        position.coords.longitude;
-
-      getPrayerTimes(
-
-        latitude,
-
-        longitude
-
-      );
-
-    },
-
-    error=>{
-
-      console.log(
-
-        "GPS Error:",
-
-        error
-
-      );
-
-      showToast(
-
-        "ڕێگەپێدان بە GPS نەدرا"
-
-      );
-
-      loadDefaultPrayerTimes();
-
-    },
-
-    {
-
-      enableHighAccuracy:true,
-
-      timeout:15000,
-
-      maximumAge:300000
-
-    }
-
-  );
-
-}
-
-/* PRAYER API */
-
-async function getPrayerTimes(
-
-  latitude,
-
-  longitude
-
-){
-
-  try{
-
-    const date =
-
-      new Date();
-
-    const day =
-
-      String(
-
-        date.getDate()
-
-      ).padStart(2,"0");
-
-    const month =
-
-      String(
-
-        date.getMonth()+1
-
-      ).padStart(2,"0");
-
-    const year =
-
-      date.getFullYear();
-
-    const url =
-
-      `https://api.aladhan.com/v1/timings/${day}-${month}-${year}`+
-
-      `?latitude=${latitude}`+
-
-      `&longitude=${longitude}`+
-
-      `&method=3`;
-
-    const response =
-
-      await fetch(url);
-
-    if(!response.ok){
-
-      throw new Error(
-
-        "Prayer API error"
-
-      );
-
-    }
-
-    const result =
-
-      await response.json();
-
-    if(
-
-      !result.data ||
-
-      !result.data.timings
-
-    ){
-
-      throw new Error(
-
-        "Prayer times unavailable"
-
-      );
-
-    }
-
-    prayerTimes =
-
-      result.data.timings;
-
-    updatePrayerUI();
-
-    updateLocationText(
-
-      latitude,
-
-      longitude
-
-    );
-
-    showToast(
-
-      "کاتی نوێژ نوێ کرایەوە"
-
-    );
-
-  }catch(error){
-
-    console.error(error);
-
-    showToast(
-
-      "کاتی نوێژ نەهاتەوە"
-
-    );
-
-    loadDefaultPrayerTimes();
-
-  }
-
-}
-
-/* DEFAULT */
-
-function loadDefaultPrayerTimes(){
-
-  prayerTimes = {
-
-    Fajr:"04:36",
-
-    Dhuhr:"12:27",
-
-    Asr:"15:59",
-
-    Maghrib:"18:35",
-
-    Isha:"19:53",
-
-    Imsak:"04:16"
-
-  };
-
-  updatePrayerUI();
-
-}
-
-/* CLEAN TIME */
-
-function cleanTime(time){
-
-  if(!time){
-
-    return "--:--";
-
-  }
-
-  return time
-
-    .replace(/\s*\(.+?\)/g,"")
-
-    .substring(0,5);
-
-}
-
-/* UPDATE PRAYER UI */
-
-function updatePrayerUI(){
-
-  const fajr =
-
-    cleanTime(prayerTimes.Fajr);
-
-  const dhuhr =
-
-    cleanTime(prayerTimes.Dhuhr);
-
-  const asr =
-
-    cleanTime(prayerTimes.Asr);
-
-  const maghrib =
-
-    cleanTime(prayerTimes.Maghrib);
-
-  const isha =
-
-    cleanTime(prayerTimes.Isha);
-
-  const imsak =
-
-    cleanTime(prayerTimes.Imsak);
-
-  /* HOME */
-
-  const homeFajr =
-
-    document.getElementById(
-
-      "homeFajr"
-
-    );
-
-  const homeDhuhr =
-
-    document.getElementById(
-
-      "homeDhuhr"
-
-    );
-
-  const homeAsr =
-
-    document.getElementById(
-
-      "homeAsr"
-
-    );
-
-  const homeMaghrib =
-
-    document.getElementById(
-
-      "homeMaghrib"
-
-    );
-
-  const homeIsha =
-
-    document.getElementById(
-
-      "homeIsha"
-
-    );
-
-  if(homeFajr)
-
-    homeFajr.textContent=fajr;
-
-  if(homeDhuhr)
-
-    homeDhuhr.textContent=dhuhr;
-
-  if(homeAsr)
-
-    homeAsr.textContent=asr;
-
-  if(homeMaghrib)
-
-    homeMaghrib.textContent=maghrib;
-
-  if(homeIsha)
-
-    homeIsha.textContent=isha;
-
-  /* PRAYERS PAGE */
-
-  const imsakElement =
-
-    document.getElementById(
-
-      "imsakTime"
-
-    );
-
-  const fajrElement =
-
-    document.getElementById(
-
-      "fajrTime"
-
-    );
-
-  const dhuhrElement =
-
-    document.getElementById(
-
-      "dhuhrTime"
-
-    );
-
-  const asrElement =
-
-    document.getElementById(
-
-      "asrTime"
-
-    );
-
-  const maghribElement =
-
-    document.getElementById(
-
-      "maghribTime"
-
-    );
-
-  const ishaElement =
-
-    document.getElementById(
-
-      "ishaTime"
-
-    );
-
-  if(imsakElement)
-
-    imsakElement.textContent=imsak;
-
-  if(fajrElement)
-
-    fajrElement.textContent=fajr;
-
-  if(dhuhrElement)
-
-    dhuhrElement.textContent=dhuhr;
-
-  if(asrElement)
-
-    asrElement.textContent=asr;
-
-  if(maghribElement)
-
-    maghribElement.textContent=maghrib;
-
-  if(ishaElement)
-
-    ishaElement.textContent=isha;
-
-  findNextPrayer();
-
-}
-
-/* LOCATION TEXT */
-
-function updateLocationText(
-
-  latitude,
-
-  longitude
-
-){
-
-  const text =
-
-    document.getElementById(
-
-      "locationText"
-
-    );
-
-  const settings =
-
-    document.getElementById(
-
-      "settingsLocation"
-
-    );
-
-  const value =
-
-    `${latitude.toFixed(2)}, ${longitude.toFixed(2)}`;
-
-  if(text){
-
-    text.textContent =
-
-      value;
-
-  }
-
-  if(settings){
-
-    settings.textContent =
-
-      value;
-
-  }
-
-}
-
-/* TIME TO DATE */
-
-function timeToDate(time){
-
-  if(!time || time === "--:--"){
-
-    return null;
-
-  }
-
-  const parts =
-
-    time.split(":");
-
-  if(parts.length < 2){
-
-    return null;
-
-  }
-
-  const date =
-
-    new Date();
-
-  date.setHours(
-
-    parseInt(parts[0]),
-
-    parseInt(parts[1]),
-
-    0,
-
-    0
-
-  );
-
-  return date;
-
-}
-
-/* FIND NEXT */
-
-function findNextPrayer(){
-
-  const order = [
-
-    "Fajr",
-
-    "Dhuhr",
-
-    "Asr",
-
-    "Maghrib",
-
-    "Isha"
-
-  ];
-
-  const now =
-
-    new Date();
-
-  nextPrayerKey =
-
-    null;
-
-  for(
-
-    const key of order
-
-  ){
-
-    const time =
-
-      cleanTime(
-
-        prayerTimes[key]
-
-      );
-
-    const prayerDate =
-
-      timeToDate(time);
-
-    if(
-
-      prayerDate &&
-
-      prayerDate > now
-
-    ){
-
-      nextPrayerKey =
-
-        key;
-
-      startCountdown(
-
-        prayerDate
-
-      );
-
-      updateNextPrayerName(
-
-        key,
-
-        time
-
-      );
-
-      highlightPrayer(
-
-        key
-
-      );
-
-      return;
-
-    }
-
-  }
-
-  /* TOMORROW FAJR */
-
-  nextPrayerKey =
-
-    "Fajr";
-
-  const tomorrow =
-
-    new Date();
-
-  tomorrow.setDate(
-
-    tomorrow.getDate()+1
-
-  );
-
-  const fajr =
-
-    cleanTime(
-
-      prayerTimes.Fajr
-
-    );
-
-  const parts =
-
-    fajr.split(":");
-
-  tomorrow.setHours(
-
-    parseInt(parts[0]),
-
-    parseInt(parts[1]),
-
-    0,
-
-    0
-
-  );
-
-  startCountdown(
-
-    tomorrow
-
-  );
-
-  updateNextPrayerName(
-
-    "Fajr",
-
-    fajr
-
-  );
-
-  highlightPrayer(
-
-    "Fajr"
-
-  );
-
-}
-
-/* NEXT NAME */
-
-function updateNextPrayerName(
-
-  key,
-
-  time
-
-){
-
-  const title =
-
-    document.getElementById(
-
-      "nextPrayer"
-
-    );
-
-  const nextTime =
-
-    document.querySelector(
-
-      ".next-prayer .next-time"
-
-    );
-
-  if(title){
-
-    title.textContent =
-
-      prayerNames[key] || key;
-
-  }
-
-  if(nextTime){
-
-    nextTime.textContent =
-
-      `کاتی نوێژ: ${time}`;
-
-  }
-
-}
-
-/* HIGHLIGHT */
-
-function highlightPrayer(key){
-
-  const indexMap = {
-
-    Fajr:0,
-
-    Dhuhr:1,
-
-    Asr:2,
-
-    Maghrib:3,
-
-    Isha:4
-
-  };
-
-  document.querySelectorAll(
-
-    ".prayer"
-
-  ).forEach(prayer=>{
-
-    prayer.classList.remove(
-
-      "active"
-
-    );
-
-  });
-
-  const index =
-
-    indexMap[key];
-
-  const cards =
-
-    document.querySelectorAll(
-
-      ".prayer"
-
-    );
-
-  if(cards[index]){
-
-    cards[index].classList.add(
-
-      "active"
-
-    );
-
-  }
-
-}
-
-/* COUNTDOWN */
-
-function startCountdown(
-
-  targetDate
-
-){
-
-  if(countdownTimer){
-
-    clearInterval(
-
-      countdownTimer
-
-    );
-
-  }
-
-  function update(){
-
-    const now =
-
-      new Date();
-
-    const difference =
-
-      targetDate.getTime() -
-
-      now.getTime();
-
-    if(difference <= 0){
-
-      clearInterval(
-
-        countdownTimer
-
-      );
-
-      findNextPrayer();
-
-      return;
-
-    }
-
-    const totalSeconds =
-
-      Math.floor(
-
-        difference / 1000
-
-      );
-
-    const hours =
-
-      Math.floor(
-
-        totalSeconds / 3600
-
-      );
-
-    const minutes =
-
-      Math.floor(
-
-        (totalSeconds % 3600) / 60
-
-      );
-
-    const seconds =
-
-      totalSeconds % 60;
-
-    const countdown =
-
-      document.getElementById(
-
-        "countdown"
-
-      );
-
-    if(countdown){
-
-      countdown.textContent =
-
-        String(hours).padStart(2,"0") +
-
-        ":" +
-
-        String(minutes).padStart(2,"0") +
-
-        ":" +
-
-        String(seconds).padStart(2,"0");
-
-    }
-
-  }
-
-  update();
-
-  countdownTimer =
-
-    setInterval(
-
-      update,
-
-      1000
-
-    );
-
-}
-
-/* SWITCH */
-
-function toggleSwitch(
-
-  element
-
-){
-
-  element.classList.toggle(
-
-    "active"
-
-  );
-
-  const active =
-
-    element.classList.contains(
-
-      "active"
-
-    );
-
-  showToast(
-
-    active
-
-      ? "چالاک کرا"
-
-      : "ناچالاک کرا"
-
-  );
-
-}
-
-/* DHIKR */
-
-let dhikr=0;
-
-function countDhikr(){
-
-  dhikr++;
-
-  const number =
-
-    document.getElementById(
-
-      "dhikrNumber"
-
-    );
-
-  if(number){
-
-    number.textContent =
-
-      dhikr;
-
-  }
-
-  if(dhikr===33){
-
-    showToast(
-
-      "33 جار تەواو بوو"
-
-    );
-
-  }
-
-  if(dhikr===100){
-
-    showToast(
-
-      "100 جار تەواو بوو"
-
-    );
-
-  }
-
-}
-
-function resetDhikr(){
-
-  dhikr=0;
-
-  const number =
-
-    document.getElementById(
-
-      "dhikrNumber"
-
-    );
-
-  if(number){
-
-    number.textContent =
-
-      "0";
-
-  }
-
-}
-
-/* QURAN SEARCH */
-
-function searchSurah(){
-
-  const input =
-
-    document.getElementById(
-
-      "quranSearch"
-
-    );
-
-  if(!input) return;
-
-  const value =
-
-    input.value
-
-      .toLowerCase();
-
-  document.querySelectorAll(
-
-    ".surah"
-
-  ).forEach(item=>{
-
-    const name =
-
-      (
-
-        item.dataset.name ||
-
-        ""
-
-      ).toLowerCase();
-
-    item.style.display =
-
-      name.includes(value)
-
-        ? "flex"
-
-        : "none";
-
-  });
-
-}
-
-/* QURAN */
-
-function playQuran(name){
-
-  const audioSurah =
-
-    document.getElementById(
-
-      "audioSurah"
-
-    );
-
-  if(audioSurah){
-
-    audioSurah.textContent =
-
-      "سورەتی " + name;
-
-  }
-
-  showScreen(
-
-    "audio"
-
-  );
-
-  showToast(
-
-    "تلاوەت ئامادەیە"
-
-  );
-
-}
-
-/* AUDIO */
-
-let playing=false;
-
-let progress=35;
-
-let audioTimer=null;
-
-function toggleAudio(){
-
-  playing=!playing;
-
-  const button =
-
-    document.getElementById(
-
-      "audioButton"
-
-    );
-
-  if(!button) return;
-
-  button.textContent =
-
-    playing
-
-      ? "Ⅱ"
-
-      : "▶";
-
-  if(playing){
-
-    showToast(
-
-      "تلاوەت دەستی پێکرد"
-
-    );
-
-    audioTimer =
-
-      setInterval(()=>{
-
-        progress += .3;
-
-        if(progress>=100){
-
-          progress=0;
-
-        }
-
-        const bar =
-
-          document.getElementById(
-
-            "audioProgress"
-
-          );
-
-        if(bar){
-
-          bar.style.width =
-
-            progress+"%";
-
-        }
-
-      },1000);
-
-  }else{
-
-    clearInterval(
-
-      audioTimer
-
-    );
-
-    showToast(
-
-      "تلاوەت وەستا"
-
-    );
-
-  }
-
-}
-
-/* QIBLA */
-
-function enableCompass(){
-
-  if(!window.DeviceOrientationEvent){
-
-    showToast(
-
-      "Compass پشتگیری ناکرێت"
-
-    );
-
-    return;
-
-  }
-
-  if(
-
-    typeof DeviceOrientationEvent
-
-      .requestPermission ===
-
-      "function"
-
-  ){
-
-    DeviceOrientationEvent
-
-      .requestPermission()
-
-      .then(permission=>{
-
-        if(
-
-          permission==="granted"
-
-        ){
-
-          window.addEventListener(
-
-            "deviceorientation",
-
-            handleOrientation
-
-          );
-
-          showToast(
-
-            "Compass چالاک کرا"
-
-          );
-
-        }else{
-
-          showToast(
-
-            "ڕێگەپێدان بە Compass نەدرا"
-
-          );
-
-        }
-
-      })
-
-      .catch(()=>{
-
-        showToast(
-
-          "Compass چالاک نەکرا"
-
-        );
-
-      });
-
-  }else{
-
-    window.addEventListener(
-
-      "deviceorientation",
-
-      handleOrientation
-
-    );
-
-    showToast(
-
-      "Compass چالاک کرا"
-
-    );
-
-  }
-
-}
-
-function handleOrientation(
-
-  event
-
-){
-
-  const needle =
-
-    document.querySelector(
-
-      ".needle"
-
-    );
-
-  if(!needle) return;
-
-  const angle =
-
-    event.alpha || 0;
-
-  needle.style.transform =
-
-    `translateX(-50%) rotate(${angle+35}deg)`;
-
-}
-
-/* MODAL */
-
-function openModal(type){
-
-  const modal =
-
-    document.getElementById(
-
-      "modal"
-
-    );
-
-  const title =
-
-    document.getElementById(
-
-      "modalTitle"
-
-    );
-
-  const content =
-
-    document.getElementById(
-
-      "modalContent"
-
-    );
-
-  if(
-
-    !modal ||
-
-    !title ||
-
-    !content
-
-  ){
-
-    return;
-
-  }
-
-  modal.classList.add(
-
-    "show"
-
-  );
-
-  if(
-
-    type==="notifications"
-
-  ){
-
-    title.textContent =
-
-      "ئاگادارکردنەوەکان";
-
-    content.innerHTML = `
-
-      <div class="option selected">
-
-        🕌 کاتی نوێژی داهاتوو
-
-      </div>
-
-      <div class="option">
-
-        📖 بەردەوام بە لە خوێندنەوەی قورئان
-
-      </div>
-
-      <div class="option">
-
-        🤲 ئەذکاری ئێوارە
-
-      </div>
-
-    `;
-
-  }
-
-  if(type==="menu"){
-
-    title.textContent =
-
-      "مینیوی Qaiwan Azan";
-
-    content.innerHTML = `
-
-      <button
-
-        class="option"
-
-        onclick="showScreen('prayers');closeModal()">
-
-        🕌 کاتی نوێژ
-
-      </button>
-
-      <button
-
-        class="option"
-
-        onclick="showScreen('quran');closeModal()">
-
-        📖 قورئان
-
-      </button>
-
-      <button
-
-        class="option"
-
-        onclick="showScreen('audio');closeModal()">
-
-        🎧 گوێگرتن
-
-      </button>
-
-      <button
-
-        class="option"
-
-        onclick="showScreen('adhkar');closeModal()">
-
-        🤲 ئەذکار
-
-      </button>
-
-      <button
-
-        class="option"
-
-        onclick="showScreen('settings');closeModal()">
-
-        ⚙️ ڕێکخستن
-
-      </button>
-
-    `;
-
-  }
-
-}
-
-function closeModal(){
-
-  const modal =
-
-    document.getElementById(
-
-      "modal"
-
-    );
-
-  if(modal){
-
-    modal.classList.remove(
-
-      "show"
-
-    );
-
-  }
-
-}
-
-/* CLOSE MODAL OUTSIDE */
-
-const modal =
-
-  document.getElementById(
-
-    "modal"
-
-  );
-
-if(modal){
-
-  modal.addEventListener(
-
-    "click",
-
-    function(event){
-
-      if(
-
-        event.target===this
-
-      ){
-
-        closeModal();
-
-      }
-
-    }
-
-  );
-
-}
-
-/* START */
-
-document.addEventListener(
-
-  "DOMContentLoaded",
-
-  ()=>{
-
-    showScreen(
-
-      "home"
-
-    );
-
-    loadDefaultPrayerTimes();
-
-    /*
-
-      GPS هەوڵ دەدات شوێنی ڕاستەقینە بدۆزێتەوە.
-
-      ئەگەر permission نەدرێت،
-
-      کاتی نموونەیی دەمێنێتەوە.
-
-    */
-
-    getUserLocation();
-
-  }
-
-);
-
-</script>
+<script src="script.js"></script>
 
 </body>
 
