@@ -22,7 +22,9 @@
 
   --border:rgba(233,184,75,.20);
 
-  --shadow:0 20px 60px rgba(0,0,0,.35);
+  --shadow:
+
+    0 20px 60px rgba(0,0,0,.35);
 
 }
 
@@ -44,13 +46,37 @@ html{
 
 body{
 
-  font-family:"Noto Sans Arabic",Arial,sans-serif;
+  font-family:
+
+    "Noto Sans Arabic",
+
+    Arial,
+
+    sans-serif;
 
   background:
 
-    radial-gradient(circle at 50% -10%,rgba(22,122,105,.28),transparent 35%),
+    radial-gradient(
 
-    linear-gradient(180deg,#031218,#061b22 55%,#04151b);
+      circle at 50% -10%,
+
+      rgba(22,122,105,.22),
+
+      transparent 35%
+
+    ),
+
+    linear-gradient(
+
+      180deg,
+
+      #031218,
+
+      #061b22 55%,
+
+      #04151b
+
+    );
 
   color:var(--text);
 
@@ -70,6 +96,8 @@ button{
 
   cursor:pointer;
 
+  -webkit-tap-highlight-color:transparent;
+
 }
 
 .app{
@@ -80,7 +108,7 @@ button{
 
   margin:auto;
 
-  padding-bottom:90px;
+  padding-bottom:95px;
 
   position:relative;
 
@@ -90,9 +118,9 @@ button{
 
 .header{
 
-  height:76px;
+  height:78px;
 
-  padding:16px;
+  padding:14px 16px;
 
   display:flex;
 
@@ -102,57 +130,33 @@ button{
 
 }
 
-.brand{
+.brand-text{
 
-  display:flex;
-
-  align-items:center;
-
-  gap:10px;
+  text-align:right;
 
 }
 
-.logo{
+.brand-text h1{
 
-  width:45px;
-
-  height:45px;
-
-  display:flex;
-
-  align-items:center;
-
-  justify-content:center;
-
-  border:1px solid var(--gold);
-
-  border-radius:14px;
-
-  background:linear-gradient(145deg,#123c45,#04151b);
-
-  color:var(--gold);
-
-  font-size:23px;
-
-}
-
-.brand h1{
-
-  font-size:18px;
+  font-size:22px;
 
   font-weight:800;
 
+  line-height:1.2;
+
 }
 
-.brand span{
+.brand-text span{
 
   display:block;
 
+  margin-top:5px;
+
   font-size:9px;
 
-  color:var(--gold);
+  letter-spacing:3px;
 
-  letter-spacing:2px;
+  color:var(--gold);
 
   direction:ltr;
 
@@ -162,23 +166,27 @@ button{
 
   display:flex;
 
-  gap:7px;
+  gap:8px;
+
+  order:-1;
 
 }
 
 .icon-btn{
 
-  width:40px;
+  width:43px;
 
-  height:40px;
+  height:43px;
 
   border:1px solid var(--border);
 
-  border-radius:13px;
+  border-radius:14px;
 
   background:#09272e;
 
   color:white;
+
+  font-size:20px;
 
 }
 
@@ -188,9 +196,17 @@ button{
 
   display:none;
 
-  padding:0 16px 25px;
+  padding:
 
-  animation:fade .2s ease;
+    0
+
+    16px
+
+    25px;
+
+  animation:
+
+    fade .2s ease;
 
 }
 
@@ -206,7 +222,7 @@ button{
 
     opacity:0;
 
-    transform:translateY(8px);
+    transform:translateY(7px);
 
   }
 
@@ -220,7 +236,7 @@ button{
 
 }
 
-/* HOME */
+/* LOCATION */
 
 .location{
 
@@ -230,37 +246,57 @@ button{
 
   font-size:11px;
 
-  margin:5px 0 12px;
+  margin:
+
+    5px
+
+    0
+
+    14px;
 
 }
 
-.location b{
+#locationText{
 
   color:white;
 
+  font-weight:600;
+
 }
+
+/* NEXT PRAYER */
 
 .next-prayer{
 
-  position:relative;
-
-  overflow:hidden;
-
   text-align:center;
 
-  padding:25px 18px;
+  padding:
 
-  border:1px solid var(--border);
+    28px
 
-  border-radius:27px;
+    18px;
 
-  background:linear-gradient(145deg,#0e4948,#051e24);
+  border:
+
+    1px solid
+
+    var(--border);
+
+  border-radius:28px;
+
+  background:
+
+    linear-gradient(
+
+      145deg,
+
+      #0e4948,
+
+      #051e24
+
+    );
 
   box-shadow:var(--shadow);
-
-}
-
-.
 
 }
 
@@ -268,7 +304,7 @@ button{
 
   color:var(--muted);
 
-  font-size:12px;
+  font-size:13px;
 
 }
 
@@ -276,9 +312,15 @@ button{
 
   color:var(--gold2);
 
-  font-size:27px;
+  font-size:28px;
 
-  margin:4px 0;
+  margin:
+
+    5px
+
+    0
+
+    6px;
 
 }
 
@@ -300,17 +342,27 @@ button{
 
   font-size:11px;
 
+  margin-top:5px;
+
 }
+
+/* PRAYER ROW */
 
 .prayer-row{
 
   display:grid;
 
-  grid-template-columns:repeat(5,1fr);
+  grid-template-columns:
+
+    repeat(5,1fr);
 
   gap:6px;
 
-  margin:13px 0;
+  margin:
+
+    13px
+
+    0;
 
 }
 
@@ -320,25 +372,47 @@ button{
 
   background:#09272e;
 
-  border:1px solid rgba(255,255,255,.06);
+  border:
 
-  border-radius:16px;
+    1px solid
 
-  padding:10px 2px;
+    rgba(255,255,255,.06);
+
+  border-radius:17px;
+
+  padding:
+
+    11px
+
+    2px;
+
+  transition:.2s;
 
 }
 
 .prayer.active{
 
-  background:linear-gradient(#0d715d,#093b37);
+  background:
 
-  border-color:rgba(233,184,75,.45);
+    linear-gradient(
+
+      #0d715d,
+
+      #093b37
+
+    );
+
+  border-color:
+
+    rgba(233,184,75,.5);
+
+  transform:translateY(-2px);
 
 }
 
 .prayer-icon{
 
-  font-size:17px;
+  font-size:18px;
 
 }
 
@@ -350,6 +424,8 @@ button{
 
   font-size:9px;
 
+  margin-top:3px;
+
 }
 
 .prayer strong{
@@ -358,17 +434,37 @@ button{
 
   font-size:11px;
 
+  margin-top:3px;
+
+  direction:ltr;
+
 }
+
+/* VERSE */
 
 .verse{
 
-  background:linear-gradient(145deg,#092d32,#071e25);
+  background:
 
-  border:1px solid rgba(255,255,255,.07);
+    linear-gradient(
 
-  border-radius:20px;
+      145deg,
 
-  padding:17px;
+      #092d32,
+
+      #071e25
+
+    );
+
+  border:
+
+    1px solid
+
+    rgba(255,255,255,.07);
+
+  border-radius:21px;
+
+  padding:18px;
 
 }
 
@@ -376,13 +472,13 @@ button{
 
   display:flex;
 
+  align-items:center;
+
   justify-content:space-between;
 
   color:var(--gold);
 
   font-size:11px;
-
-  margin-bottom:9px;
 
 }
 
@@ -392,7 +488,9 @@ button{
 
   line-height:2;
 
-  font-size:16px;
+  font-size:17px;
+
+  margin-top:12px;
 
 }
 
@@ -404,15 +502,23 @@ button{
 
   color:var(--muted);
 
-  margin-top:7px;
-
   font-size:10px;
+
+  margin-top:8px;
 
 }
 
+/* QUICK */
+
 .section-title{
 
-  margin:20px 2px 10px;
+  margin:
+
+    20px
+
+    2px
+
+    10px;
 
 }
 
@@ -426,7 +532,9 @@ button{
 
   display:grid;
 
-  grid-template-columns:repeat(4,1fr);
+  grid-template-columns:
+
+    repeat(4,1fr);
 
   gap:8px;
 
@@ -434,15 +542,27 @@ button{
 
 .quick{
 
-  min-height:78px;
+  min-height:82px;
 
   background:#09272e;
 
-  border:1px solid rgba(255,255,255,.06);
+  border:
+
+    1px solid
+
+    rgba(255,255,255,.06);
 
   border-radius:17px;
 
   color:white;
+
+  transition:.15s;
+
+}
+
+.quick:active{
+
+  transform:scale(.96);
 
 }
 
@@ -454,7 +574,7 @@ button{
 
   font-size:22px;
 
-  margin-bottom:4px;
+  margin-bottom:5px;
 
 }
 
@@ -470,7 +590,13 @@ button{
 
   font-size:24px;
 
-  margin:10px 0 4px;
+  margin:
+
+    10px
+
+    0
+
+    4px;
 
 }
 
@@ -486,9 +612,23 @@ button{
 
 .card{
 
-  background:linear-gradient(145deg,#0a2a31,#061e25);
+  background:
 
-  border:1px solid rgba(255,255,255,.07);
+    linear-gradient(
+
+      145deg,
+
+      #0a2a31,
+
+      #061e25
+
+    );
+
+  border:
+
+    1px solid
+
+    rgba(255,255,255,.07);
 
   border-radius:21px;
 
@@ -508,22 +648,6 @@ button{
 
 }
 
-.muted{
-
-  color:var(--muted);
-
-  font-size:10px;
-
-  margin-top:12px;
-
-}
-
-.gold-text{
-
-  color:var(--gold);
-
-}
-
 /* SETTINGS */
 
 .setting{
@@ -538,7 +662,11 @@ button{
 
   padding:14px 2px;
 
-  border-bottom:1px solid rgba(255,255,255,.06);
+  border-bottom:
+
+    1px solid
+
+    rgba(255,255,255,.06);
 
 }
 
@@ -564,9 +692,13 @@ button{
 
 .setting-info small{
 
+  display:block;
+
   color:var(--muted);
 
   font-size:10px;
+
+  margin-top:2px;
 
 }
 
@@ -575,6 +707,8 @@ button{
   direction:ltr;
 
   color:var(--gold2);
+
+  font-size:14px;
 
 }
 
@@ -593,6 +727,8 @@ button{
   background:#263e43;
 
   padding:3px;
+
+  transition:.2s;
 
 }
 
@@ -620,7 +756,9 @@ button{
 
 .switch.active span{
 
-  transform:translateX(-20px);
+  transform:
+
+    translateX(-20px);
 
 }
 
@@ -630,9 +768,9 @@ button{
 
   display:flex;
 
-  justify-content:space-between;
-
   align-items:center;
+
+  justify-content:space-between;
 
 }
 
@@ -640,11 +778,17 @@ button{
 
   color:var(--muted);
 
+  font-size:10px;
+
 }
 
 .last-read h3{
 
-  margin:4px 0;
+  margin:
+
+    4px
+
+    0;
 
 }
 
@@ -652,7 +796,7 @@ button{
 
   color:var(--gold);
 
-  font-size:11px;
+  font-size:10px;
 
 }
 
@@ -666,11 +810,19 @@ button{
 
   background:#071d23;
 
-  border:1px solid rgba(255,255,255,.08);
+  border:
+
+    1px solid
+
+    rgba(255,255,255,.08);
 
   border-radius:15px;
 
-  padding:0 13px;
+  padding:
+
+    0
+
+    13px;
 
   margin-bottom:12px;
 
@@ -704,7 +856,7 @@ button{
 
   color:var(--gold);
 
-  font-size:23px;
+  font-size:22px;
 
 }
 
@@ -716,9 +868,17 @@ button{
 
   gap:12px;
 
-  padding:12px 2px;
+  padding:
 
-  border-bottom:1px solid rgba(255,255,255,.06);
+    12px
+
+    2px;
+
+  border-bottom:
+
+    1px solid
+
+    rgba(255,255,255,.06);
 
 }
 
@@ -734,25 +894,25 @@ button{
 
   height:40px;
 
-  border:1px solid var(--gold);
-
-  transform:rotate(45deg);
-
   display:flex;
 
   align-items:center;
 
   justify-content:center;
 
+  border:
+
+    1px solid
+
+    var(--gold);
+
+  border-radius:12px;
+
   color:var(--gold);
 
   flex-shrink:0;
 
-}
-
-.surah-number::first-letter{
-
-  transform:rotate(-45deg);
+  font-size:11px;
 
 }
 
@@ -772,9 +932,13 @@ button{
 
 .surah-info small{
 
+  display:block;
+
   color:var(--muted);
 
   font-size:10px;
+
+  margin-top:2px;
 
 }
 
@@ -806,11 +970,17 @@ button{
 
 .reciter{
 
-  width:90px;
+  width:88px;
 
-  height:90px;
+  height:88px;
 
-  margin:5px auto 15px;
+  margin:
+
+    5px
+
+    auto
+
+    15px;
 
   display:flex;
 
@@ -818,13 +988,17 @@ button{
 
   justify-content:center;
 
-  border:1px solid var(--gold);
+  border:
+
+    1px solid
+
+    var(--gold);
 
   border-radius:50%;
 
   background:#0c514a;
 
-  font-size:38px;
+  font-size:34px;
 
 }
 
@@ -842,23 +1016,23 @@ button{
 
 }
 
-.audio-actions{
-
-  margin-top:15px;
-
-}
-
 .audio-main{
 
   width:58px;
 
   height:58px;
 
+  margin-top:15px;
+
   border:0;
 
   border-radius:50%;
 
   background:var(--gold);
+
+  color:#182019;
+
+  font-size:20px;
 
 }
 
@@ -878,29 +1052,49 @@ button{
 
   font-weight:800;
 
+  direction:ltr;
+
 }
 
 .compass{
 
-  width:280px;
+  width:270px;
 
-  height:280px;
+  height:270px;
 
   max-width:80vw;
 
-  margin:15px auto;
+  margin:
+
+    15px
+
+    auto;
 
   position:relative;
 
-  border:2px solid var(--gold);
+  border:
+
+    2px solid
+
+    var(--gold);
 
   border-radius:50%;
 
   background:
 
-    radial-gradient(circle,#092e35 0 42%,#061d24 43% 63%,#0a3034 64% 66%,#061a20 67%);
+    radial-gradient(
 
-  box-shadow:0 0 0 8px rgba(233,184,75,.04);
+      circle,
+
+      #092e35 0 42%,
+
+      #061d24 43% 63%,
+
+      #0a3034 64% 66%,
+
+      #061a20 67%
+
+    );
 
 }
 
@@ -928,7 +1122,9 @@ button{
 
   left:50%;
 
-  transform:translateX(-50%);
+  transform:
+
+    translateX(-50%);
 
   color:var(--gold);
 
@@ -940,7 +1136,9 @@ button{
 
   left:50%;
 
-  transform:translateX(-50%);
+  transform:
+
+    translateX(-50%);
 
 }
 
@@ -950,7 +1148,9 @@ button{
 
   top:50%;
 
-  transform:translateY(-50%);
+  transform:
+
+    translateY(-50%);
 
 }
 
@@ -960,7 +1160,9 @@ button{
 
   top:50%;
 
-  transform:translateY(-50%);
+  transform:
+
+    translateY(-50%);
 
 }
 
@@ -970,19 +1172,31 @@ button{
 
   width:4px;
 
-  height:210px;
+  height:205px;
 
   left:50%;
 
-  top:35px;
+  top:33px;
 
-  transform:translateX(-50%) rotate(35deg);
+  transform:
+
+    translateX(-50%)
+
+    rotate(35deg);
 
   transform-origin:center;
 
   border-radius:5px;
 
-  background:linear-gradient(var(--gold) 0 49%,#d7ebe5 50%);
+  background:
+
+    linear-gradient(
+
+      var(--gold) 0 49%,
+
+      #d7ebe5 50%
+
+    );
 
 }
 
@@ -990,15 +1204,17 @@ button{
 
   position:absolute;
 
-  width:64px;
+  width:62px;
 
-  height:64px;
+  height:62px;
 
   left:50%;
 
   top:50%;
 
-  transform:translate(-50%,-50%);
+  transform:
+
+    translate(-50%,-50%);
 
   display:flex;
 
@@ -1008,7 +1224,11 @@ button{
 
   background:#07181c;
 
-  border:1px solid var(--gold);
+  border:
+
+    1px solid
+
+    var(--gold);
 
   border-radius:50%;
 
@@ -1026,7 +1246,11 @@ button{
 
   border-radius:14px;
 
-  padding:12px 18px;
+  padding:
+
+    12px
+
+    18px;
 
   font-weight:700;
 
@@ -1040,9 +1264,21 @@ button{
 
 }
 
+.gold-text{
+
+  color:var(--gold);
+
+}
+
 .dhikr-text{
 
-  margin:28px 0 15px;
+  margin:
+
+    25px
+
+    0
+
+    15px;
 
   font-size:21px;
 
@@ -1066,17 +1302,37 @@ button{
 
   height:110px;
 
-  margin:5px auto;
+  margin:
+
+    5px
+
+    auto;
 
   display:block;
 
-  border:2px solid var(--gold);
+  border:
+
+    2px solid
+
+    var(--gold);
 
   border-radius:50%;
 
-  background:linear-gradient(145deg,#0e7b63,#083f39);
+  background:
+
+    linear-gradient(
+
+      145deg,
+
+      #0e7b63,
+
+      #083f39
+
+    );
 
   color:white;
+
+  font-weight:700;
 
 }
 
@@ -1094,6 +1350,8 @@ button{
 
 }
 
+/* LIST */
+
 .list-option{
 
   width:100%;
@@ -1108,11 +1366,19 @@ button{
 
   border:0;
 
-  border-bottom:1px solid rgba(255,255,255,.06);
+  border-bottom:
+
+    1px solid
+
+    rgba(255,255,255,.06);
 
   color:white;
 
-  padding:15px 2px;
+  padding:
+
+    15px
+
+    2px;
 
   text-align:right;
 
@@ -1132,7 +1398,7 @@ button{
 
 }
 
-/* NAV */
+/* BOTTOM NAV */
 
 .bottom-nav{
 
@@ -1142,27 +1408,39 @@ button{
 
   bottom:0;
 
-  transform:translateX(-50%);
+  transform:
+
+    translateX(-50%);
 
   width:100%;
 
   max-width:520px;
 
-  height:76px;
+  height:78px;
 
   display:grid;
 
-  grid-template-columns:repeat(5,1fr);
+  grid-template-columns:
 
-  background:rgba(4,21,27,.95);
+    repeat(5,1fr);
+
+  background:
+
+    rgba(4,21,27,.97);
 
   backdrop-filter:blur(18px);
 
-  border-top:1px solid rgba(233,184,75,.14);
+  border-top:
+
+    1px solid
+
+    rgba(233,184,75,.14);
 
   z-index:100;
 
-  padding-bottom:env(safe-area-inset-bottom);
+  padding-bottom:
+
+    env(safe-area-inset-bottom);
 
 }
 
@@ -1210,7 +1488,9 @@ button{
 
   justify-content:center;
 
-  background:rgba(0,0,0,.72);
+  background:
+
+    rgba(0,0,0,.72);
 
 }
 
@@ -1228,13 +1508,27 @@ button{
 
   background:#09272e;
 
-  border:1px solid var(--border);
+  border:
 
-  border-radius:27px 27px 0 0;
+    1px solid
+
+    var(--border);
+
+  border-radius:
+
+    27px
+
+    27px
+
+    0
+
+    0;
 
   padding:20px;
 
-  animation:slideUp .2s ease;
+  animation:
+
+    slideUp .2s ease;
 
 }
 
@@ -1242,13 +1536,17 @@ button{
 
   from{
 
-    transform:translateY(100%);
+    transform:
+
+      translateY(100%);
 
   }
 
   to{
 
-    transform:translateY(0);
+    transform:
+
+      translateY(0);
 
   }
 
@@ -1290,7 +1588,11 @@ button{
 
   padding:14px;
 
-  border:1px solid rgba(255,255,255,.07);
+  border:
+
+    1px solid
+
+    rgba(255,255,255,.07);
 
   border-radius:14px;
 
@@ -1314,7 +1616,9 @@ button{
 
   left:50%;
 
-  transform:translate(-50%,-100px);
+  transform:
+
+    translate(-50%,-100px);
 
   z-index:900;
 
@@ -1322,7 +1626,11 @@ button{
 
   color:white;
 
-  padding:11px 17px;
+  padding:
+
+    11px
+
+    17px;
 
   border-radius:13px;
 
@@ -1334,13 +1642,27 @@ button{
 
 .toast.show{
 
-  transform:translate(-50%,0);
+  transform:
+
+    translate(-50%,0);
 
 }
 
 /* MOBILE */
 
 @media(max-width:370px){
+
+  .brand-text h1{
+
+    font-size:19px;
+
+  }
+
+  .countdown{
+
+    font-size:29px;
+
+  }
 
   .quick span{
 
@@ -1354,17 +1676,11 @@ button{
 
   }
 
-  .countdown{
-
-    font-size:29px;
-
-  }
-
   .compass{
 
-    width:250px;
+    width:245px;
 
-    height:250px;
+    height:245px;
 
   }
 
