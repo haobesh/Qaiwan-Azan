@@ -6,15 +6,25 @@
 
   <meta charset="UTF-8">
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta
 
-  <meta name="theme-color" content="#061b22">
+    name="viewport"
 
-  <meta name="description" content="Qaiwan Azan - ئەذان، کاتی نوێژ، قورئان، قیبلە و ئەذکار">
+    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+
+  >
+
+  <meta
+
+    name="theme-color"
+
+    content="#061a20"
+
+  >
 
   <title>Qaiwan Azan</title>
 
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="./style.css">
 
 </head>
 
@@ -28,13 +38,7 @@
 
     <div class="brand">
 
-      <div class="logo">
-
-        ☪
-
-      </div>
-
-      <div>
+      <div class="brand-text">
 
         <h1>Qaiwan Azan</h1>
 
@@ -46,13 +50,29 @@
 
     <div class="header-actions">
 
-      <button class="icon-btn" id="notificationBtn" aria-label="Notifications">
+      <button
+
+        class="icon-btn"
+
+        id="notificationBtn"
+
+        type="button"
+
+      >
 
         🔔
 
       </button>
 
-      <button class="icon-btn" id="menuBtn" aria-label="Menu">
+      <button
+
+        class="icon-btn"
+
+        id="menuBtn"
+
+        type="button"
+
+      >
 
         ☰
 
@@ -64,13 +84,27 @@
 
   <!-- HOME -->
 
-  <main id="home" class="screen active">
+  <main
+
+    id="home"
+
+    class="screen active"
+
+  >
 
     <div class="location">
 
-      📍 <b id="locationText">شوێن دیاری نەکراوە</b>
+      📍
+
+      <span id="locationText">
+
+        شوێن دیاری نەکراوە
+
+      </span>
 
     </div>
+
+    <!-- NEXT PRAYER -->
 
     <section class="next-prayer">
 
@@ -82,85 +116,199 @@
 
       <h2 id="nextPrayer">
 
-        چاوەڕوان بە...
+        بەیانی
 
       </h2>
 
-      <div class="countdown" id="countdown">
+      <div
+
+        class="countdown"
+
+        id="countdown"
+
+      >
 
         --:--:--
 
       </div>
 
-      <div class="next-time" id="nextTime">
+      <div
 
-        کاتی نوێژ: --:--
+        class="next-time"
+
+        id="nextTime"
+
+      >
+
+        کاتی نوێژ: 04:36
 
       </div>
 
     </section>
+
+    <!-- PRAYER TIMES -->
 
     <section class="prayer-row">
 
-      <div class="prayer" data-prayer="Fajr">
+      <div
 
-        <div class="prayer-icon">🌙</div>
+        class="prayer"
 
-        <small>بەیانی</small>
+        data-prayer="Isha"
 
-        <strong id="homeFajr">--:--</strong>
+      >
 
-      </div>
+        <div class="prayer-icon">
 
-      <div class="prayer" data-prayer="Dhuhr">
+          🌙
 
-        <div class="prayer-icon">☀️</div>
+        </div>
 
-        <small>زوهر</small>
+        <small>
 
-        <strong id="homeDhuhr">--:--</strong>
+          عیشاء
 
-      </div>
+        </small>
 
-      <div class="prayer" data-prayer="Asr">
+        <strong id="homeIsha">
 
-        <div class="prayer-icon">🌤️</div>
+          19:53
 
-        <small>عەسر</small>
-
-        <strong id="homeAsr">--:--</strong>
+        </strong>
 
       </div>
 
-      <div class="prayer" data-prayer="Maghrib">
+      <div
 
-        <div class="prayer-icon">🌅</div>
+        class="prayer"
 
-        <small>مەغریب</small>
+        data-prayer="Maghrib"
 
-        <strong id="homeMaghrib">--:--</strong>
+      >
+
+        <div class="prayer-icon">
+
+          🌅
+
+        </div>
+
+        <small>
+
+          مەغریب
+
+        </small>
+
+        <strong id="homeMaghrib">
+
+          18:35
+
+        </strong>
 
       </div>
 
-      <div class="prayer" data-prayer="Isha">
+      <div
 
-        <div class="prayer-icon">🌙</div>
+        class="prayer"
 
-        <small>عیشاء</small>
+        data-prayer="Asr"
 
-        <strong id="homeIsha">--:--</strong>
+      >
+
+        <div class="prayer-icon">
+
+          🌤️
+
+        </div>
+
+        <small>
+
+          عەسر
+
+        </small>
+
+        <strong id="homeAsr">
+
+          15:59
+
+        </strong>
+
+      </div>
+
+      <div
+
+        class="prayer"
+
+        data-prayer="Dhuhr"
+
+      >
+
+        <div class="prayer-icon">
+
+          ☀️
+
+        </div>
+
+        <small>
+
+          زوهر
+
+        </small>
+
+        <strong id="homeDhuhr">
+
+          12:27
+
+        </strong>
+
+      </div>
+
+      <div
+
+        class="prayer"
+
+        data-prayer="Fajr"
+
+      >
+
+        <div class="prayer-icon">
+
+          🌙
+
+        </div>
+
+        <small>
+
+          بەیانی
+
+        </small>
+
+        <strong id="homeFajr">
+
+          04:36
+
+        </strong>
 
       </div>
 
     </section>
+
+    <!-- DAILY VERSE -->
 
     <section class="verse">
 
       <div class="verse-title">
 
-        <span>✨ ئایەتی ڕۆژ</span>
+        <span>
 
-        <span>سورەتی کەھف</span>
+          ✨ ئایەتی ڕۆژ
+
+        </span>
+
+        <span>
+
+          سورەتی کەھف
+
+        </span>
 
       </div>
 
@@ -178,43 +326,97 @@
 
     </section>
 
+    <!-- QUICK ACCESS -->
+
     <div class="section-title">
 
-      <h3>بەشەکان</h3>
+      <h3>
+
+        بەشەکان
+
+      </h3>
 
     </div>
 
     <section class="quick-grid">
 
-      <button class="quick" data-go="quran">
+      <button
+
+        class="quick"
+
+        type="button"
+
+        data-go="quran"
+
+      >
 
         <i>📖</i>
 
-        <span>قورئان</span>
+        <span>
+
+          قورئان
+
+        </span>
 
       </button>
 
-      <button class="quick" data-go="qibla">
+      <button
+
+        class="quick"
+
+        type="button"
+
+        data-go="qibla"
+
+      >
 
         <i>🧭</i>
 
-        <span>قیبلە</span>
+        <span>
+
+          قیبلە
+
+        </span>
 
       </button>
 
-      <button class="quick" data-go="adhkar">
+      <button
+
+        class="quick"
+
+        type="button"
+
+        data-go="adhkar"
+
+      >
 
         <i>🤲</i>
 
-        <span>ئەذکار</span>
+        <span>
+
+          ئەذکار
+
+        </span>
 
       </button>
 
-      <button class="quick" data-go="prayers">
+      <button
+
+        class="quick"
+
+        type="button"
+
+        data-go="prayers"
+
+      >
 
         <i>🕌</i>
 
-        <span>نوێژ</span>
+        <span>
+
+          نوێژ
+
+        </span>
 
       </button>
 
@@ -224,7 +426,13 @@
 
   <!-- PRAYERS -->
 
-  <section id="prayers" class="screen">
+  <section
+
+    id="prayers"
+
+    class="screen"
+
+  >
 
     <h2 class="page-title">
 
@@ -244,13 +452,25 @@
 
         <div class="setting-info">
 
-          <b>ئیمساک</b>
+          <b>
 
-          <small>Imsak</small>
+            ئیمساک
+
+          </b>
+
+          <small>
+
+            Imsak
+
+          </small>
 
         </div>
 
-        <strong id="imsakTime">--:--</strong>
+        <strong id="imsakTime">
+
+          04:16
+
+        </strong>
 
       </div>
 
@@ -258,13 +478,25 @@
 
         <div class="setting-info">
 
-          <b>بەیانی</b>
+          <b>
 
-          <small>Fajr</small>
+            بەیانی
+
+          </b>
+
+          <small>
+
+            Fajr
+
+          </small>
 
         </div>
 
-        <strong id="fajrTime">--:--</strong>
+        <strong id="fajrTime">
+
+          04:36
+
+        </strong>
 
       </div>
 
@@ -272,13 +504,25 @@
 
         <div class="setting-info">
 
-          <b>زوهر</b>
+          <b>
 
-          <small>Dhuhr</small>
+            زوهر
+
+          </b>
+
+          <small>
+
+            Dhuhr
+
+          </small>
 
         </div>
 
-        <strong id="dhuhrTime">--:--</strong>
+        <strong id="dhuhrTime">
+
+          12:27
+
+        </strong>
 
       </div>
 
@@ -286,13 +530,25 @@
 
         <div class="setting-info">
 
-          <b>عەسر</b>
+          <b>
 
-          <small>Asr</small>
+            عەسر
+
+          </b>
+
+          <small>
+
+            Asr
+
+          </small>
 
         </div>
 
-        <strong id="asrTime">--:--</strong>
+        <strong id="asrTime">
+
+          15:59
+
+        </strong>
 
       </div>
 
@@ -300,13 +556,25 @@
 
         <div class="setting-info">
 
-          <b>مەغریب</b>
+          <b>
 
-          <small>Maghrib</small>
+            مەغریب
+
+          </b>
+
+          <small>
+
+            Maghrib
+
+          </small>
 
         </div>
 
-        <strong id="maghribTime">--:--</strong>
+        <strong id="maghribTime">
+
+          18:35
+
+        </strong>
 
       </div>
 
@@ -314,13 +582,25 @@
 
         <div class="setting-info">
 
-          <b>عیشاء</b>
+          <b>
 
-          <small>Isha</small>
+            عیشاء
+
+          </b>
+
+          <small>
+
+            Isha
+
+          </small>
 
         </div>
 
-        <strong id="ishaTime">--:--</strong>
+        <strong id="ishaTime">
+
+          19:53
+
+        </strong>
 
       </div>
 
@@ -338,13 +618,29 @@
 
         <div class="setting-info">
 
-          <b>ئەذانی بەیانی</b>
+          <b>
 
-          <small>ئاگادارکردنەوە</small>
+            بەیانی
+
+          </b>
+
+          <small>
+
+            ئاگادارکردنەوە
+
+          </small>
 
         </div>
 
-        <button class="switch active" data-switch>
+        <button
+
+          class="switch active"
+
+          type="button"
+
+          data-switch
+
+        >
 
           <span></span>
 
@@ -356,13 +652,29 @@
 
         <div class="setting-info">
 
-          <b>ئەذانی زوهر</b>
+          <b>
 
-          <small>ئاگادارکردنەوە</small>
+            زوهر
+
+          </b>
+
+          <small>
+
+            ئاگادارکردنەوە
+
+          </small>
 
         </div>
 
-        <button class="switch active" data-switch>
+        <button
+
+          class="switch active"
+
+          type="button"
+
+          data-switch
+
+        >
 
           <span></span>
 
@@ -374,13 +686,29 @@
 
         <div class="setting-info">
 
-          <b>ئەذانی عەسر</b>
+          <b>
 
-          <small>ئاگادارکردنەوە</small>
+            عەسر
+
+          </b>
+
+          <small>
+
+            ئاگادارکردنەوە
+
+          </small>
 
         </div>
 
-        <button class="switch active" data-switch>
+        <button
+
+          class="switch active"
+
+          type="button"
+
+          data-switch
+
+        >
 
           <span></span>
 
@@ -392,13 +720,29 @@
 
         <div class="setting-info">
 
-          <b>ئەذانی مەغریب</b>
+          <b>
 
-          <small>ئاگادارکردنەوە</small>
+            مەغریب
+
+          </b>
+
+          <small>
+
+            ئاگادارکردنەوە
+
+          </small>
 
         </div>
 
-        <button class="switch active" data-switch>
+        <button
+
+          class="switch active"
+
+          type="button"
+
+          data-switch
+
+        >
 
           <span></span>
 
@@ -410,13 +754,29 @@
 
         <div class="setting-info">
 
-          <b>ئەذانی عیشاء</b>
+          <b>
 
-          <small>ئاگادارکردنەوە</small>
+            عیشاء
+
+          </b>
+
+          <small>
+
+            ئاگادارکردنەوە
+
+          </small>
 
         </div>
 
-        <button class="switch active" data-switch>
+        <button
+
+          class="switch active"
+
+          type="button"
+
+          data-switch
+
+        >
 
           <span></span>
 
@@ -430,7 +790,13 @@
 
   <!-- QURAN -->
 
-  <section id="quran" class="screen">
+  <section
+
+    id="quran"
+
+    class="screen"
+
+  >
 
     <h2 class="page-title">
 
@@ -448,15 +814,35 @@
 
       <div>
 
-        <small>دوایین خوێندنەوە</small>
+        <small>
 
-        <h3>سورەتی یاسین</h3>
+          دوایین خوێندنەوە
 
-        <span>ئایەتی 12</span>
+        </small>
+
+        <h3>
+
+          سورەتی یاسین
+
+        </h3>
+
+        <span>
+
+          ئایەتی 12
+
+        </span>
 
       </div>
 
-      <button class="play-btn" id="lastReadBtn">
+      <button
+
+        class="play-btn"
+
+        type="button"
+
+        id="lastReadBtn"
+
+      >
 
         ▶
 
@@ -476,13 +862,29 @@
 
       >
 
-      <span>⌕</span>
+      <span>
+
+        ⌕
+
+      </span>
 
     </div>
 
-    <div class="card surah-list" id="surahList">
+    <div
 
-      <article class="surah" data-name="الفاتحة فاتحە">
+      class="card surah-list"
+
+      id="surahList"
+
+    >
+
+      <article
+
+        class="surah"
+
+        data-name="فاتحە الفاتحة"
+
+      >
 
         <div class="surah-number">
 
@@ -492,13 +894,29 @@
 
         <div class="surah-info">
 
-          <b>الفاتحة</b>
+          <b>
 
-          <small>فاتحە · 7 ئایەت</small>
+            الفاتحة
+
+          </b>
+
+          <small>
+
+            فاتحە · 7 ئایەت
+
+          </small>
 
         </div>
 
-        <button class="play-btn surah-play" data-surah="فاتحە">
+        <button
+
+          class="play-btn surah-play"
+
+          type="button"
+
+          data-surah="فاتحە"
+
+        >
 
           ▶
 
@@ -506,7 +924,13 @@
 
       </article>
 
-      <article class="surah" data-name="البقرة بەقەرە">
+      <article
+
+        class="surah"
+
+        data-name="بەقەرە البقرة"
+
+      >
 
         <div class="surah-number">
 
@@ -516,13 +940,29 @@
 
         <div class="surah-info">
 
-          <b>البقرة</b>
+          <b>
 
-          <small>بەقەرە · 286 ئایەت</small>
+            البقرة
+
+          </b>
+
+          <small>
+
+            بەقەرە · 286 ئایەت
+
+          </small>
 
         </div>
 
-        <button class="play-btn surah-play" data-surah="بەقەرە">
+        <button
+
+          class="play-btn surah-play"
+
+          type="button"
+
+          data-surah="بەقەرە"
+
+        >
 
           ▶
 
@@ -530,7 +970,13 @@
 
       </article>
 
-      <article class="surah" data-name="آل عمران عیمڕان">
+      <article
+
+        class="surah"
+
+        data-name="عیمڕان آل عمران"
+
+      >
 
         <div class="surah-number">
 
@@ -540,13 +986,29 @@
 
         <div class="surah-info">
 
-          <b>آل عمران</b>
+          <b>
 
-          <small>عیمڕان · 200 ئایەت</small>
+            آل عمران
+
+          </b>
+
+          <small>
+
+            عیمڕان · 200 ئایەت
+
+          </small>
 
         </div>
 
-        <button class="play-btn surah-play" data-surah="عیمڕان">
+        <button
+
+          class="play-btn surah-play"
+
+          type="button"
+
+          data-surah="عیمڕان"
+
+        >
 
           ▶
 
@@ -554,7 +1016,13 @@
 
       </article>
 
-      <article class="surah" data-name="النساء نیسا">
+      <article
+
+        class="surah"
+
+        data-name="نیسا النساء"
+
+      >
 
         <div class="surah-number">
 
@@ -564,13 +1032,29 @@
 
         <div class="surah-info">
 
-          <b>النساء</b>
+          <b>
 
-          <small>نیسا · 176 ئایەت</small>
+            النساء
+
+          </b>
+
+          <small>
+
+            نیسا · 176 ئایەت
+
+          </small>
 
         </div>
 
-        <button class="play-btn surah-play" data-surah="نیسا">
+        <button
+
+          class="play-btn surah-play"
+
+          type="button"
+
+          data-surah="نیسا"
+
+        >
 
           ▶
 
@@ -578,7 +1062,13 @@
 
       </article>
 
-      <article class="surah" data-name="المائدة مائدە">
+      <article
+
+        class="surah"
+
+        data-name="مائدە المائدة"
+
+      >
 
         <div class="surah-number">
 
@@ -588,13 +1078,29 @@
 
         <div class="surah-info">
 
-          <b>المائدة</b>
+          <b>
 
-          <small>مائدە · 120 ئایەت</small>
+            المائدة
+
+          </b>
+
+          <small>
+
+            مائدە · 120 ئایەت
+
+          </small>
 
         </div>
 
-        <button class="play-btn surah-play" data-surah="مائدە">
+        <button
+
+          class="play-btn surah-play"
+
+          type="button"
+
+          data-surah="مائدە"
+
+        >
 
           ▶
 
@@ -602,7 +1108,13 @@
 
       </article>
 
-      <article class="surah" data-name="يس یاسین">
+      <article
+
+        class="surah"
+
+        data-name="یاسین يس"
+
+      >
 
         <div class="surah-number">
 
@@ -612,13 +1124,29 @@
 
         <div class="surah-info">
 
-          <b>يس</b>
+          <b>
 
-          <small>یاسین · 83 ئایەت</small>
+            يس
+
+          </b>
+
+          <small>
+
+            یاسین · 83 ئایەت
+
+          </small>
 
         </div>
 
-        <button class="play-btn surah-play" data-surah="یاسین">
+        <button
+
+          class="play-btn surah-play"
+
+          type="button"
+
+          data-surah="یاسین"
+
+        >
 
           ▶
 
@@ -632,7 +1160,13 @@
 
   <!-- AUDIO -->
 
-  <section id="audio" class="screen">
+  <section
+
+    id="audio"
+
+    class="screen"
+
+  >
 
     <h2 class="page-title">
 
@@ -650,7 +1184,7 @@
 
       <div class="reciter">
 
-        🎙
+        🎙️
 
       </div>
 
@@ -662,7 +1196,7 @@
 
       <small>
 
-        تلاوەت
+        Qaiwan Azan
 
       </small>
 
@@ -672,19 +1206,21 @@
 
         controls
 
-        preload="none">
+      ></audio>
 
-      </audio>
+      <button
 
-      <div class="audio-actions">
+        id="audioPlay"
 
-        <button id="audioPlay" class="audio-main">
+        class="audio-main"
 
-          ▶
+        type="button"
 
-        </button>
+      >
 
-      </div>
+        ▶
+
+      </button>
 
     </div>
 
@@ -692,7 +1228,13 @@
 
   <!-- QIBLA -->
 
-  <section id="qibla" class="screen">
+  <section
+
+    id="qibla"
+
+    class="screen"
+
+  >
 
     <h2 class="page-title">
 
@@ -710,19 +1252,47 @@
 
       <div class="qibla-degree">
 
-        <span id="qiblaDegree">244</span>°
+        <span id="qiblaDegree">
+
+          244
+
+        </span>
+
+        °
 
       </div>
 
-      <div class="compass" id="compass">
+      <div
 
-        <span class="north">N</span>
+        class="compass"
 
-        <span class="south">S</span>
+        id="compass"
 
-        <span class="east">E</span>
+      >
 
-        <span class="west">W</span>
+        <span class="north">
+
+          N
+
+        </span>
+
+        <span class="south">
+
+          S
+
+        </span>
+
+        <span class="east">
+
+          E
+
+        </span>
+
+        <span class="west">
+
+          W
+
+        </span>
 
         <div class="needle"></div>
 
@@ -734,7 +1304,15 @@
 
       </div>
 
-      <button class="gold-btn" id="compassBtn">
+      <button
+
+        class="gold-btn"
+
+        id="compassBtn"
+
+        type="button"
+
+      >
 
         🧭 چالاککردنی Compass
 
@@ -752,7 +1330,13 @@
 
   <!-- ADHKAR -->
 
-  <section id="adhkar" class="screen">
+  <section
+
+    id="adhkar"
+
+    class="screen"
+
+  >
 
     <h2 class="page-title">
 
@@ -780,19 +1364,41 @@
 
       </p>
 
-      <div class="dhikr-number" id="dhikrNumber">
+      <div
+
+        class="dhikr-number"
+
+        id="dhikrNumber"
+
+      >
 
         0
 
       </div>
 
-      <button class="counter" id="counterBtn">
+      <button
+
+        class="counter"
+
+        id="counterBtn"
+
+        type="button"
+
+      >
 
         ذکر
 
       </button>
 
-      <button class="reset-btn" id="resetDhikr">
+      <button
+
+        class="reset-btn"
+
+        id="resetDhikr"
+
+        type="button"
+
+      >
 
         ڕیسێت
 
@@ -808,27 +1414,75 @@
 
       </div>
 
-      <button class="list-option">
+      <button
 
-        <span>🤲 دوعای پێش خەوتن</span>
+        class="list-option"
 
-        <b>‹</b>
+        type="button"
+
+        data-dua="دوعای پێش خەوتن"
+
+      >
+
+        <span>
+
+          🤲 دوعای پێش خەوتن
+
+        </span>
+
+        <b>
+
+          ‹
+
+        </b>
 
       </button>
 
-      <button class="list-option">
+      <button
 
-        <span>✈️ دوعای سفر</span>
+        class="list-option"
 
-        <b>‹</b>
+        type="button"
+
+        data-dua="دوعای سفر"
+
+      >
+
+        <span>
+
+          ✈️ دوعای سفر
+
+        </span>
+
+        <b>
+
+          ‹
+
+        </b>
 
       </button>
 
-      <button class="list-option">
+      <button
 
-        <span>🕌 ئەذکاری دوای نوێژ</span>
+        class="list-option"
 
-        <b>‹</b>
+        type="button"
+
+        data-dua="ئەذکاری دوای نوێژ"
+
+      >
+
+        <span>
+
+          🕌 ئەذکاری دوای نوێژ
+
+        </span>
+
+        <b>
+
+          ‹
+
+        </b>
 
       </button>
 
@@ -838,7 +1492,13 @@
 
   <!-- SETTINGS -->
 
-  <section id="settings" class="screen">
+  <section
+
+    id="settings"
+
+    class="screen"
+
+  >
 
     <h2 class="page-title">
 
@@ -858,7 +1518,11 @@
 
         <div class="setting-info">
 
-          <b>شوێن</b>
+          <b>
+
+            شوێن
+
+          </b>
 
           <small id="settingsLocation">
 
@@ -868,7 +1532,11 @@
 
         </div>
 
-        <span>📍</span>
+        <span>
+
+          📍
+
+        </span>
 
       </div>
 
@@ -876,13 +1544,25 @@
 
         <div class="setting-info">
 
-          <b>زمان</b>
+          <b>
 
-          <small>کوردی</small>
+            زمان
+
+          </b>
+
+          <small>
+
+            کوردی
+
+          </small>
 
         </div>
 
-        <span>🌐</span>
+        <span>
+
+          🌐
+
+        </span>
 
       </div>
 
@@ -890,13 +1570,29 @@
 
         <div class="setting-info">
 
-          <b>ئاگادارکردنەوە</b>
+          <b>
 
-          <small>نوێژەکان</small>
+            ئاگادارکردنەوە
+
+          </b>
+
+          <small>
+
+            نوێژەکان
+
+          </small>
 
         </div>
 
-        <button class="switch active" data-switch>
+        <button
+
+          class="switch active"
+
+          type="button"
+
+          data-switch
+
+        >
 
           <span></span>
 
@@ -908,13 +1604,29 @@
 
         <div class="setting-info">
 
-          <b>دەنگی ئەذان</b>
+          <b>
 
-          <small>چالاک</small>
+            دەنگی ئەذان
+
+          </b>
+
+          <small>
+
+            چالاک
+
+          </small>
 
         </div>
 
-        <button class="switch active" data-switch>
+        <button
+
+          class="switch active"
+
+          type="button"
+
+          data-switch
+
+        >
 
           <span></span>
 
@@ -926,13 +1638,29 @@
 
         <div class="setting-info">
 
-          <b>دۆخی تاریک</b>
+          <b>
 
-          <small>Dark Mode</small>
+            دۆخی تاریک
+
+          </b>
+
+          <small>
+
+            Dark Mode
+
+          </small>
 
         </div>
 
-        <button class="switch active" data-switch>
+        <button
+
+          class="switch active"
+
+          type="button"
+
+          data-switch
+
+        >
 
           <span></span>
 
@@ -944,19 +1672,51 @@
 
     <div class="card">
 
-      <button class="list-option">
+      <button
 
-        <span>ℹ️ دەربارەی Qaiwan Azan</span>
+        class="list-option"
 
-        <b>‹</b>
+        type="button"
+
+        data-about
+
+      >
+
+        <span>
+
+          ℹ️ دەربارەی Qaiwan Azan
+
+        </span>
+
+        <b>
+
+          ‹
+
+        </b>
 
       </button>
 
-      <button class="list-option">
+      <button
 
-        <span>🛟 پشتیوانی</span>
+        class="list-option"
 
-        <b>‹</b>
+        type="button"
+
+        data-support
+
+      >
+
+        <span>
+
+          🛟 پشتیوانی
+
+        </span>
+
+        <b>
+
+          ‹
+
+        </b>
 
       </button>
 
@@ -968,7 +1728,15 @@
 
   <nav class="bottom-nav">
 
-    <button class="nav-btn active" data-screen="home">
+    <button
+
+      class="nav-btn active"
+
+      type="button"
+
+      data-screen="home"
+
+    >
 
       <span>⌂</span>
 
@@ -976,7 +1744,15 @@
 
     </button>
 
-    <button class="nav-btn" data-screen="quran">
+    <button
+
+      class="nav-btn"
+
+      type="button"
+
+      data-screen="quran"
+
+    >
 
       <span>📖</span>
 
@@ -984,7 +1760,15 @@
 
     </button>
 
-    <button class="nav-btn" data-screen="qibla">
+    <button
+
+      class="nav-btn"
+
+      type="button"
+
+      data-screen="qibla"
+
+    >
 
       <span>🧭</span>
 
@@ -992,7 +1776,15 @@
 
     </button>
 
-    <button class="nav-btn" data-screen="adhkar">
+    <button
+
+      class="nav-btn"
+
+      type="button"
+
+      data-screen="adhkar"
+
+    >
 
       <span>🤲</span>
 
@@ -1000,9 +1792,17 @@
 
     </button>
 
-    <button class="nav-btn" data-screen="settings">
+    <button
 
-      <span>⚙</span>
+      class="nav-btn"
+
+      type="button"
+
+      data-screen="settings"
+
+    >
+
+      <span>⚙️</span>
 
       ڕێکخستن
 
@@ -1014,7 +1814,13 @@
 
 <!-- MODAL -->
 
-<div class="modal" id="modal">
+<div
+
+  class="modal"
+
+  id="modal"
+
+>
 
   <div class="modal-box">
 
@@ -1026,7 +1832,13 @@
 
       </h3>
 
-      <button id="closeModal">
+      <button
+
+        id="closeModal"
+
+        type="button"
+
+      >
 
         ×
 
@@ -1040,9 +1852,17 @@
 
 </div>
 
-<div class="toast" id="toast"></div>
+<!-- TOAST -->
 
-<script src="script.js"></script>
+<div
+
+  class="toast"
+
+  id="toast"
+
+></div>
+
+<script src="./script.js"></script>
 
 </body>
 
