@@ -1,752 +1,94 @@
 "use strict";
 
-/* =========================
+document.addEventListener("DOMContentLoaded", function(){
 
-   BASIC HELPERS
+  const $ = function(id){
 
-========================= */
+    return document.getElementById(id);
 
-const $ = (selector) =>
+  };
 
-  document.querySelector(selector);
+  const pages = document.querySelectorAll(".page");
 
-const $$ = (selector) =>
+  const navButtons = document.querySelectorAll("[data-page]");
 
-  [...document.querySelectorAll(selector)];
+  let currentPrayers = null;
 
-function pad(number){
+  let nextPrayer = null;
 
-  return String(number).padStart(2,"0");
+  let dhikr = 0;
 
-}
+  /* =========================
 
-function showToast(message){
+     TOAST
 
-  const toast = $("#toast");
+  ========================= */
 
-  toast.textContent = message;
+  function toast(text){
 
-  toast.classList.add("show");
+    const box = $("toast");
 
-  clearTimeout(window.toastTimer);
+    box.textContent = text;
 
-  window.toastTimer = setTimeout(() => {
+    box.classList.add("show");
 
-    toast.classList.remove("show");
+    clearTimeout(window.toastTimeout);
 
-  },2500);
+    window.toastTimeout = setTimeout(function(){
 
-}
+      box.classList.remove("show");
 
-/* =========================
-
-   APP STATE
-
-========================= */
-
-const app = {
-
-  latitude:35.5613,
-
-  longitude:45.4375,
-
-  city:"سلێمانی",
-
-  prayers:{},
-
-  nextPrayer:null,
-
-  dhikr:0,
-
-  qibla:0
-
-};
-
-/* =========================
-
-   PRAYERS
-
-========================= */
-
-const prayerData = [
-
-  {
-
-    key:"fajr",
-
-    name:"بەیانی",
-
-    icon:"🌙"
-
-  },
-
-  {
-
-    key:"dhuhr",
-
-    name:"نوێڕۆ",
-
-    icon:"☀️"
-
-  },
-
-  {
-
-    key:"asr",
-
-    name:"عەسر",
-
-    icon:"🌤️"
-
-  },
-
-  {
-
-    key:"maghrib",
-
-    name:"مەغریب",
-
-    icon:"🌅"
-
-  },
-
-  {
-
-    key:"isha",
-
-    name:"عیشاء",
-
-    icon:"🌙"
+    },2500);
 
   }
 
-];
+  /* =========================
 
-function radians(degree){
+     PAGE NAVIGATION
 
-  return degree * Math.PI / 180;
+  ========================= */
 
-}
+  function openPage(name){
 
-function degrees(radian){
+    pages.forEach(function(page){
 
-  return radian * 180 / Math.PI;
+      page.classList.toggle(
 
-}
+        "active",
 
-function sin(degree){
-
-  return Math.sin(radians(degree));
-
-}
-
-function cos(degree){
-
-  return Math.cos(radians(degree));
-
-}
-
-function calculateSun(){
-
-  const date = new Date();
-
-  const start =
-
-    Date.UTC(
-
-      date.getFullYear(),
-
-      date.getMonth(),
-
-      date.getDate()
-
-    );
-
-  const base =
-
-    Date.UTC(2000,0,1);
-
-  const days =
-
-    (start-base)/86400000;
-
-  const g =
-
-    radians(
-
-      (357.529 + 0.98560028 * days) % 360
-
-    );
-
-  const q =
-
-    (280.459 + 0.98564736 * days) % 360;
-
-  const longitude =
-
-    (q +
-
-      1.915 * Math.sin(g) +
-
-      0.020 * Math.sin(2*g)
-
-    ) % 360;
-
-  const obliquity =
-
-    23.439 -
-
-    0.00000036 * days;
-
-  const rightAscension =
-
-    (
-
-      degrees(
-
-        Math.atan2(
-
-          cos(obliquity) *
-
-          sin(longitude),
-
-          cos(longitude)
-
-        )
-
-      ) / 15
-
-      + 24
-
-    ) % 24;
-
-  const equation =
-
-    q/15 -
-
-    rightAscension;
-
-  const declination =
-
-    degrees(
-
-      Math.asin(
-
-        sin(obliquity) *
-
-        sin(longitude)
-
-      )
-
-    );
-
-  return {
-
-    equation,
-
-    declination
-
-  };
-
-}
-
-function hourAngle(
-
-  latitude,
-
-  declination,
-
-  angle
-
-){
-
-  const value =
-
-    (
-
-      cos(angle) -
-
-      sin(latitude) *
-
-      sin(declination)
-
-    ) /
-
-    (
-
-      cos(latitude) *
-
-      cos(declination)
-
-    );
-
-  return (
-
-    degrees(
-
-      Math.acos(
-
-        Math.max(
-
-          -1,
-
-          Math.min(1,value)
-
-        )
-
-      )
-
-    ) / 15
-
-  );
-
-}
-
-function calculatePrayerTimes(){
-
-  const sun =
-
-    calculateSun();
-
-  const noon =
-
-    12 -
-
-    sun.equation -
-
-    app.longitude / 15;
-
-  const sunrise =
-
-    noon -
-
-    hourAngle(
-
-      app.latitude,
-
-      sun.declination,
-
-      .833
-
-    );
-
-  const sunset =
-
-    noon +
-
-    hourAngle(
-
-      app.latitude,
-
-      sun.declination,
-
-      .833
-
-    );
-
-  const fajr =
-
-    noon -
-
-    hourAngle(
-
-      app.latitude,
-
-      sun.declination,
-
-      18
-
-    );
-
-  const isha =
-
-    noon +
-
-    hourAngle(
-
-      app.latitude,
-
-      sun.declination,
-
-      18
-
-    );
-
-  const asr =
-
-    noon +
-
-    hourAngle(
-
-      app.latitude,
-
-      sun.declination,
-
-      45
-
-    );
-
-  return {
-
-    fajr,
-
-    dhuhr:noon,
-
-    asr,
-
-    maghrib:sunset,
-
-    isha
-
-  };
-
-}
-
-function formatTime(decimalHours){
-
-  let totalMinutes =
-
-    Math.round(decimalHours*60);
-
-  totalMinutes =
-
-    (
-
-      totalMinutes % 1440 +
-
-      1440
-
-    ) % 1440;
-
-  const hours =
-
-    Math.floor(
-
-      totalMinutes / 60
-
-    );
-
-  const minutes =
-
-    totalMinutes % 60;
-
-  return `${pad(hours)}:${pad(minutes)}`;
-
-}
-
-function timeToMinutes(time){
-
-  const parts =
-
-    time.split(":").map(Number);
-
-  return parts[0]*60 + parts[1];
-
-}
-
-/* =========================
-
-   RENDER PRAYERS
-
-========================= */
-
-function renderPrayerTimes(){
-
-  const calculated =
-
-    calculatePrayerTimes();
-
-  app.prayers = {};
-
-  Object.keys(calculated).forEach(key => {
-
-    app.prayers[key] =
-
-      formatTime(
-
-        calculated[key]
+        page.id === name
 
       );
 
-  });
+    });
 
-  const container =
+    document.querySelectorAll(".bottom button").forEach(function(btn){
 
-    $("#prayerList");
+      btn.classList.toggle(
 
-  container.innerHTML =
+        "active",
 
-    prayerData.map(prayer => {
+        btn.dataset.page === name
 
-      return `
+      );
 
-        <div
+    });
 
-          class="prayer"
+    closeMenu();
 
-          data-prayer="${prayer.key}"
+    window.scrollTo({
 
-        >
+      top:0,
 
-          <div class="prayer-icon">
+      behavior:"smooth"
 
-            ${prayer.icon}
-
-          </div>
-
-          <div class="prayer-name">
-
-            ${prayer.name}
-
-          </div>
-
-          <div class="prayer-time">
-
-            ${app.prayers[prayer.key]}
-
-          </div>
-
-        </div>
-
-      `;
-
-    }).join("");
-
-  findNextPrayer();
-
-}
-
-/* =========================
-
-   NEXT PRAYER
-
-========================= */
-
-function findNextPrayer(){
-
-  const now =
-
-    new Date();
-
-  const currentMinutes =
-
-    now.getHours()*60 +
-
-    now.getMinutes() +
-
-    now.getSeconds()/60;
-
-  let next =
-
-    prayerData.find(
-
-      prayer =>
-
-        timeToMinutes(
-
-          app.prayers[prayer.key]
-
-        ) > currentMinutes
-
-    );
-
-  let tomorrow = false;
-
-  if(!next){
-
-    next = prayerData[0];
-
-    tomorrow = true;
+    });
 
   }
 
-  app.nextPrayer = {
+  navButtons.forEach(function(button){
 
-    ...next,
-
-    tomorrow
-
-  };
-
-  $("#nextPrayerName").textContent =
-
-    next.name;
-
-  $("#nextPrayerTime").textContent =
-
-    app.prayers[next.key];
-
-  $$(".prayer").forEach(card => {
-
-    card.classList.toggle(
-
-      "active",
-
-      card.dataset.prayer === next.key
-
-    );
-
-  });
-
-  updateCountdown();
-
-}
-
-function updateCountdown(){
-
-  if(!app.nextPrayer){
-
-    return;
-
-  }
-
-  const now =
-
-    new Date();
-
-  const target =
-
-    new Date();
-
-  const time =
-
-    app.prayers[
-
-      app.nextPrayer.key
-
-    ];
-
-  const parts =
-
-    time.split(":").map(Number);
-
-  target.setHours(
-
-    parts[0],
-
-    parts[1],
-
-    0,
-
-    0
-
-  );
-
-  if(
-
-    app.nextPrayer.tomorrow ||
-
-    target <= now
-
-  ){
-
-    target.setDate(
-
-      target.getDate()+1
-
-    );
-
-  }
-
-  let seconds =
-
-    Math.floor(
-
-      (target-now)/1000
-
-    );
-
-  if(seconds < 0){
-
-    seconds = 0;
-
-  }
-
-  const hours =
-
-    Math.floor(
-
-      seconds/3600
-
-    );
-
-  const minutes =
-
-    Math.floor(
-
-      (seconds%3600)/60
-
-    );
-
-  const sec =
-
-    seconds%60;
-
-  $("#countdown").textContent =
-
-    `${pad(hours)}:${pad(minutes)}:${pad(sec)}`;
-
-}
-
-setInterval(
-
-  updateCountdown,
-
-  1000
-
-);
-
-/* =========================
-
-   NAVIGATION
-
-========================= */
-
-function openPage(page){
-
-  $$(".page").forEach(section => {
-
-    section.classList.toggle(
-
-      "active",
-
-      section.id === page
-
-    );
-
-  });
-
-  $$(".bottom-nav button").forEach(button => {
-
-    button.classList.toggle(
-
-      "active",
-
-      button.dataset.page === page
-
-    );
-
-  });
-
-  closeMenu();
-
-  window.scrollTo({
-
-    top:0,
-
-    behavior:"smooth"
-
-  });
-
-}
-
-$$("[data-page]").forEach(button => {
-
-  button.addEventListener(
-
-    "click",
-
-    () => {
+    button.addEventListener("click",function(){
 
       openPage(
 
@@ -754,45 +96,37 @@ $$("[data-page]").forEach(button => {
 
       );
 
-    }
+    });
 
-  );
+  });
 
-});
+  /* =========================
 
-/* =========================
+     MENU
 
-   SIDE MENU
+  ========================= */
 
-========================= */
+  const menu = $("menu");
 
-function openMenu(){
+  const overlay = $("overlay");
 
-  $("#sideMenu")
+  function openMenu(){
 
-    .classList.add("open");
+    menu.classList.add("open");
 
-  $("#overlay")
+    overlay.classList.add("show");
 
-    .classList.add("show");
+  }
 
-}
+  function closeMenu(){
 
-function closeMenu(){
+    menu.classList.remove("open");
 
-  $("#sideMenu")
+    overlay.classList.remove("show");
 
-    .classList.remove("open");
+  }
 
-  $("#overlay")
-
-    .classList.remove("show");
-
-}
-
-$("#menuButton")
-
-  .addEventListener(
+  $("menuBtn").addEventListener(
 
     "click",
 
@@ -800,9 +134,7 @@ $("#menuButton")
 
   );
 
-$("#closeMenu")
-
-  .addEventListener(
+  $("closeMenu").addEventListener(
 
     "click",
 
@@ -810,9 +142,7 @@ $("#closeMenu")
 
   );
 
-$("#overlay")
-
-  .addEventListener(
+  overlay.addEventListener(
 
     "click",
 
@@ -820,586 +150,1150 @@ $("#overlay")
 
   );
 
-/* =========================
+  /* =========================
 
-   LOCATION
+     PRAYER TIMES
 
-========================= */
+  ========================= */
 
-$("#locationButton")
+  async function loadPrayerTimes(){
 
-  .addEventListener(
+    $("nextName").textContent = "دەخەینەوە...";
 
-    "click",
+    $("timer").textContent = "--:--:--";
 
-    () => {
+    try{
 
-      if(!navigator.geolocation){
+      const date = new Date();
 
-        showToast(
+      const day =
 
-          "GPS لەم ئامێرەدا بەردەست نییە"
+        String(date.getDate()).padStart(2,"0");
 
-        );
+      const month =
 
-        return;
+        String(date.getMonth()+1).padStart(2,"0");
+
+      const year =
+
+        date.getFullYear();
+
+      /*
+
+        Default:
+
+        Sulaymaniyah
+
+        Latitude: 35.56
+
+        Longitude: 45.44
+
+      */
+
+      const lat = 35.5613;
+
+      const lon = 45.4375;
+
+      const url =
+
+        "https://api.aladhan.com/v1/timings/" +
+
+        `${day}-${month}-${year}` +
+
+        `?latitude=${lat}` +
+
+        `&longitude=${lon}` +
+
+        "&method=3";
+
+      const response =
+
+        await fetch(url);
+
+      if(!response.ok){
+
+        throw new Error("API error");
 
       }
 
-      showToast(
+      const json =
 
-        "لە دۆزینەوەی شوێنەکەتدایین..."
-
-      );
-
-      navigator.geolocation.getCurrentPosition(
-
-        position => {
-
-          app.latitude =
-
-            position.coords.latitude;
-
-          app.longitude =
-
-            position.coords.longitude;
-
-          app.city =
-
-            `${app.latitude.toFixed(4)}°, ${app.longitude.toFixed(4)}°`;
-
-          $("#locationName")
-
-            .textContent =
-
-            app.city;
-
-          $("#locationStatus")
-
-            .textContent =
-
-            "شوێنی GPS";
-
-          renderPrayerTimes();
-
-          calculateQibla();
-
-          showToast(
-
-            "شوێن بە سەرکەوتوویی نوێکرایەوە"
-
-          );
-
-        },
-
-        () => {
-
-          showToast(
-
-            "ڕێگەدان بە GPS نەدرا"
-
-          );
-
-        },
-
-        {
-
-          enableHighAccuracy:true,
-
-          timeout:12000,
-
-          maximumAge:300000
-
-        }
-
-      );
-
-    }
-
-  );
-
-/* =========================
-
-   DAILY AYAH
-
-========================= */
-
-const ayahs = [
-
-  [
-
-    "إِنَّ مَعَ الْعُسْرِ يُسْرًا",
-
-    "الشرح • 6"
-
-  ],
-
-  [
-
-    "وَقُل رَّبِّ زِدْنِي عِلْمًا",
-
-    "طه • 114"
-
-  ],
-
-  [
-
-    "فَاذْكُرُونِي أَذْكُرْكُمْ",
-
-    "البقرة • 152"
-
-  ],
-
-  [
-
-    "إِنَّ اللَّهَ مَعَ الصَّابِرِينَ",
-
-    "البقرة • 153"
-
-  ]
-
-];
-
-let ayahIndex = 0;
-
-$("#newAyah")
-
-  .addEventListener(
-
-    "click",
-
-    () => {
-
-      ayahIndex =
-
-        (ayahIndex+1) %
-
-        ayahs.length;
-
-      $("#ayahText")
-
-        .textContent =
-
-        ayahs[ayahIndex][0];
-
-      $("#ayahReference")
-
-        .textContent =
-
-        ayahs[ayahIndex][1];
-
-    }
-
-  );
-
-/* =========================
-
-   QIBLA
-
-========================= */
-
-function calculateQibla(){
-
-  const kaabaLatitude =
-
-    21.4225;
-
-  const kaabaLongitude =
-
-    39.8262;
-
-  const y =
-
-    sin(
-
-      kaabaLongitude -
-
-      app.longitude
-
-    ) *
-
-    cos(
-
-      kaabaLatitude
-
-    );
-
-  const x =
-
-    cos(app.latitude) *
-
-    sin(kaabaLatitude) -
-
-    sin(app.latitude) *
-
-    cos(kaabaLatitude) *
-
-    cos(
-
-      kaabaLongitude -
-
-      app.longitude
-
-    );
-
-  app.qibla =
-
-    (
-
-      degrees(
-
-        Math.atan2(y,x)
-
-      ) + 360
-
-    ) % 360;
-
-  $("#qiblaDegree")
-
-    .textContent =
-
-    `قیبلە: ${app.qibla.toFixed(1)}°`;
-
-  $("#qiblaDescription")
-
-    .textContent =
-
-    `ئاراستەی قیبلە ${app.qibla.toFixed(1)}° ـە.`;
-
-}
-
-$("#startQibla")
-
-  .addEventListener(
-
-    "click",
-
-    async () => {
-
-      calculateQibla();
+        await response.json();
 
       if(
 
-        typeof DeviceOrientationEvent !==
+        !json ||
 
-        "undefined" &&
+        !json.data ||
 
-        typeof DeviceOrientationEvent
-
-          .requestPermission ===
-
-          "function"
+        !json.data.timings
 
       ){
 
-        try{
+        throw new Error("Invalid data");
 
-          const permission =
+      }
 
-            await DeviceOrientationEvent
+      const t =
 
-              .requestPermission();
+        json.data.timings;
 
-          if(permission !== "granted"){
+      currentPrayers = {
 
-            showToast(
+        fajr:t.Fajr,
 
-              "ڕێگە بە سنسەری مۆبایل نەدرا"
+        dhuhr:t.Dhuhr,
+
+        asr:t.Asr,
+
+        maghrib:t.Maghrib,
+
+        isha:t.Isha
+
+      };
+
+      $("fajr").textContent =
+
+        currentPrayers.fajr;
+
+      $("dhuhr").textContent =
+
+        currentPrayers.dhuhr;
+
+      $("asr").textContent =
+
+        currentPrayers.asr;
+
+      $("maghrib").textContent =
+
+        currentPrayers.maghrib;
+
+      $("isha").textContent =
+
+        currentPrayers.isha;
+
+      findNextPrayer();
+
+    }catch(error){
+
+      console.error(error);
+
+      /*
+
+        Fallback times
+
+        so the app never remains --:--
+
+      */
+
+      currentPrayers = {
+
+        fajr:"04:30",
+
+        dhuhr:"12:15",
+
+        asr:"15:45",
+
+        maghrib:"18:35",
+
+        isha:"19:55"
+
+      };
+
+      $("fajr").textContent =
+
+        currentPrayers.fajr;
+
+      $("dhuhr").textContent =
+
+        currentPrayers.dhuhr;
+
+      $("asr").textContent =
+
+        currentPrayers.asr;
+
+      $("maghrib").textContent =
+
+        currentPrayers.maghrib;
+
+      $("isha").textContent =
+
+        currentPrayers.isha;
+
+      findNextPrayer();
+
+      toast(
+
+        "کاتی بنەڕەتی پیشان درا"
+
+      );
+
+    }
+
+  }
+
+  function minutesFromTime(time){
+
+    const clean =
+
+      time.replace(
+
+        /[^0-9:]/g,
+
+        ""
+
+      );
+
+    const parts =
+
+      clean.split(":");
+
+    let hour =
+
+      Number(parts[0]);
+
+    const minute =
+
+      Number(parts[1]);
+
+    /*
+
+      Handle possible 12-hour format
+
+    */
+
+    if(
+
+      /pm/i.test(time) &&
+
+      hour < 12
+
+    ){
+
+      hour += 12;
+
+    }
+
+    if(
+
+      /am/i.test(time) &&
+
+      hour === 12
+
+    ){
+
+      hour = 0;
+
+    }
+
+    return hour*60 + minute;
+
+  }
+
+  function findNextPrayer(){
+
+    if(!currentPrayers){
+
+      return;
+
+    }
+
+    const now =
+
+      new Date();
+
+    const nowMinutes =
+
+      now.getHours()*60 +
+
+      now.getMinutes();
+
+    const list = [
+
+      {
+
+        key:"fajr",
+
+        name:"بەیانی"
+
+      },
+
+      {
+
+        key:"dhuhr",
+
+        name:"نوێڕۆ"
+
+      },
+
+      {
+
+        key:"asr",
+
+        name:"عەسر"
+
+      },
+
+      {
+
+        key:"maghrib",
+
+        name:"مەغریب"
+
+      },
+
+      {
+
+        key:"isha",
+
+        name:"عیشاء"
+
+      }
+
+    ];
+
+    nextPrayer = null;
+
+    for(
+
+      let i=0;
+
+      i<list.length;
+
+      i++
+
+    ){
+
+      const item =
+
+        list[i];
+
+      const minutes =
+
+        minutesFromTime(
+
+          currentPrayers[item.key]
+
+        );
+
+      if(minutes > nowMinutes){
+
+        nextPrayer = item;
+
+        break;
+
+      }
+
+    }
+
+    /*
+
+      If all prayers have passed,
+
+      next prayer is tomorrow's Fajr.
+
+    */
+
+    if(!nextPrayer){
+
+      nextPrayer = list[0];
+
+      nextPrayer.tomorrow = true;
+
+    }
+
+    $("nextName").textContent =
+
+      nextPrayer.name;
+
+    $("nextTime").textContent =
+
+      currentPrayers[
+
+        nextPrayer.key
+
+      ];
+
+    document.querySelectorAll(".prayer")
+
+      .forEach(function(card){
+
+        card.classList.remove("active");
+
+      });
+
+    const ids = {
+
+      fajr:"fajr",
+
+      dhuhr:"dhuhr",
+
+      asr:"asr",
+
+      maghrib:"maghrib",
+
+      isha:"isha"
+
+    };
+
+    $(ids[nextPrayer.key])
+
+      .parentElement
+
+      .classList.add("active");
+
+    updateCountdown();
+
+  }
+
+  function updateCountdown(){
+
+    if(
+
+      !currentPrayers ||
+
+      !nextPrayer
+
+    ){
+
+      return;
+
+    }
+
+    const now =
+
+      new Date();
+
+    const time =
+
+      currentPrayers[
+
+        nextPrayer.key
+
+      ];
+
+    const parts =
+
+      time
+
+        .replace(
+
+          /[^0-9:]/g,
+
+          ""
+
+        )
+
+        .split(":")
+
+        .map(Number);
+
+    let target =
+
+      new Date();
+
+    target.setHours(
+
+      parts[0],
+
+      parts[1],
+
+      0,
+
+      0
+
+    );
+
+    if(
+
+      nextPrayer.tomorrow ||
+
+      target <= now
+
+    ){
+
+      target.setDate(
+
+        target.getDate()+1
+
+      );
+
+    }
+
+    let seconds =
+
+      Math.floor(
+
+        (target-now)/1000
+
+      );
+
+    if(seconds < 0){
+
+      seconds = 0;
+
+    }
+
+    const h =
+
+      Math.floor(seconds/3600);
+
+    const m =
+
+      Math.floor(
+
+        (seconds%3600)/60
+
+      );
+
+    const s =
+
+      seconds%60;
+
+    $("timer").textContent =
+
+      String(h).padStart(2,"0") +
+
+      ":" +
+
+      String(m).padStart(2,"0") +
+
+      ":" +
+
+      String(s).padStart(2,"0");
+
+  }
+
+  setInterval(
+
+    function(){
+
+      updateCountdown();
+
+    },
+
+    1000
+
+  );
+
+  /*
+
+    Refresh prayer status every minute
+
+  */
+
+  setInterval(
+
+    function(){
+
+      findNextPrayer();
+
+    },
+
+    60000
+
+  );
+
+  /* =========================
+
+     LOCATION
+
+  ========================= */
+
+  $("locationBtn")
+
+    .addEventListener(
+
+      "click",
+
+      function(){
+
+        if(!navigator.geolocation){
+
+          toast(
+
+            "GPS لەم ئامێرەدا بەردەست نییە"
+
+          );
+
+          return;
+
+        }
+
+        toast(
+
+          "لە دۆزینەوەی شوێنەکەتدایین..."
+
+        );
+
+        navigator.geolocation.getCurrentPosition(
+
+          function(position){
+
+            const lat =
+
+              position.coords.latitude;
+
+            const lon =
+
+              position.coords.longitude;
+
+            $("locationName")
+
+              .textContent =
+
+              lat.toFixed(4) +
+
+              "°, " +
+
+              lon.toFixed(4) +
+
+              "°";
+
+            $("locationStatus")
+
+              .textContent =
+
+              "شوێنی GPS";
+
+            /*
+
+              For the next version we can
+
+              send these coordinates to
+
+              the prayer API.
+
+            */
+
+            toast(
+
+              "شوێن بە سەرکەوتوویی دۆزرایەوە"
 
             );
 
-            return;
+          },
+
+          function(){
+
+            toast(
+
+              "ڕێگە بە GPS نەدرا"
+
+            );
+
+          },
+
+          {
+
+            enableHighAccuracy:true,
+
+            timeout:15000,
+
+            maximumAge:300000
 
           }
 
-        }catch(error){
+        );
 
-          console.log(error);
+      }
+
+    );
+
+  /* =========================
+
+     DAILY AYAH
+
+  ========================= */
+
+  const ayahs = [
+
+    {
+
+      text:"إِنَّ مَعَ الْعُسْرِ يُسْرًا",
+
+      ref:"الشرح • 6"
+
+    },
+
+    {
+
+      text:"وَقُل رَّبِّ زِدْنِي عِلْمًا",
+
+      ref:"طه • 114"
+
+    },
+
+    {
+
+      text:"فَاذْكُرُونِي أَذْكُرْكُمْ",
+
+      ref:"البقرة • 152"
+
+    },
+
+    {
+
+      text:"إِنَّ اللَّهَ مَعَ الصَّابِرِينَ",
+
+      ref:"البقرة • 153"
+
+    }
+
+  ];
+
+  let ayahIndex = 0;
+
+  $("newAyah")
+
+    .addEventListener(
+
+      "click",
+
+      function(){
+
+        ayahIndex++;
+
+        if(
+
+          ayahIndex >= ayahs.length
+
+        ){
+
+          ayahIndex = 0;
+
+        }
+
+        $("ayah").textContent =
+
+          ayahs[ayahIndex].text;
+
+        $("ayahRef").textContent =
+
+          ayahs[ayahIndex].ref;
+
+      }
+
+    );
+
+  /* =========================
+
+     DHIKR
+
+  ========================= */
+
+  $("dhikrBtn")
+
+    .addEventListener(
+
+      "click",
+
+      function(){
+
+        dhikr++;
+
+        $("dhikrCount")
+
+          .textContent =
+
+          dhikr;
+
+        if(dhikr === 33){
+
+          toast(
+
+            "٣٣ جار تەواو بوو"
+
+          );
 
         }
 
       }
 
-      window.addEventListener(
+    );
 
-        "deviceorientation",
+  $("resetDhikr")
 
-        event => {
+    .addEventListener(
 
-          let heading;
+      "click",
 
-          if(
+      function(){
 
-            typeof event.webkitCompassHeading ===
+        dhikr = 0;
 
-            "number"
+        $("dhikrCount")
 
-          ){
+          .textContent = "0";
 
-            heading =
+      }
 
-              event.webkitCompassHeading;
+    );
+
+  /* =========================
+
+     QIBLA
+
+  ========================= */
+
+  let qiblaDegree = 0;
+
+  function calculateQibla(
+
+    latitude,
+
+    longitude
+
+  ){
+
+    const kaabaLat =
+
+      21.4225;
+
+    const kaabaLon =
+
+      39.8262;
+
+    const toRad =
+
+      Math.PI / 180;
+
+    const lat1 =
+
+      latitude * toRad;
+
+    const lat2 =
+
+      kaabaLat * toRad;
+
+    const deltaLon =
+
+      (kaabaLon-longitude) *
+
+      toRad;
+
+    const y =
+
+      Math.sin(deltaLon) *
+
+      Math.cos(lat2);
+
+    const x =
+
+      Math.cos(lat1) *
+
+      Math.sin(lat2) -
+
+      Math.sin(lat1) *
+
+      Math.cos(lat2) *
+
+      Math.cos(deltaLon);
+
+    qiblaDegree =
+
+      (
+
+        Math.atan2(y,x) /
+
+        toRad +
+
+        360
+
+      ) % 360;
+
+    $("qiblaDegree")
+
+      .textContent =
+
+      "قیبلە: " +
+
+      qiblaDegree.toFixed(1) +
+
+      "°";
+
+  }
+
+  calculateQibla(
+
+    35.5613,
+
+    45.4375
+
+  );
+
+  $("qiblaBtn")
+
+    .addEventListener(
+
+      "click",
+
+      async function(){
+
+        calculateQibla(
+
+          35.5613,
+
+          45.4375
+
+        );
+
+        if(
+
+          typeof DeviceOrientationEvent !==
+
+          "undefined" &&
+
+          typeof DeviceOrientationEvent
+
+            .requestPermission ===
+
+          "function"
+
+        ){
+
+          try{
+
+            const permission =
+
+              await DeviceOrientationEvent
+
+                .requestPermission();
+
+            if(
+
+              permission !== "granted"
+
+            ){
+
+              $("qiblaText")
+
+                .textContent =
+
+                "ڕێگە بە compass نەدرا.";
+
+              return;
+
+            }
+
+          }catch(error){
+
+            console.log(error);
 
           }
 
-          else if(
+        }
 
-            typeof event.alpha ===
+        window.addEventListener(
 
-            "number"
+          "deviceorientation",
 
-          ){
+          function(event){
 
-            heading =
+            let heading = null;
 
-              360-event.alpha;
+            if(
 
-          }
+              typeof event.webkitCompassHeading ===
 
-          else{
+              "number"
 
-            return;
+            ){
 
-          }
+              heading =
 
-          const rotation =
+                event.webkitCompassHeading;
 
-            app.qibla-heading;
+            }
 
-          $("#compassArrow")
+            else if(
 
-            .style.transform =
+              typeof event.alpha ===
 
-            `rotate(${rotation}deg)`;
+              "number"
 
-        },
+            ){
 
-        true
+              heading =
 
-      );
+                360-event.alpha;
 
-      showToast(
+            }
 
-        "قیبلە چالاک کرا"
+            if(heading === null){
 
-      );
+              return;
 
-    }
+            }
 
-  );
+            const rotation =
 
-/* =========================
+              qiblaDegree-heading;
 
-   DHIKR
+            $("arrow")
 
-========================= */
+              .style.transform =
 
-$("#dhikrButton")
+              "rotate(" +
 
-  .addEventListener(
+              rotation +
 
-    "click",
+              "deg)";
 
-    () => {
+          },
 
-      app.dhikr++;
+          true
 
-      if(app.dhikr > 33){
+        );
 
-        app.dhikr = 0;
+        $("qiblaText")
 
-      }
+          .textContent =
 
-      $("#dhikrCounter")
+          "قیبلە چالاکە.";
 
-        .textContent =
+        toast(
 
-        app.dhikr;
-
-      if(app.dhikr === 33){
-
-        showToast(
-
-          "٣٣ جار تەواو بوو"
+          "قیبلە چالاک کرا"
 
         );
 
       }
 
-    }
+    );
 
-  );
+  /* =========================
 
-$("#resetDhikr")
+     NOTIFICATION
 
-  .addEventListener(
+  ========================= */
 
-    "click",
+  $("notifyBtn")
 
-    () => {
+    .addEventListener(
 
-      app.dhikr = 0;
+      "click",
 
-      $("#dhikrCounter")
+      async function(){
 
-        .textContent = "0";
+        if(
 
-    }
+          !("Notification" in window)
 
-  );
+        ){
 
-/* =========================
+          toast(
 
-   NOTIFICATIONS
+            "ئاگادارکردنەوە بەردەست نییە"
 
-========================= */
+          );
 
-$("#notificationButton")
+          return;
 
-  .addEventListener(
+        }
 
-    "click",
+        const permission =
 
-    async () => {
+          await Notification.requestPermission();
 
-      if(
+        if(
 
-        !("Notification" in window)
+          permission === "granted"
 
-      ){
+        ){
 
-        showToast(
+          toast(
 
-          "Notification بەردەست نییە"
+            "ئاگادارکردنەوە چالاک کرا"
 
-        );
+          );
 
-        return;
+        }else{
 
-      }
+          toast(
 
-      const permission =
+            "ڕێگەدان نەدرا"
 
-        await Notification.requestPermission();
+          );
 
-      if(permission === "granted"){
-
-        showToast(
-
-          "ئاگادارکردنەوە چالاک کرا"
-
-        );
+        }
 
       }
 
-      else{
+    );
 
-        showToast(
+  /* =========================
 
-          "ڕێگەدان نەدرا"
+     SETTINGS
 
-        );
+  ========================= */
 
-      }
+  const notificationToggle =
 
-    }
+    $("notifications");
 
-  );
+  notificationToggle.checked =
 
-$("#notificationToggle")
+    localStorage.getItem(
 
-  .addEventListener(
+      "qaiwan_notifications"
+
+    ) === "1";
+
+  notificationToggle.addEventListener(
 
     "change",
 
-    async event => {
+    function(){
 
       localStorage.setItem(
 
-        "qaiwan_notification",
+        "qaiwan_notifications",
 
-        event.target.checked
-
-          ? "1"
-
-          : "0"
+        this.checked ? "1" : "0"
 
       );
 
-      if(
+    }
 
-        event.target.checked &&
+  );
 
-        "Notification" in window
+  $("clearBtn")
 
-      ){
+    .addEventListener(
 
-        await Notification.requestPermission();
+      "click",
+
+      function(){
+
+        localStorage.clear();
+
+        dhikr = 0;
+
+        $("dhikrCount")
+
+          .textContent = "0";
+
+        notificationToggle.checked =
+
+          false;
+
+        toast(
+
+          "داتا سڕایەوە"
+
+        );
 
       }
 
-    }
+    );
 
-  );
+  /* =========================
 
-/* =========================
+     START
 
-   CLEAR DATA
+  ========================= */
 
-========================= */
+  loadPrayerTimes();
 
-$("#clearData")
-
-  .addEventListener(
-
-    "click",
-
-    () => {
-
-      localStorage.clear();
-
-      $("#notificationToggle")
-
-        .checked = false;
-
-      app.dhikr = 0;
-
-      $("#dhikrCounter")
-
-        .textContent = "0";
-
-      showToast(
-
-        "هەموو داتا سڕایەوە"
-
-      );
-
-    }
-
-  );
-
-/* =========================
-
-   START APP
-
-========================= */
-
-if(
-
-  localStorage.getItem(
-
-    "qaiwan_notification"
-
-  ) === "1"
-
-){
-
-  $("#notificationToggle")
-
-    .checked = true;
-
-}
-
-renderPrayerTimes();
-
-calculateQibla();
+});
