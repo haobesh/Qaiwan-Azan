@@ -6,13 +6,9 @@
 
   <meta charset="UTF-8">
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 
-  <meta name="theme-color" content="#061d20">
-
-  <meta name="apple-mobile-web-app-capable" content="yes">
-
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#061c1f">
 
   <title>Qaiwan Azan</title>
 
@@ -22,35 +18,29 @@
 
 <body>
 
-<header class="header">
+<header class="topbar">
 
-  <button class="header-button" id="menuButton" aria-label="Menu">
+  <button class="icon-btn" id="menuBtn">☰</button>
 
-    ☰
+  <div class="logo">
 
-  </button>
+    <b>Qaiwan Azan</b>
 
-  <div class="brand">
-
-    <div class="brand-title">Qaiwan Azan</div>
-
-    <div class="brand-subtitle">QAIWAN AZAN</div>
+    <small>QAIWAN AZAN</small>
 
   </div>
 
-  <button class="header-button" id="notificationButton" aria-label="Notification">
-
-    🔔
-
-  </button>
+  <button class="icon-btn" id="notifyBtn">🔔</button>
 
 </header>
 
-<div class="side-menu" id="sideMenu">
+<div class="overlay" id="overlay"></div>
 
-  <div class="menu-header">
+<aside class="menu" id="menu">
 
-    <strong>Qaiwan Azan</strong>
+  <div class="menu-title">
+
+    <b>Qaiwan Azan</b>
 
     <button id="closeMenu">×</button>
 
@@ -66,9 +56,7 @@
 
   <button data-page="settings">ڕێکخستن</button>
 
-</div>
-
-<div class="overlay" id="overlay"></div>
+</aside>
 
 <main>
 
@@ -76,15 +64,15 @@
 
 <section class="page active" id="home">
 
-  <div class="location">
+  <div class="location-box">
 
     <div>
 
-      <div class="location-title">
+      <div class="location-name">
 
         <span>📍</span>
 
-        <strong id="locationName">سلێمانی</strong>
+        <b id="locationName">سلێمانی</b>
 
       </div>
 
@@ -96,7 +84,7 @@
 
     </div>
 
-    <button class="location-button" id="locationButton">
+    <button class="location-btn" id="locationBtn">
 
       شوێنم بدۆزەوە
 
@@ -104,63 +92,93 @@
 
   </div>
 
-  <div class="next-prayer">
+  <div class="next-card">
 
-    <div class="small-title">
+    <span>نوێژی داهاتوو</span>
 
-      نوێژی داهاتوو
+    <h1 id="nextName">--</h1>
 
-    </div>
-
-    <h1 id="nextPrayerName">
-
-      چاوەڕێ بکە...
-
-    </h1>
-
-    <div class="countdown" id="countdown">
+    <div class="timer" id="timer">
 
       --:--:--
 
     </div>
 
-    <div class="next-time">
+    <p>
 
       کاتی نوێژ:
 
-      <strong id="nextPrayerTime">--:--</strong>
+      <strong id="nextTime">--:--</strong>
+
+    </p>
+
+  </div>
+
+  <div class="prayers" id="prayers">
+
+    <div class="prayer">
+
+      <b>بەیانی</b>
+
+      <strong id="fajr">--:--</strong>
+
+    </div>
+
+    <div class="prayer">
+
+      <b>نوێڕۆ</b>
+
+      <strong id="dhuhr">--:--</strong>
+
+    </div>
+
+    <div class="prayer">
+
+      <b>عەسر</b>
+
+      <strong id="asr">--:--</strong>
+
+    </div>
+
+    <div class="prayer">
+
+      <b>مەغریب</b>
+
+      <strong id="maghrib">--:--</strong>
+
+    </div>
+
+    <div class="prayer">
+
+      <b>عیشاء</b>
+
+      <strong id="isha">--:--</strong>
 
     </div>
 
   </div>
 
-  <div class="prayer-list" id="prayerList"></div>
+  <div class="ayah-card">
 
-  <div class="daily-ayah">
+    <div class="ayah-top">
 
-    <div class="ayah-header">
+      <b>ئایەتی ڕۆژ</b>
 
-      <strong>ئایەتی ڕۆژ</strong>
-
-      <button id="newAyah">
-
-        نوێ
-
-      </button>
+      <button id="newAyah">نوێ</button>
 
     </div>
 
-    <div class="ayah-text" id="ayahText">
+    <div class="ayah" id="ayah">
 
       إِنَّ مَعَ الْعُسْرِ يُسْرًا
 
     </div>
 
-    <div class="ayah-reference" id="ayahReference">
+    <small id="ayahRef">
 
       الشرح • 6
 
-    </div>
+    </small>
 
   </div>
 
@@ -170,19 +188,15 @@
 
 <section class="page" id="quran">
 
-  <div class="page-header">
+  <div class="page-title">
 
-    <button class="back-button" data-page="home">
-
-      →
-
-    </button>
+    <button data-page="home">→</button>
 
     <h2>قورئان</h2>
 
   </div>
 
-  <div class="quran-card">
+  <div class="quran">
 
     <h3>سورەتی الفاتحة</h3>
 
@@ -202,15 +216,15 @@
 
     </p>
 
-    <span>
+    <small>
 
       الفاتحة • 1–4
 
-    </span>
+    </small>
 
   </div>
 
-  <div class="quran-card">
+  <div class="quran">
 
     <p>
 
@@ -218,11 +232,11 @@
 
     </p>
 
-    <span>
+    <small>
 
       الشرح • 6
 
-    </span>
+    </small>
 
   </div>
 
@@ -232,13 +246,9 @@
 
 <section class="page" id="qibla">
 
-  <div class="page-header">
+  <div class="page-title">
 
-    <button class="back-button" data-page="home">
-
-      →
-
-    </button>
+    <button data-page="home">→</button>
 
     <h2>قیبلە</h2>
 
@@ -248,13 +258,9 @@
 
     <div class="compass">
 
-      <span class="north">
+      <span>N</span>
 
-        N
-
-      </span>
-
-      <div class="compass-arrow" id="compassArrow">
+      <div id="arrow">
 
         ▲
 
@@ -268,13 +274,13 @@
 
     </h2>
 
-    <p id="qiblaDescription">
+    <p id="qiblaText">
 
-      شوێنەکەت دیاری بکە بۆ حسابکردنی ئاراستەی قیبلە.
+      دوگمەی خوارەوە دابگرە بۆ دەستپێکردنی قیبلە.
 
     </p>
 
-    <button class="main-button" id="startQibla">
+    <button class="main-btn" id="qiblaBtn">
 
       دەستپێکردنی قیبلە
 
@@ -288,13 +294,9 @@
 
 <section class="page" id="adhkar">
 
-  <div class="page-header">
+  <div class="page-title">
 
-    <button class="back-button" data-page="home">
-
-      →
-
-    </button>
+    <button data-page="home">→</button>
 
     <h2>ئەذکار</h2>
 
@@ -302,25 +304,25 @@
 
   <div class="dhikr-card">
 
-    <div class="dhikr-counter" id="dhikrCounter">
+    <div id="dhikrCount">
 
       0
 
     </div>
 
-    <div class="dhikr-text">
+    <p>
 
       سُبْحَانَ اللَّهِ وَبِحَمْدِهِ
 
-    </div>
+    </p>
 
-    <button class="main-button" id="dhikrButton">
+    <button class="main-btn" id="dhikrBtn">
 
       ژمێر بکە
 
     </button>
 
-    <button class="secondary-button" id="resetDhikr">
+    <button class="reset-btn" id="resetDhikr">
 
       ڕیسێت
 
@@ -334,45 +336,25 @@
 
 <section class="page" id="settings">
 
-  <div class="page-header">
+  <div class="page-title">
 
-    <button class="back-button" data-page="home">
-
-      →
-
-    </button>
+    <button data-page="home">→</button>
 
     <h2>ڕێکخستن</h2>
 
   </div>
 
-  <div class="settings-card">
+  <div class="settings">
 
     <label>
 
-      <span>
+      <span>ئاگادارکردنەوە</span>
 
-        ئاگادارکردنەوە
-
-      </span>
-
-      <input type="checkbox" id="notificationToggle">
+      <input type="checkbox" id="notifications">
 
     </label>
 
-    <label>
-
-      <span>
-
-        کاتژمێری 24 کاتژمێر
-
-      </span>
-
-      <input type="checkbox" id="timeFormatToggle" checked>
-
-    </label>
-
-    <button class="danger-button" id="clearData">
+    <button class="danger" id="clearBtn">
 
       سڕینەوەی داتا
 
@@ -384,9 +366,7 @@
 
 </main>
 
-<!-- BOTTOM NAV -->
-
-<nav class="bottom-nav">
+<nav class="bottom">
 
   <button class="active" data-page="home">
 
@@ -430,7 +410,7 @@
 
 </nav>
 
-<div class="toast" id="toast"></div>
+<div id="toast"></div>
 
 <script src="script.js"></script>
 
