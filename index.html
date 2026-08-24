@@ -6,1863 +6,433 @@
 
   <meta charset="UTF-8">
 
-  <meta
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
-    name="viewport"
+  <meta name="theme-color" content="#061d20">
 
-    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+  <meta name="apple-mobile-web-app-capable" content="yes">
 
-  >
-
-  <meta
-
-    name="theme-color"
-
-    content="#061a20"
-
-  >
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
   <title>Qaiwan Azan</title>
 
-  <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="style.css">
 
 </head>
 
 <body>
 
-<div class="app">
+<header class="header">
 
-  <!-- HEADER -->
+  <button class="header-button" id="menuButton" aria-label="Menu">
 
-  <header class="header">
+    ☰
 
-    <div class="brand">
+  </button>
 
-      <div class="brand-text">
+  <div class="brand">
 
-        <h1>Qaiwan Azan</h1>
+    <div class="brand-title">Qaiwan Azan</div>
 
-        <span>QAIWAN AZAN</span>
-
-      </div>
-
-    </div>
-
-    <div class="header-actions">
-
-      <button
-
-        class="icon-btn"
-
-        id="notificationBtn"
-
-        type="button"
-
-      >
-
-        🔔
-
-      </button>
-
-      <button
-
-        class="icon-btn"
-
-        id="menuBtn"
-
-        type="button"
-
-      >
-
-        ☰
-
-      </button>
-
-    </div>
-
-  </header>
-
-  <!-- HOME -->
-
-  <main
-
-    id="home"
-
-    class="screen active"
-
-  >
-
-    <div class="location">
-
-      📍
-
-      <span id="locationText">
-
-        شوێن دیاری نەکراوە
-
-      </span>
-
-    </div>
-
-    <!-- NEXT PRAYER -->
-
-    <section class="next-prayer">
-
-      <div class="next-label">
-
-        نوێژی داهاتوو
-
-      </div>
-
-      <h2 id="nextPrayer">
-
-        بەیانی
-
-      </h2>
-
-      <div
-
-        class="countdown"
-
-        id="countdown"
-
-      >
-
-        --:--:--
-
-      </div>
-
-      <div
-
-        class="next-time"
-
-        id="nextTime"
-
-      >
-
-        کاتی نوێژ: 04:36
-
-      </div>
-
-    </section>
-
-    <!-- PRAYER TIMES -->
-
-    <section class="prayer-row">
-
-      <div
-
-        class="prayer"
-
-        data-prayer="Isha"
-
-      >
-
-        <div class="prayer-icon">
-
-          🌙
-
-        </div>
-
-        <small>
-
-          عیشاء
-
-        </small>
-
-        <strong id="homeIsha">
-
-          19:53
-
-        </strong>
-
-      </div>
-
-      <div
-
-        class="prayer"
-
-        data-prayer="Maghrib"
-
-      >
-
-        <div class="prayer-icon">
-
-          🌅
-
-        </div>
-
-        <small>
-
-          مەغریب
-
-        </small>
-
-        <strong id="homeMaghrib">
-
-          18:35
-
-        </strong>
-
-      </div>
-
-      <div
-
-        class="prayer"
-
-        data-prayer="Asr"
-
-      >
-
-        <div class="prayer-icon">
-
-          🌤️
-
-        </div>
-
-        <small>
-
-          عەسر
-
-        </small>
-
-        <strong id="homeAsr">
-
-          15:59
-
-        </strong>
-
-      </div>
-
-      <div
-
-        class="prayer"
-
-        data-prayer="Dhuhr"
-
-      >
-
-        <div class="prayer-icon">
-
-          ☀️
-
-        </div>
-
-        <small>
-
-          زوهر
-
-        </small>
-
-        <strong id="homeDhuhr">
-
-          12:27
-
-        </strong>
-
-      </div>
-
-      <div
-
-        class="prayer"
-
-        data-prayer="Fajr"
-
-      >
-
-        <div class="prayer-icon">
-
-          🌙
-
-        </div>
-
-        <small>
-
-          بەیانی
-
-        </small>
-
-        <strong id="homeFajr">
-
-          04:36
-
-        </strong>
-
-      </div>
-
-    </section>
-
-    <!-- DAILY VERSE -->
-
-    <section class="verse">
-
-      <div class="verse-title">
-
-        <span>
-
-          ✨ ئایەتی ڕۆژ
-
-        </span>
-
-        <span>
-
-          سورەتی کەھف
-
-        </span>
-
-      </div>
-
-      <p>
-
-        وَاذْكُر رَّبَّكَ إِذَا نَسِيتَ
-
-      </p>
-
-      <small>
-
-        سورەتی کەھف · 24
-
-      </small>
-
-    </section>
-
-    <!-- QUICK ACCESS -->
-
-    <div class="section-title">
-
-      <h3>
-
-        بەشەکان
-
-      </h3>
-
-    </div>
-
-    <section class="quick-grid">
-
-      <button
-
-        class="quick"
-
-        type="button"
-
-        data-go="quran"
-
-      >
-
-        <i>📖</i>
-
-        <span>
-
-          قورئان
-
-        </span>
-
-      </button>
-
-      <button
-
-        class="quick"
-
-        type="button"
-
-        data-go="qibla"
-
-      >
-
-        <i>🧭</i>
-
-        <span>
-
-          قیبلە
-
-        </span>
-
-      </button>
-
-      <button
-
-        class="quick"
-
-        type="button"
-
-        data-go="adhkar"
-
-      >
-
-        <i>🤲</i>
-
-        <span>
-
-          ئەذکار
-
-        </span>
-
-      </button>
-
-      <button
-
-        class="quick"
-
-        type="button"
-
-        data-go="prayers"
-
-      >
-
-        <i>🕌</i>
-
-        <span>
-
-          نوێژ
-
-        </span>
-
-      </button>
-
-    </section>
-
-  </main>
-
-  <!-- PRAYERS -->
-
-  <section
-
-    id="prayers"
-
-    class="screen"
-
-  >
-
-    <h2 class="page-title">
-
-      کاتی نوێژ
-
-    </h2>
-
-    <p class="page-sub">
-
-      کاتەکانی ئەمڕۆ
-
-    </p>
-
-    <div class="card">
-
-      <div class="setting">
-
-        <div class="setting-info">
-
-          <b>
-
-            ئیمساک
-
-          </b>
-
-          <small>
-
-            Imsak
-
-          </small>
-
-        </div>
-
-        <strong id="imsakTime">
-
-          04:16
-
-        </strong>
-
-      </div>
-
-      <div class="setting">
-
-        <div class="setting-info">
-
-          <b>
-
-            بەیانی
-
-          </b>
-
-          <small>
-
-            Fajr
-
-          </small>
-
-        </div>
-
-        <strong id="fajrTime">
-
-          04:36
-
-        </strong>
-
-      </div>
-
-      <div class="setting">
-
-        <div class="setting-info">
-
-          <b>
-
-            زوهر
-
-          </b>
-
-          <small>
-
-            Dhuhr
-
-          </small>
-
-        </div>
-
-        <strong id="dhuhrTime">
-
-          12:27
-
-        </strong>
-
-      </div>
-
-      <div class="setting">
-
-        <div class="setting-info">
-
-          <b>
-
-            عەسر
-
-          </b>
-
-          <small>
-
-            Asr
-
-          </small>
-
-        </div>
-
-        <strong id="asrTime">
-
-          15:59
-
-        </strong>
-
-      </div>
-
-      <div class="setting">
-
-        <div class="setting-info">
-
-          <b>
-
-            مەغریب
-
-          </b>
-
-          <small>
-
-            Maghrib
-
-          </small>
-
-        </div>
-
-        <strong id="maghribTime">
-
-          18:35
-
-        </strong>
-
-      </div>
-
-      <div class="setting">
-
-        <div class="setting-info">
-
-          <b>
-
-            عیشاء
-
-          </b>
-
-          <small>
-
-            Isha
-
-          </small>
-
-        </div>
-
-        <strong id="ishaTime">
-
-          19:53
-
-        </strong>
-
-      </div>
-
-    </div>
-
-    <div class="card">
-
-      <div class="card-title">
-
-        ئاگادارکردنەوەی ئەذان
-
-      </div>
-
-      <div class="setting">
-
-        <div class="setting-info">
-
-          <b>
-
-            بەیانی
-
-          </b>
-
-          <small>
-
-            ئاگادارکردنەوە
-
-          </small>
-
-        </div>
-
-        <button
-
-          class="switch active"
-
-          type="button"
-
-          data-switch
-
-        >
-
-          <span></span>
-
-        </button>
-
-      </div>
-
-      <div class="setting">
-
-        <div class="setting-info">
-
-          <b>
-
-            زوهر
-
-          </b>
-
-          <small>
-
-            ئاگادارکردنەوە
-
-          </small>
-
-        </div>
-
-        <button
-
-          class="switch active"
-
-          type="button"
-
-          data-switch
-
-        >
-
-          <span></span>
-
-        </button>
-
-      </div>
-
-      <div class="setting">
-
-        <div class="setting-info">
-
-          <b>
-
-            عەسر
-
-          </b>
-
-          <small>
-
-            ئاگادارکردنەوە
-
-          </small>
-
-        </div>
-
-        <button
-
-          class="switch active"
-
-          type="button"
-
-          data-switch
-
-        >
-
-          <span></span>
-
-        </button>
-
-      </div>
-
-      <div class="setting">
-
-        <div class="setting-info">
-
-          <b>
-
-            مەغریب
-
-          </b>
-
-          <small>
-
-            ئاگادارکردنەوە
-
-          </small>
-
-        </div>
-
-        <button
-
-          class="switch active"
-
-          type="button"
-
-          data-switch
-
-        >
-
-          <span></span>
-
-        </button>
-
-      </div>
-
-      <div class="setting">
-
-        <div class="setting-info">
-
-          <b>
-
-            عیشاء
-
-          </b>
-
-          <small>
-
-            ئاگادارکردنەوە
-
-          </small>
-
-        </div>
-
-        <button
-
-          class="switch active"
-
-          type="button"
-
-          data-switch
-
-        >
-
-          <span></span>
-
-        </button>
-
-      </div>
-
-    </div>
-
-  </section>
-
-  <!-- QURAN -->
-
-  <section
-
-    id="quran"
-
-    class="screen"
-
-  >
-
-    <h2 class="page-title">
-
-      قورئانی پیرۆز
-
-    </h2>
-
-    <p class="page-sub">
-
-      بخوێنەوە و گوێ لە تلاوەت بگرە
-
-    </p>
-
-    <div class="card last-read">
-
-      <div>
-
-        <small>
-
-          دوایین خوێندنەوە
-
-        </small>
-
-        <h3>
-
-          سورەتی یاسین
-
-        </h3>
-
-        <span>
-
-          ئایەتی 12
-
-        </span>
-
-      </div>
-
-      <button
-
-        class="play-btn"
-
-        type="button"
-
-        id="lastReadBtn"
-
-      >
-
-        ▶
-
-      </button>
-
-    </div>
-
-    <div class="search-box">
-
-      <input
-
-        id="quranSearch"
-
-        type="search"
-
-        placeholder="گەڕان لە سورەتەکان..."
-
-      >
-
-      <span>
-
-        ⌕
-
-      </span>
-
-    </div>
-
-    <div
-
-      class="card surah-list"
-
-      id="surahList"
-
-    >
-
-      <article
-
-        class="surah"
-
-        data-name="فاتحە الفاتحة"
-
-      >
-
-        <div class="surah-number">
-
-          1
-
-        </div>
-
-        <div class="surah-info">
-
-          <b>
-
-            الفاتحة
-
-          </b>
-
-          <small>
-
-            فاتحە · 7 ئایەت
-
-          </small>
-
-        </div>
-
-        <button
-
-          class="play-btn surah-play"
-
-          type="button"
-
-          data-surah="فاتحە"
-
-        >
-
-          ▶
-
-        </button>
-
-      </article>
-
-      <article
-
-        class="surah"
-
-        data-name="بەقەرە البقرة"
-
-      >
-
-        <div class="surah-number">
-
-          2
-
-        </div>
-
-        <div class="surah-info">
-
-          <b>
-
-            البقرة
-
-          </b>
-
-          <small>
-
-            بەقەرە · 286 ئایەت
-
-          </small>
-
-        </div>
-
-        <button
-
-          class="play-btn surah-play"
-
-          type="button"
-
-          data-surah="بەقەرە"
-
-        >
-
-          ▶
-
-        </button>
-
-      </article>
-
-      <article
-
-        class="surah"
-
-        data-name="عیمڕان آل عمران"
-
-      >
-
-        <div class="surah-number">
-
-          3
-
-        </div>
-
-        <div class="surah-info">
-
-          <b>
-
-            آل عمران
-
-          </b>
-
-          <small>
-
-            عیمڕان · 200 ئایەت
-
-          </small>
-
-        </div>
-
-        <button
-
-          class="play-btn surah-play"
-
-          type="button"
-
-          data-surah="عیمڕان"
-
-        >
-
-          ▶
-
-        </button>
-
-      </article>
-
-      <article
-
-        class="surah"
-
-        data-name="نیسا النساء"
-
-      >
-
-        <div class="surah-number">
-
-          4
-
-        </div>
-
-        <div class="surah-info">
-
-          <b>
-
-            النساء
-
-          </b>
-
-          <small>
-
-            نیسا · 176 ئایەت
-
-          </small>
-
-        </div>
-
-        <button
-
-          class="play-btn surah-play"
-
-          type="button"
-
-          data-surah="نیسا"
-
-        >
-
-          ▶
-
-        </button>
-
-      </article>
-
-      <article
-
-        class="surah"
-
-        data-name="مائدە المائدة"
-
-      >
-
-        <div class="surah-number">
-
-          5
-
-        </div>
-
-        <div class="surah-info">
-
-          <b>
-
-            المائدة
-
-          </b>
-
-          <small>
-
-            مائدە · 120 ئایەت
-
-          </small>
-
-        </div>
-
-        <button
-
-          class="play-btn surah-play"
-
-          type="button"
-
-          data-surah="مائدە"
-
-        >
-
-          ▶
-
-        </button>
-
-      </article>
-
-      <article
-
-        class="surah"
-
-        data-name="یاسین يس"
-
-      >
-
-        <div class="surah-number">
-
-          36
-
-        </div>
-
-        <div class="surah-info">
-
-          <b>
-
-            يس
-
-          </b>
-
-          <small>
-
-            یاسین · 83 ئایەت
-
-          </small>
-
-        </div>
-
-        <button
-
-          class="play-btn surah-play"
-
-          type="button"
-
-          data-surah="یاسین"
-
-        >
-
-          ▶
-
-        </button>
-
-      </article>
-
-    </div>
-
-  </section>
-
-  <!-- AUDIO -->
-
-  <section
-
-    id="audio"
-
-    class="screen"
-
-  >
-
-    <h2 class="page-title">
-
-      تلاوەت
-
-    </h2>
-
-    <p class="page-sub">
-
-      گوێگرتن لە قورئان
-
-    </p>
-
-    <div class="card audio-card">
-
-      <div class="reciter">
-
-        🎙️
-
-      </div>
-
-      <h2 id="audioSurah">
-
-        سورەتی یاسین
-
-      </h2>
-
-      <small>
-
-        Qaiwan Azan
-
-      </small>
-
-      <audio
-
-        id="quranAudio"
-
-        controls
-
-      ></audio>
-
-      <button
-
-        id="audioPlay"
-
-        class="audio-main"
-
-        type="button"
-
-      >
-
-        ▶
-
-      </button>
-
-    </div>
-
-  </section>
-
-  <!-- QIBLA -->
-
-  <section
-
-    id="qibla"
-
-    class="screen"
-
-  >
-
-    <h2 class="page-title">
-
-      قیبلە
-
-    </h2>
-
-    <p class="page-sub">
-
-      ئاراستەی کەعبە
-
-    </p>
-
-    <div class="card qibla-card">
-
-      <div class="qibla-degree">
-
-        <span id="qiblaDegree">
-
-          244
-
-        </span>
-
-        °
-
-      </div>
-
-      <div
-
-        class="compass"
-
-        id="compass"
-
-      >
-
-        <span class="north">
-
-          N
-
-        </span>
-
-        <span class="south">
-
-          S
-
-        </span>
-
-        <span class="east">
-
-          E
-
-        </span>
-
-        <span class="west">
-
-          W
-
-        </span>
-
-        <div class="needle"></div>
-
-        <div class="kaaba">
-
-          🕋
-
-        </div>
-
-      </div>
-
-      <button
-
-        class="gold-btn"
-
-        id="compassBtn"
-
-        type="button"
-
-      >
-
-        🧭 چالاککردنی Compass
-
-      </button>
-
-      <p class="muted">
-
-        بۆ کارکردنی Compass ڕێگە بە مۆبایلەکەت بدە.
-
-      </p>
-
-    </div>
-
-  </section>
-
-  <!-- ADHKAR -->
-
-  <section
-
-    id="adhkar"
-
-    class="screen"
-
-  >
-
-    <h2 class="page-title">
-
-      ئەذکار
-
-    </h2>
-
-    <p class="page-sub">
-
-      یادی خوا دڵ ئارام دەکات
-
-    </p>
-
-    <div class="card dhikr-card">
-
-      <span class="gold-text">
-
-        ئەذکاری بەیانی
-
-      </span>
-
-      <p class="dhikr-text">
-
-        سُبْحَانَ اللَّهِ وَبِحَمْدِهِ
-
-      </p>
-
-      <div
-
-        class="dhikr-number"
-
-        id="dhikrNumber"
-
-      >
-
-        0
-
-      </div>
-
-      <button
-
-        class="counter"
-
-        id="counterBtn"
-
-        type="button"
-
-      >
-
-        ذکر
-
-      </button>
-
-      <button
-
-        class="reset-btn"
-
-        id="resetDhikr"
-
-        type="button"
-
-      >
-
-        ڕیسێت
-
-      </button>
-
-    </div>
-
-    <div class="card">
-
-      <div class="card-title">
-
-        دوعاکان
-
-      </div>
-
-      <button
-
-        class="list-option"
-
-        type="button"
-
-        data-dua="دوعای پێش خەوتن"
-
-      >
-
-        <span>
-
-          🤲 دوعای پێش خەوتن
-
-        </span>
-
-        <b>
-
-          ‹
-
-        </b>
-
-      </button>
-
-      <button
-
-        class="list-option"
-
-        type="button"
-
-        data-dua="دوعای سفر"
-
-      >
-
-        <span>
-
-          ✈️ دوعای سفر
-
-        </span>
-
-        <b>
-
-          ‹
-
-        </b>
-
-      </button>
-
-      <button
-
-        class="list-option"
-
-        type="button"
-
-        data-dua="ئەذکاری دوای نوێژ"
-
-      >
-
-        <span>
-
-          🕌 ئەذکاری دوای نوێژ
-
-        </span>
-
-        <b>
-
-          ‹
-
-        </b>
-
-      </button>
-
-    </div>
-
-  </section>
-
-  <!-- SETTINGS -->
-
-  <section
-
-    id="settings"
-
-    class="screen"
-
-  >
-
-    <h2 class="page-title">
-
-      ڕێکخستنەکان
-
-    </h2>
-
-    <p class="page-sub">
-
-      Qaiwan Azan
-
-    </p>
-
-    <div class="card">
-
-      <div class="setting">
-
-        <div class="setting-info">
-
-          <b>
-
-            شوێن
-
-          </b>
-
-          <small id="settingsLocation">
-
-            دیاری نەکراوە
-
-          </small>
-
-        </div>
-
-        <span>
-
-          📍
-
-        </span>
-
-      </div>
-
-      <div class="setting">
-
-        <div class="setting-info">
-
-          <b>
-
-            زمان
-
-          </b>
-
-          <small>
-
-            کوردی
-
-          </small>
-
-        </div>
-
-        <span>
-
-          🌐
-
-        </span>
-
-      </div>
-
-      <div class="setting">
-
-        <div class="setting-info">
-
-          <b>
-
-            ئاگادارکردنەوە
-
-          </b>
-
-          <small>
-
-            نوێژەکان
-
-          </small>
-
-        </div>
-
-        <button
-
-          class="switch active"
-
-          type="button"
-
-          data-switch
-
-        >
-
-          <span></span>
-
-        </button>
-
-      </div>
-
-      <div class="setting">
-
-        <div class="setting-info">
-
-          <b>
-
-            دەنگی ئەذان
-
-          </b>
-
-          <small>
-
-            چالاک
-
-          </small>
-
-        </div>
-
-        <button
-
-          class="switch active"
-
-          type="button"
-
-          data-switch
-
-        >
-
-          <span></span>
-
-        </button>
-
-      </div>
-
-      <div class="setting">
-
-        <div class="setting-info">
-
-          <b>
-
-            دۆخی تاریک
-
-          </b>
-
-          <small>
-
-            Dark Mode
-
-          </small>
-
-        </div>
-
-        <button
-
-          class="switch active"
-
-          type="button"
-
-          data-switch
-
-        >
-
-          <span></span>
-
-        </button>
-
-      </div>
-
-    </div>
-
-    <div class="card">
-
-      <button
-
-        class="list-option"
-
-        type="button"
-
-        data-about
-
-      >
-
-        <span>
-
-          ℹ️ دەربارەی Qaiwan Azan
-
-        </span>
-
-        <b>
-
-          ‹
-
-        </b>
-
-      </button>
-
-      <button
-
-        class="list-option"
-
-        type="button"
-
-        data-support
-
-      >
-
-        <span>
-
-          🛟 پشتیوانی
-
-        </span>
-
-        <b>
-
-          ‹
-
-        </b>
-
-      </button>
-
-    </div>
-
-  </section>
-
-  <!-- BOTTOM NAV -->
-
-  <nav class="bottom-nav">
-
-    <button
-
-      class="nav-btn active"
-
-      type="button"
-
-      data-screen="home"
-
-    >
-
-      <span>⌂</span>
-
-      سەرەکی
-
-    </button>
-
-    <button
-
-      class="nav-btn"
-
-      type="button"
-
-      data-screen="quran"
-
-    >
-
-      <span>📖</span>
-
-      قورئان
-
-    </button>
-
-    <button
-
-      class="nav-btn"
-
-      type="button"
-
-      data-screen="qibla"
-
-    >
-
-      <span>🧭</span>
-
-      قیبلە
-
-    </button>
-
-    <button
-
-      class="nav-btn"
-
-      type="button"
-
-      data-screen="adhkar"
-
-    >
-
-      <span>🤲</span>
-
-      ئەذکار
-
-    </button>
-
-    <button
-
-      class="nav-btn"
-
-      type="button"
-
-      data-screen="settings"
-
-    >
-
-      <span>⚙️</span>
-
-      ڕێکخستن
-
-    </button>
-
-  </nav>
-
-</div>
-
-<!-- MODAL -->
-
-<div
-
-  class="modal"
-
-  id="modal"
-
->
-
-  <div class="modal-box">
-
-    <div class="modal-header">
-
-      <h3 id="modalTitle">
-
-        Qaiwan Azan
-
-      </h3>
-
-      <button
-
-        id="closeModal"
-
-        type="button"
-
-      >
-
-        ×
-
-      </button>
-
-    </div>
-
-    <div id="modalContent"></div>
+    <div class="brand-subtitle">QAIWAN AZAN</div>
 
   </div>
 
+  <button class="header-button" id="notificationButton" aria-label="Notification">
+
+    🔔
+
+  </button>
+
+</header>
+
+<div class="side-menu" id="sideMenu">
+
+  <div class="menu-header">
+
+    <strong>Qaiwan Azan</strong>
+
+    <button id="closeMenu">×</button>
+
+  </div>
+
+  <button data-page="home">سەرەکی</button>
+
+  <button data-page="quran">قورئان</button>
+
+  <button data-page="qibla">قیبلە</button>
+
+  <button data-page="adhkar">ئەذکار</button>
+
+  <button data-page="settings">ڕێکخستن</button>
+
 </div>
 
-<!-- TOAST -->
+<div class="overlay" id="overlay"></div>
 
-<div
+<main>
 
-  class="toast"
+<!-- HOME -->
 
-  id="toast"
+<section class="page active" id="home">
 
-></div>
+  <div class="location">
 
-<script src="./script.js"></script>
+    <div>
+
+      <div class="location-title">
+
+        <span>📍</span>
+
+        <strong id="locationName">سلێمانی</strong>
+
+      </div>
+
+      <small id="locationStatus">
+
+        شوێنی بنەڕەت
+
+      </small>
+
+    </div>
+
+    <button class="location-button" id="locationButton">
+
+      شوێنم بدۆزەوە
+
+    </button>
+
+  </div>
+
+  <div class="next-prayer">
+
+    <div class="small-title">
+
+      نوێژی داهاتوو
+
+    </div>
+
+    <h1 id="nextPrayerName">
+
+      چاوەڕێ بکە...
+
+    </h1>
+
+    <div class="countdown" id="countdown">
+
+      --:--:--
+
+    </div>
+
+    <div class="next-time">
+
+      کاتی نوێژ:
+
+      <strong id="nextPrayerTime">--:--</strong>
+
+    </div>
+
+  </div>
+
+  <div class="prayer-list" id="prayerList"></div>
+
+  <div class="daily-ayah">
+
+    <div class="ayah-header">
+
+      <strong>ئایەتی ڕۆژ</strong>
+
+      <button id="newAyah">
+
+        نوێ
+
+      </button>
+
+    </div>
+
+    <div class="ayah-text" id="ayahText">
+
+      إِنَّ مَعَ الْعُسْرِ يُسْرًا
+
+    </div>
+
+    <div class="ayah-reference" id="ayahReference">
+
+      الشرح • 6
+
+    </div>
+
+  </div>
+
+</section>
+
+<!-- QURAN -->
+
+<section class="page" id="quran">
+
+  <div class="page-header">
+
+    <button class="back-button" data-page="home">
+
+      →
+
+    </button>
+
+    <h2>قورئان</h2>
+
+  </div>
+
+  <div class="quran-card">
+
+    <h3>سورەتی الفاتحة</h3>
+
+    <p>
+
+      بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
+
+    </p>
+
+    <p>
+
+      الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ
+
+      الرَّحْمَٰنِ الرَّحِيمِ
+
+      مَالِكِ يَوْمِ الدِّينِ
+
+    </p>
+
+    <span>
+
+      الفاتحة • 1–4
+
+    </span>
+
+  </div>
+
+  <div class="quran-card">
+
+    <p>
+
+      إِنَّ مَعَ الْعُسْرِ يُسْرًا
+
+    </p>
+
+    <span>
+
+      الشرح • 6
+
+    </span>
+
+  </div>
+
+</section>
+
+<!-- QIBLA -->
+
+<section class="page" id="qibla">
+
+  <div class="page-header">
+
+    <button class="back-button" data-page="home">
+
+      →
+
+    </button>
+
+    <h2>قیبلە</h2>
+
+  </div>
+
+  <div class="qibla-card">
+
+    <div class="compass">
+
+      <span class="north">
+
+        N
+
+      </span>
+
+      <div class="compass-arrow" id="compassArrow">
+
+        ▲
+
+      </div>
+
+    </div>
+
+    <h2 id="qiblaDegree">
+
+      قیبلە: --°
+
+    </h2>
+
+    <p id="qiblaDescription">
+
+      شوێنەکەت دیاری بکە بۆ حسابکردنی ئاراستەی قیبلە.
+
+    </p>
+
+    <button class="main-button" id="startQibla">
+
+      دەستپێکردنی قیبلە
+
+    </button>
+
+  </div>
+
+</section>
+
+<!-- ADHKAR -->
+
+<section class="page" id="adhkar">
+
+  <div class="page-header">
+
+    <button class="back-button" data-page="home">
+
+      →
+
+    </button>
+
+    <h2>ئەذکار</h2>
+
+  </div>
+
+  <div class="dhikr-card">
+
+    <div class="dhikr-counter" id="dhikrCounter">
+
+      0
+
+    </div>
+
+    <div class="dhikr-text">
+
+      سُبْحَانَ اللَّهِ وَبِحَمْدِهِ
+
+    </div>
+
+    <button class="main-button" id="dhikrButton">
+
+      ژمێر بکە
+
+    </button>
+
+    <button class="secondary-button" id="resetDhikr">
+
+      ڕیسێت
+
+    </button>
+
+  </div>
+
+</section>
+
+<!-- SETTINGS -->
+
+<section class="page" id="settings">
+
+  <div class="page-header">
+
+    <button class="back-button" data-page="home">
+
+      →
+
+    </button>
+
+    <h2>ڕێکخستن</h2>
+
+  </div>
+
+  <div class="settings-card">
+
+    <label>
+
+      <span>
+
+        ئاگادارکردنەوە
+
+      </span>
+
+      <input type="checkbox" id="notificationToggle">
+
+    </label>
+
+    <label>
+
+      <span>
+
+        کاتژمێری 24 کاتژمێر
+
+      </span>
+
+      <input type="checkbox" id="timeFormatToggle" checked>
+
+    </label>
+
+    <button class="danger-button" id="clearData">
+
+      سڕینەوەی داتا
+
+    </button>
+
+  </div>
+
+</section>
+
+</main>
+
+<!-- BOTTOM NAV -->
+
+<nav class="bottom-nav">
+
+  <button class="active" data-page="home">
+
+    <span>⌂</span>
+
+    <small>سەرەکی</small>
+
+  </button>
+
+  <button data-page="quran">
+
+    <span>📖</span>
+
+    <small>قورئان</small>
+
+  </button>
+
+  <button data-page="qibla">
+
+    <span>🧭</span>
+
+    <small>قیبلە</small>
+
+  </button>
+
+  <button data-page="adhkar">
+
+    <span>🤲</span>
+
+    <small>ئەذکار</small>
+
+  </button>
+
+  <button data-page="settings">
+
+    <span>⚙</span>
+
+    <small>ڕێکخستن</small>
+
+  </button>
+
+</nav>
+
+<div class="toast" id="toast"></div>
+
+<script src="script.js"></script>
 
 </body>
 
