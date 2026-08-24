@@ -260,19 +260,7 @@ button{
 
 }
 
-.next-prayer:after{
-
-  content:"☪";
-
-  position:absolute;
-
-  left:-20px;
-
-  top:-35px;
-
-  font-size:130px;
-
-  color:rgba(233,184,75,.05);
+.
 
 }
 
